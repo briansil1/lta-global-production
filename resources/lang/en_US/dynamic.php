@@ -8,10 +8,6 @@ return [
         'dynamic-tool' => 'Dynamic Tool',
         'select-country-text' => 'Select the country you want to analyze. Once selected, it is posible to scroll through the three available tabs and observe the country-specific information and its comparison with other  countries or regions.',
         'select-country' => 'Select country',
-        'profile' => 'Profile',
-        'components' => 'Gasoline/ethanol blending components',
-        'impact' => 'Ethanol impact on emissions',
-        'ghg' => 'Life Cycle GHG Emissions',
         'profile-tab' => [
             'profile-title' => 'Gasoline supply/demand',
             'profile-text' => 'La producción total de gasolina en Colombia se ha mantenido entre 4.000 y 5.000 millones de litros anuales, con una participación de mercado de aproximadamente 5% de gasolina extra (AKI 87) y 95% de la gasolina regular (AKI 81). La demanda es mayor por lo que es necesario importar gasolinas, siendo Estados Unidos el principal origen de las importaciones.',
@@ -28,6 +24,9 @@ return [
             'compare-select' => 'Select',
             'download-button' => 'DOWNLOAD',
         ],
+        'volume-quality' => 'VOLUME & QUALITY',
+        'vehicular-emissions' => 'VEHICULAR EMISSIONS',
+        'green-house-emissions' => 'GREEN HOUSE EMISSIONS',
         'component-tab' => [
             'first-paragraph' => 'Gasoline is a blend of a base gasoline and other components. This blending is usually done at blending terminals as only 30% of the world\'s finished gasoline is distributed directly from refineries. Each component provides different properties to the final blend, for example, isomerates, alkylates and butanes increase the octane. The components commonly used in Latin America are:',
             'benefits-1' => 'In some parts of the world, ethanol is added to gasoline as a blending component.',

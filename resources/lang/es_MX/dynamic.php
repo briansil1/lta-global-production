@@ -8,10 +8,6 @@ return [
         'dynamic-tool' => 'Herramienta dinámica',
         'select-country-text' => 'Seleccionar el país que se desea analizar. Una vez seleccionado, es posible desplazarse por las tres pestañas disponibles y observar la específica del país y su comparación con otros países o regiones.',
         'select-country' => 'Seleccionar país',
-        'profile' => 'Perfil',
-        'components' => 'Componentes de mezclado de gasolina con etanol',
-        'impact' => 'Impacto del etanol en las emisiones',
-        'ghg' => 'Emisiones Ciclo de Vida GEI',
         'profile-tab' => [
             'profile-title' => 'Oferta / Demanda de gasolinas',
             'profile-text' => 'La producción total de gasolina en Colombia se ha mantenido entre 4.000 y 5.000 millones de litros anuales, con una participación de mercado de aproximadamente 5% de gasolina extra (AKI 87) y 95% de la gasolina regular (AKI 81). La demanda es mayor por lo que es necesario importar gasolinas, siendo Estados Unidos el principal origen de las importaciones.',
@@ -28,6 +24,9 @@ return [
             'compare-select' => 'Seleccionar',
             'download-button' => 'DESCARGAR',
         ],
+        'volume-quality' => 'VOLUMEN Y CALIDAD',
+        'vehicular-emissions' => 'EMISIONES VEHICULARES',
+        'green-house-emissions' => 'EMISIONES CASA VERDE',
         'component-tab' => [
             'first-paragraph' => 'La gasolina es una mezcla de una base especifica de gasolina y otros compuestos. Esta mezcla suele realizarse en terminales de mezclado y solo el 30% de la gasolina del mundo se distribuye directamente de refinerías. Cada componente proporciona distintas propiedades a la mezcla final, por ejemplo, isomerados, alquilados y butanos aumentan el octanaje. Los componentes utilizados en Latinoamérica son:',
             'benefits-1' => 'En varias partes del mundo se añade etanol a los componentes de mezcla de gasolina. Esto presenta ventajas al ser un combustible renovable, hecho de biomasa, potenciador del octanaje, reductor de azufre; permitiendo el cumplimiento de objetivos ambientales.',

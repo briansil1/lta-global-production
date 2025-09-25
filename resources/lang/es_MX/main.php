@@ -121,7 +121,7 @@ return [
         'america' => 'AMÉRICA LATINA',
         'asia-africa' => 'ASIA-AFRICA',
         'europe' => 'EUROPA',
-        'global' => 'GLOBAL',
+        'global-version' => 'GLOBAL VERSION',
         'detail' => 'Existen retos importantes en la calidad de los combustibles y las emisiones de los vehículos al medio ambiente en la región.',
         'report' => 'REPORTE',
         'report-detail' => 'Descarga para conocer los perfiles y reglamentaciones de gasolina por país y análisis de mezclas con etanol: parámetros, componentes, impacto en emisiones y casos de estudio.',

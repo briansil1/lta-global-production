@@ -56,7 +56,7 @@ $(function () {
     continent_json = GetLanguageJson(lang);
 
     const continent_label = document.getElementById('tool_continent');
-    continent_label.innerHTML = continent_json.america;
+    //continent_label.innerHTML = continent_json.america;
 
     const continent_id = document.getElementById('continent_hidden');
     continent_id.innerHTML = continent_json.america_id;

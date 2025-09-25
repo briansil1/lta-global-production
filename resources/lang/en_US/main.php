@@ -122,7 +122,7 @@ return [
         'america' => 'LATIN AMERICA',
         'asia-africa' => 'ASIA-AFRICA',
         'europe' => 'EUROPE',
-        'global' => 'GLOBAL',
+        'global-version' => 'GLOBAL VERSION',
         'detail' => 'There are significant fuel quality and vehicle emission reduction challenges in the region.',
         'report' => 'REPORT',
         'report-detail' => 'Download to learn about gasoline profiles and regulations by country, and the analysis of ethanol/gasoline blend levels: parameters, components, impact on emissions and case studies.',

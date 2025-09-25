@@ -41,57 +41,18 @@
                         <h2 class="h1 uppercase text-2xl md:text-5xl text-white container oswald">{{ __('main.content.profiles') }} <br> {{ __('main.content.profiles-2') }}</h2>
                         <h3 class="text-white mt-0 pt-0 oswald">
                             <label id="tool_continent"  class="text-white mt-0 pt-0 oswald" aria-label="tool_continent" aria-describedby="tool_continent"></label>
-                        </h3>{{--  {{ __('main.content.america') }} --}}
+                            {{ __('main.content.global-version') }}
+                        </h3>
                         <p class="text-white text-center">
                             {{ __('main.content.detail') }}
                         </p>
-                        
-                        <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
-                            <a href="#" id="switch_continent_america" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.america') }}
-                                </p>
-                            </a>
-                            <a href="#" id="switch_continent_asia_africa" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.asia-africa') }}
-                                </p>
-                            </a>
-                            <a href="#" id="switch_continent_europe" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.europe') }}
-                                </p>
-                            </a>
-                            <a href="#" id="switch_continent_global" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.global') }}
-                                </p>
-                            </a>
-                        </div>
-
 
                     </div>
                     <div class="header-img">
                         <div class="w-full mg-wrap mx-auto px-6 box-sizing-content flex flex-col items-center justify-center py-14 relative z-10">
                             <div class="text-center w-full box-sizing-border">
                                 <div class="dynamic-flex-area md:flex flex-wrap justify-center mt-12 md:mt-40 xl:mx-18 col-lg-9 mx-auto text-shadow">
-                                    <a href="/buying-selling/corn/commercial-grain-suppliers/" id="reports" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
+                                    <!-- <a href="/buying-selling/corn/commercial-grain-suppliers/" id="reports" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
                                         <div class="d-flex justify-content-between align-items-center w-100 pb-3">
                                             <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
                                             <span class="fs-4">{{ __('main.content.report') }}</span>
@@ -110,7 +71,7 @@
                                         <p class="card-p">
                                             {{ __('main.content.dynamic-tool-detail') }}
                                         </p>
-                                    </a>
+                                    </a> -->
                                 </div>
                             </div>
                         </div>
@@ -125,7 +86,7 @@
                 </div>
                 <div class="row mx-0 pt-3">
                     <div class="col-lg-6">
-                        <h3 class="mb-0">{{ __('main.content.america') }}</h3>
+                        <!-- <h3 class="mb-0">{{ __('main.content.america') }}</h3>
                         <p>{{ __('main.content.report-section.description') }}</p>
                         <strong>{{ __('main.content.report-section.sections') }}</strong>
                         <div class="ps-lg-4 pt-2">
@@ -162,10 +123,10 @@
                                     {{ __('main.content.report-section.what-you-need-element-4') }}
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-lg-6">
-                        <img src="{{ asset(__('main.content.report-section.image-url')) }}" class="img-fluid" alt="">
+                        <!-- <img src="{{ asset(__('main.content.report-section.image-url')) }}" class="img-fluid" alt=""> -->
                     </div>
                 </div>
             </div>
