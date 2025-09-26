@@ -222,12 +222,12 @@
                         <!---tabs-->
                         <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block d-xxl-block">
                             <ul class="nav nav-tabs d-flex " id="myTab" role="tablist">
-                                <li class="nav-item col-3" role="presentation">
+                                <li class="nav-item col-4" role="presentation">
                                     <span class="nav-link-3 @if($tab == '1') active @endif oswald" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab1" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '1' ? 'true' : 'false'}}">
                                         {{ __('dynamic.content.volume-quality') }}
                                     </span>
                                 </li>
-                                <li class="nav-item col-3" role="presentation">
+                                <li class="nav-item col-4" role="presentation">
 
                                 <div id="content" class="site-content">
                                     <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden" aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
@@ -400,16 +400,16 @@
                                         {{ __('dynamic.content.vehicular-emissions') }}
                                     </span>
                                 </li>
-                                <li class="nav-item col-3" role="presentation">
+                                <li class="nav-item col-4" role="presentation">
                                     <span class="nav-link-3 @if($tab == '3') active @endif oswald" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab3" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '3' ? 'true' : 'false'}}">
                                         {{ __('dynamic.content.green-house-emissions') }}
                                         </span>
                                 </li>
-                                <li class="nav-item col-3" role="presentation">
+                                {{-- <li class="nav-item col-3" role="presentation">
                                     <span class="nav-link-3 @if($tab == '4') active @endif oswald" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab4" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '4' ? 'true' : 'false'}}">
                                         {{ __('dynamic.content.ghg') }}
                                     </span>
-                                </li>
+                                </li> --}}
                             </ul>
                             <!---tabs-->
                             <!---contenedor tabs-->
@@ -423,9 +423,9 @@
                                 <div class="tab-pane fade @if($tab == '3') show active @endif" id="tab3" role="tabpanel" aria-labelledby="tab-3">
                                     @include('component.tab-pane-green-house', ['chart_id' => 'chart-tab'])
                                 </div>
-                                <div class="tab-pane fade @if($tab == '4') show active @endif" id="tab4" role="tabpanel" aria-labelledby="tab-4">
+                                {{-- <div class="tab-pane fade @if($tab == '4') show active @endif" id="tab4" role="tabpanel" aria-labelledby="tab-4">
                                     @include('component.tab-pane-ghg', ['chart_id' => 'chart-tab'])
-                                </div>
+                                </div> --}}
                             </div>
                             <!---contenedor tabs-->
                         </div>
