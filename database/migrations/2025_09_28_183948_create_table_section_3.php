@@ -192,6 +192,6 @@ class CreateTableSection3 extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_section_3');
+        Schema::dropIfExists('green_house');
     }
 }
