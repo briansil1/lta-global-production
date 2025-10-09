@@ -28,8 +28,8 @@ class Translations
         $group_lang = $request->route()->getPrefix();
 	    //$group_locale_clean = substr($group_lang, 1,2);
         // eliminar "/" en $group_lang
-        $group_lang = ltrim($group_lang, '/');
-        //echo "X:".$group_lang;
+        $group_lang = str_replace('/', '', $group_lang);
+        echo "X:".$group_lang;
         $group_locale_clean = mb_substr($group_lang, 1, 2, 'UTF-8');
         //echo "X:".$group_locale_clean;
 
