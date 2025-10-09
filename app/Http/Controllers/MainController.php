@@ -37,7 +37,7 @@ class MainController extends Controller
         ]); 
     }
 
-    public function tools(Request $request, $tab = '1', Continent $continentid = null,  $regionid = null, $type = null) {
+    public function tools(Request $request, $tab = '1', $continentid = null,  $regionid = null, $type = null) {
         echo $tab."-".$continentid."-".$regionid."-".$type."<br>";
         // Variables globales $type
      
@@ -50,8 +50,8 @@ class MainController extends Controller
         }
 
         $tab = $request->tab ?? '1';
-        $continent = $request->continentid ?? Continent::find(session('continent_id'));
         $continentid = $continent->id ?? 1;
+        $continent = ($continentid && (int)$continentid > 0) ? Continent::find($continentid) : null;
         $region    = ($regionid && (int)$regionid > 0) ? Region::find($regionid) : null;
 
         // Variables
