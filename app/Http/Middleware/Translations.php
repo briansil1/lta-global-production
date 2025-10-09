@@ -21,7 +21,7 @@ class Translations
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = $request->route('locale');              
+        $locale = $request->segment(1);           
         $locale = strtolower((string) $locale);
         $locale2 = substr($locale, 0, 2);  
 
