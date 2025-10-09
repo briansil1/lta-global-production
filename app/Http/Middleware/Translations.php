@@ -23,6 +23,7 @@ class Translations
     {
         $group_lang = $request->route()->getPrefix();
 	    //$group_locale_clean = substr($group_lang, 1,2);
+        echo "X:".$group_lang;
         $group_locale_clean = mb_substr($group_lang, 1, 2, 'UTF-8');
         //echo "X:".$group_locale_clean;
         app()->setLocale($this->languages[$group_locale_clean]);
