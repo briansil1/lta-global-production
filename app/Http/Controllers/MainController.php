@@ -1,12 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Region;
 use App\Models\Emission;
 use App\Models\Locale;
 use App\Models\Profile;
 use App\Models\Report;
+use App\Models\Continent;
+use App\Models\VolumeQuality;
+use App\Models\VehicularEmissions;
+use App\Models\GreenHouse;
+
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +21,8 @@ use Illuminate\Support\Facades\Session;
 
 class MainController extends Controller
 {
+    public $type = '_lt'; // Valor por defecto
+
     public function home(Request $request, $token = false) {
         $locale = app()->getLocale();
         $base_l = explode('_', $locale)[0];
@@ -30,7 +37,9 @@ class MainController extends Controller
         ]); 
     }
 
-    public function tools(Request $request, $tab = '1', Country $country = null, Country $compareCountry = null) {
+    public function tools(Request $request, $tab = '1', Continent $continentid = null,  $regionid = null, $type = null) {
+        // Variables globales $type
+     
         if (!Auth::check()) {
             return redirect(route(__('routes.home')));
         }
@@ -38,84 +47,356 @@ class MainController extends Controller
         if (!session('continent_id')) {
             return redirect(route('logout-session'));
         }
+
+        $tab = $request->tab ?? '1';
+        $continent = $request->continentid ?? Continent::find(session('continent_id'));
+        $continentid = $continent->id ?? 1;
+        $region    = ($regionid && (int)$regionid > 0) ? Region::find($regionid) : null;
+
+        // Variables
+        $dataG1 = null;
+        $chartLabels = null;
+        $chartValues = null;
+        $chartLabels2 = null;
+        $chartValues2 = null;
+        $chartLabels3 = null;
+        $chartValues3 = null;
+        $chartLabels4 = null;
+        $chartValues4 = null;
+        $dataGenerales = null;  
+        // Si type es null o es igual a litros entonces $type = '_lt'; de lo contrario $type = '_gl';
+        if($tab == 1){
+            if($request->type === null || $request->type === 'litros') {
+                $type = '_lt';
+                $this->type = '_lt';
+            } else {
+                $type = '_gl';
+                $this->type = '_gl';
+            }
+        }
+        // si $tab == 2  this->type = "g" o "ton"
+        if ($tab == 2){
+            if($request->type === null ) {
+                $type = 'Benzene';
+            } elseif($tab == 2 && $request->type === 'ton') {
+                $type = $request->type;
+            }
+        }
+        // Obtener todas las regiones sin where
+        $regions = Region::all();
+        // filtrar regiones por continent_id = 1 y guardar en $regions1
+        $regionsAll = $regions->where('continent_id', $continentid);
+        // $tab = '1'; ==> Volumen. y calidad
+        // $tab = '2'; ==> Emisiones
+        // $tab = '3'; ==> Emision de gases inveernadero
+        // Datos generales de volumen y calidad (totales por continente)
+        if($tab == '1') {
+            // Datos generales de volumen y calidad (totales por continente) para mostrar en la tabla superior
+            $dataGenerales = VolumeQuality::query()
+                ->with(['region'])     // eager loading
+                ->where('tipo', 'C')   // o ->tipo('P')
+                // ->select(['id','region_id','campo1','campo2', ...]) // opcional: limitar columnas
+                ->get();
+
+            // Datos de volumen y calidad para luego filtrar por graficas
+            $dataG1 = VolumeQuality::query()
+            ->with('region')  // eager loading
+            ->where('tipo', 'P')
+            ->whereHas('region', function ($q) use ($continentid) {
+                $q->where('continent_id', $continentid);
+            })
+            ->when($regionid > 0, function ($q) use ($regionid) {
+                $q->where('region_id', $regionid);
+            })
+            ->get();
+
+            // --> GRAFICA 1 - Ordena desc por gasolina y arma labels/values para el gráfico de litros
+            $g1Sorted = $dataG1->sortByDesc('gasoline_demand'.$type)->values();
+            // Labels de ciudades 
+            $chartLabels = $g1Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues = $g1Sorted->pluck('gasoline_demand'.$type);
+
+            // --> GRAFICA 2 - Ordena desc por gasolina y arma labels/values para el gráfico de litros de crecimiento %
+            $g2Sorted = $dataG1->sortByDesc('gasoline_growth_porc')->values();
+            // Labels de ciudades 
+            $chartLabels2 = $g2Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues2 = $g2Sorted->pluck('gasoline_growth_porc');
+            
+            // --> GRAFICA 3 - Ordena desc por gasolina y arma labels/values para el gráfico de litros de producción
+            $g3Sorted = $dataG1->sortByDesc('gasoline_prod'.$type)->values();
+            // Labels de ciudades
+            $chartLabels3 = $g3Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues3 = $g3Sorted->pluck('gasoline_prod'.$type);
+
+            // --> GRAFICA 4 - Ordena desc por gasolina y arma labels/values para el gráfico de litros de importación
+            $g4Sorted = $dataG1->sortByDesc('gasoline_import'.$type)->values();
+            // Labels de ciudades
+            $chartLabels4 = $g4Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues4 = $g4Sorted->pluck('gasoline_import'.$type);
+
+            // --> GRAFICA 5 - Ordena desc por Ethanol Demand y arma labels/values para el gráfico de litros de Ethanol Demand
+            $g5Sorted = $dataG1->sortByDesc('ethanol_demand'.$type)->values();
+            // Labels de ciudades 
+            $chartLabels5 = $g5Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues5 = $g5Sorted->pluck('ethanol_demand'.$type);
+            // --> GRAFICA 6 - Ordena desc por Octane Demand y arma labels/values para el gráfico de litros de Octane Demand
+            $g6Sorted = $dataG1->sortByDesc('ethanol_prod'.$type)->values();
+            // Labels de ciudades
+            $chartLabels6 = $g6Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues6 = $g6Sorted->pluck('ethanol_prod'.$type);
+            // --> GRAFICA 7 - Ordena desc por Octane Potential y arma labels/values para el gráfico de litros de Octane Potential
+            // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10_lt, e15_lt, e20_lt, e25_lt, e30_lt, e0_lt
+            $g7Sorted = $dataG1->values();
+            // Labels de ciudades
+            $g7Sorted = $dataG1->map(function ($r) {
        
-        $continent_id = session('continent_id');
-
-        $locale = app()->getLocale();
-        $base_l = explode('_', $locale)[0];
-        $locale = Locale::where('code', $locale)->first();
-        if (empty($locale)) {
-            $locale = Locale::where('code', $base_l)->first();
-        }
-
-        // $country_profiles = Profile::select('country_id')->where('country_id', '<>', env('APP_EUROPE_ID'))->groupBy('country_id')->get();
-        $country_profiles = Profile::join('countries', 'countries.id', '=', 'profiles.country_id')
-            ->join('regions', 'regions.id', '=', 'countries.region_id')
-            ->join('continents', 'continents.id', '=', 'regions.continent_id')
-            ->where('continents.id', $continent_id)
-            ->select('country_id')->where('country_id', '<>', env('APP_EUROPE_ID'))->groupBy('country_id')->get();
-        $c_ids = [];
-
-        foreach ($country_profiles as $profile) {
-            $c_ids[] = $profile->country_id;
-        }
-        $countries = Country::whereIn('id', $c_ids)->get();
-
-        if (empty($country)) {
+                if($this->type == '_lt') {
+                    return [
+                        'country' => $r->country,
+                        'e0_lt'  => (float)($r->e0_lt ?? 0),
+                        'e10_lt' => (float)($r->e10_lt ?? 0),
+                        'e15_lt' => (float)($r->e15_lt ?? 0),
+                        'e20_lt' => (float)($r->e20_lt ?? 0),
+                        'e25_lt' => (float)($r->e25_lt ?? 0),
+                        'e30_lt' => (float)($r->e30_lt ?? 0),
+                        'total'  => (float)(
+                            ($r->e0_lt ?? 0)+($r->e10_lt ?? 0)+($r->e15_lt ?? 0)+($r->e20_lt ?? 0)+($r->e25_lt ?? 0)+($r->e30_lt ?? 0)
+                        ),
+                    ];
+                }else {
+                    return [    
+                        'country' => $r->country,
+                        'e0_lt'  => (float)($r->e0_gl ?? 0),
+                        'e10_lt' => (float)($r->e10_gl ?? 0),
+                        'e15_lt' => (float)($r->e15_gl ?? 0),
+                        'e20_lt' => (float)($r->e20_gl ?? 0),
+                        'e25_lt' => (float)($r->e25_gl ?? 0),
+                        'e30_lt' => (float)($r->e30_gl ?? 0),
+                        'total'  => (float)(
+                            ($r->e0_gl ?? 0)+($r->e10_gl ?? 0)+($r->e15_gl ?? 0)+($r->e20_gl ?? 0)+($r->e25_gl ?? 0)+($r->e30_gl ?? 0)
+                        ),
+                    ];
+                }
+            })
+            ->sortByDesc('total')
+            ->values();  
+            $chartLabels7 = $g7Sorted->pluck('country');
+            $chartValues7 = $g7Sorted->map(fn($r) => collect($r)->except(['country','total']));
             return view('dynamic', [
                 'tab' => $tab,
-                'countryList' => $countries
+                'continent' => $continent,
+                'region' => $region,
+                'continentid' => $continentid,
+                'regionid' => $regionid,
+                'regionsAll' => $regionsAll,
+                'dataG1' => $dataG1,
+                'type' => $type,
+                'chartLabels'  => $chartLabels,
+                'chartValues'  => $chartValues,
+
+                'chartLabels2' => $chartLabels2,
+                'chartValues2' => $chartValues2,
+
+                'chartLabels3' => $chartLabels3,
+                'chartValues3' => $chartValues3,
+
+                'chartLabels4' => $chartLabels4,
+                'chartValues4' => $chartValues4,
+
+                'chartLabels5' => $chartLabels5,
+                'chartValues5' => $chartValues5,
+
+                'chartLabels6' => $chartLabels6,
+                'chartValues6' => $chartValues6,
+
+                'chartLabels7' => $chartLabels7,
+                'chartValues7' => $chartValues7,
+
+                'dataGenerales' => $dataGenerales,
+                
+            ]);
+            
+        } elseif($tab == '2') {
+            // Si $regionid es null o vacio o "" entonces =  1
+            
+            $dataGenerales = VehicularEmissions::query()
+                ->with(['region'])     // eager loading
+                ->where('tipo', 'C')   // o ->tipo('C')
+                // ->select(['id','region_id','campo1','campo2', ...]) // opcional: limitar columnas
+                ->get();
+
+            // Datos de emisiones vehiculares
+            // Si $this->type == "" entonces $this->type = "Benzene"
+            if($this->type == '') {
+                $this->type = 'Benzene';
+            }
+            // --> GRAFICA 1 - CO Emmisions (g/km)
+            $dataG1 = VehicularEmissions::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                ->where('tipo', 'P')
+                ->where('emission_component', $type)
+                ->where('emission_type', 'Emissions (g/km)')
+                ->get();
+
+           
+
+            // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10, e15, e20, e25, e30, e0
+            //$g1Sorted = $dataG1->values();
+            // Labels de ciudades
+            $g1Sorted = $dataG1->map(function ($r) {
+                return [
+                    'country' => $r->country,
+                    'e0'  => (float)($r->e0 ?? 0),
+                    'e10' => (float)($r->e10 ?? 0),
+                    'e15' => (float)($r->e15 ?? 0),
+                    'e20' => (float)($r->e20 ?? 0),
+                    'e25' => (float)($r->e25 ?? 0),
+                    'e30' => (float)($r->e30 ?? 0),
+                    'total'  => (float)(
+                        ($r->e0 ?? 0)+($r->e10 ?? 0)+($r->e15 ?? 0)+($r->e20 ?? 0)+($r->e25 ?? 0)+($r->e30 ?? 0)
+                    ),
+                ];
+            })->sortByDesc('total')->values();  
+
+            $chartLabels1 = $g1Sorted->pluck('country');
+            $chartValues1 = $g1Sorted->map(fn($r) => collect($r)->except(['country','total']));
+
+            // --> GRAFICA 2 - CO2 Emmisions (Ton/kday)
+            $dataG2 = VehicularEmissions::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                ->where('tipo', 'P')
+                ->where('emission_component', $type)
+                ->where('emission_type', 'Emissions (Ton/day)')
+                ->get();
+
+            // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e
+            //$g2Sorted = $dataG2->values();
+            // Labels de ciudades
+            $g2Sorted = $dataG2->map(function ($r) {
+                return [
+                    'country' => $r->country,
+                    'e0'  => (float)($r->e0 ?? 0),
+                    'e10' => (float)($r->e10 ?? 0),
+                    'e15' => (float)($r->e15 ?? 0),             
+                    'e20' => (float)($r->e20 ?? 0),
+                    'e25' => (float)($r->e25 ?? 0),
+                    'e30' => (float)($r->e30 ?? 0),
+                    'total'  => (float)(
+                        ($r->e0 ?? 0)+($r->e10 ?? 0)+($r->e15 ?? 0)+($r->e20 ?? 0)+($r->e25 ?? 0)+($r->e30 ?? 0)
+                    ),
+                ];
+            })->sortByDesc('total')->values();
+      
+            $chartLabels2 = $g2Sorted->pluck('country');
+            $chartValues2 = $g2Sorted->map(fn($r) => collect($r)->except(['country','total']));
+
+            // --> GRAFICA 3 - Vehicle Fleet (millions)
+            $dataG3 = VolumeQuality::query()
+            ->with('region')  // eager loading
+            ->where('tipo', 'P')
+            ->whereHas('region', function ($q) use ($continentid) {
+                $q->where('continent_id', $continentid);
+            })
+            ->when($regionid > 0, function ($q) use ($regionid) {
+                $q->where('region_id', $regionid);
+            })
+            ->get();
+
+            // --> GRAFICA 3 - Ordena desc por gasolina y arma labels/values para el gráfico de litros
+            $g3Sorted = $dataG3->sortByDesc('vehicle_fleet')->values();
+            // Labels de ciudades 
+            $chartLabels3 = $g3Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues3 = $g3Sorted->pluck('vehicle_fleet');
+            //echo $regionid;
+            $regionid = ($regionid && (int)$regionid > 0) ? $regionid : 0;
+            return view('dynamic', [
+                'tab' => $tab,
+                'continent' => $continent,
+                'region' => $region,
+                'continentid' => $continentid,
+                'regionid' => $regionid,
+                'type' => $type,
+                'regionsAll' => $regionsAll,
+
+                'chartLabels1'  => $chartLabels1,
+                'chartValues1'  => $chartValues1,
+
+                'chartLabels2'  => $chartLabels2,
+                'chartValues2'  => $chartValues2,
+
+                'chartLabels3' => $chartLabels3,
+                'chartValues3' => $chartValues3,
+
+                'dataGenerales' => $dataGenerales,
+            ]);
+        } elseif($tab == '3') {
+            // Datos de emisiones de gases invernadero
+            $dataGenerales = GreenHouse::query()
+                ->with(['region'])     // eager loading
+                // ->select(['id','region_id','campo1','campo2', ...]) // opcional: limitar columnas
+                ->get();
+            
+            // --> GRAFICA 1 - Emissions RED III (MMT/yr)
+            $dataG1 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                ->where('methodology', 'RED III')
+                ->where('data', 'GHG')
+                ->get();
+
+            // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10, e15, e20, e25, e30, e0
+            //$g1Sorted = $dataG1->values();
+            // Labels de ciudades
+            $g1Sorted = $dataG1->map(function ($r) {
+                return [
+                    'country' => $r->country,
+                    'e0'  => (float)($r->e0 ?? 0),
+                    'e10' => (float)($r->e10 ?? 0),
+                    'e15' => (float)($r->e15 ?? 0),
+                    'e20' => (float)($r->e20 ?? 0),
+                    'e25' => (float)($r->e25 ?? 0),
+                    'e30' => (float)($r->e30 ?? 0),
+                    'total'  => (float)(
+                        ($r->e0 ?? 0)+($r->e10 ?? 0)+($r->e15 ?? 0)+($r->e20 ?? 0)+($r->e25 ?? 0)+($r->e30 ?? 0)
+                    ),
+                ];
+            })->sortByDesc('total')->values();  
+
+            $chartLabels1 = $g1Sorted->pluck('country');
+            $chartValues1 = $g1Sorted->map(fn($r) => collect($r)->except(['country','total']));
+
+                
+
+
+            return view('dynamic', [
+                'tab' => $tab,
+                'continent' => $continent,
+                'region' => $region,
+                'continentid' => $continentid,
+                'regionid' => $regionid,
+                'chartLabels1' => $chartLabels1,
+                'chartValues1' => $chartValues1,
+                'dataG1' => $dataG1,
             ]);
         }
-
-        $country_emissions = Emission::select('country_id')
-            ->where('country_id', '<>', env('APP_EUROPE_ID'))
-            ->where('country_id', '<>', env('APP_USA_ID'))
-            ->groupBy('country_id')->get();
-        $c_ids = [];
-        foreach ($country_emissions as $cemissions) {
-            $c_ids[] = $cemissions->country_id;
-        }
-        $countriesE = Country::whereIn('id', $c_ids)->get();
-
-        $europeUnion = Country::find(env('APP_EUROPE_ID'));
-
-        $profileData = $locale->profiles()->where('country_id', $country->id)->orderBy('order', 'asc')->get();
-        $europeData = $locale->profiles()->where('country_id', env('APP_EUROPE_ID'))->orderBy('order', 'asc')->get();
-
-        $compareProfile = null;
-        $gasolineCompareTypes = null;
-        $gasolineCompareGrades = null;
-        if ($compareCountry) {
-            $compareProfile = $locale->profiles()->where('country_id', $compareCountry->id)->orderBy('order', 'asc')->get();
-            $gasolineCompareTypes = $compareCountry->gasolineComponents()->select('gasoline_type')->groupBy('gasoline_type')->get();
-            $gasolineCompareGrades = $compareCountry->gasolineComponents()->select('quality_restriction')->groupBy('quality_restriction')->get();
-        }
-
-        $supplyText = $locale->dynamicToolsTexts()->where('country_id', $country->id)->where('key', 'gasoline_demand')->first();
-        $ethanolText = $locale->dynamicToolsTexts()->where('country_id', $country->id)->where('key', 'ethanol_text')->first();
-
-        $gasoline_types = $country->gasolineComponents()->select('gasoline_type')->groupBy('gasoline_type')->get();
-        $gasoline_grades = $country->gasolineComponents()->select('quality_restriction')->groupBy('quality_restriction')->get();
-
-        return view('dynamic', [
-            'tab' => $tab,
-            'country' => $country,
-            'europeUnion' => $europeUnion,
-            'profileData' => $profileData,
-            'europeData' => $europeData,
-            'countryList' => $countries,
-            'countryEmissionsList' => $countriesE,
-            'compareCountry' => $compareCountry,
-            'compareProfileData' => $compareProfile,
-            'supplyText' => $supplyText,
-            'ethanolText' => $ethanolText,
-            'gasolineTypes' => $gasoline_types,
-            'gasolineGrades' => $gasoline_grades,
-            'gasolineCompareTypes' => $gasolineCompareTypes,
-            'gasolineCompareGrades' => $gasolineCompareGrades,
-            'continent_id' => $continent_id
-        ]);
     }
 
     public function setLocale(Request $request) {

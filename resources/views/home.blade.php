@@ -171,6 +171,7 @@
                                     <form id="login-form" method="post" action="{{ route('login') }}" class="px-3 py-5 col-lg-8 col-12 pb-5">
                                         <input type="hidden" name="user_locale" value="{{ app()->getLocale() }}" />
                                         <input type="hidden" class="form-control" name="continent_hidden" id="continent_hidden" aria-label="continent_hidden" aria-describedby="continent_hidden" value="1">
+                                        
                                         <div class="login-errors-container mb-3 d-none">
                                             <label for="" class="form-label login-errors"></label>
                                         </div>

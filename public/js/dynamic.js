@@ -55,9 +55,9 @@ $(function () {
 
     continent_names_json = GetLanguageJsonn(lang);
 
-    const continent_label = document.getElementById('tool_continent');
-    continent_label.innerHTML = continent_names_json.america;
-  
+    //const continent_label = document.getElementById('tool_continent');
+    //continent_label.innerHTML = continent_names_json.america;
+  /*
     $('#switch_continent_america').on('click', evt => {
         evt.preventDefault();
         continent_label.innerHTML = continent_names_json.america;
@@ -75,7 +75,7 @@ $(function () {
         continent_label.innerHTML = continent_names_json.europa;
         window.location.href = _get_change_continent(2);
     });
-
+*/
     $('.lang-select').off('change').on('change', function (evt) {
         window.location.replace(this.value);
     });

@@ -1504,6 +1504,7 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
+<<<<<<< HEAD
             "version": "v0.4.5",
             "source": {
                 "type": "git",
@@ -1514,17 +1515,33 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/406b15af162e78be5c7793b25aadd5a183eea84b",
                 "reference": "406b15af162e78be5c7793b25aadd5a183eea84b",
+=======
+            "version": "v0.6.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inertiajs/inertia-laravel.git",
+                "reference": "2a1e19048f95c0e4adb2b2733f9119e49c4fc09f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/2a1e19048f95c0e4adb2b2733f9119e49c4fc09f",
+                "reference": "2a1e19048f95c0e4adb2b2733f9119e49c4fc09f",
+>>>>>>> 5da0d5cd2d5ec62b3fb0029541034358f17478b6
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "^5.4|^6.0|^7.0|^8.0",
-                "php": "^7.2|^8.0"
+                "laravel/framework": "^6.0|^7.0|^8.74|^9.0|^10.0",
+                "php": "^7.2|~8.0.0|~8.1.0|~8.2.0|~8.3.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0|^6.0",
-                "phpunit/phpunit": "^8.0|^9.0",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^4.0|^5.0|^6.4|^7.0|^8.0",
+                "phpunit/phpunit": "^8.0|^9.5.8",
                 "roave/security-advisories": "dev-master"
+            },
+            "suggest": {
+                "ext-pcntl": "Recommended when running the Inertia SSR server via the `inertia:start-ssr` artisan command."
             },
             "type": "library",
             "extra": {
@@ -1560,7 +1577,11 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.4.5"
+=======
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.11"
+>>>>>>> 5da0d5cd2d5ec62b3fb0029541034358f17478b6
             },
             "funding": [
                 {
@@ -1568,7 +1589,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-10-27T09:37:59+00:00"
+=======
+            "time": "2023-10-27T10:59:02+00:00"
+>>>>>>> 5da0d5cd2d5ec62b3fb0029541034358f17478b6
         },
         {
             "name": "laravel/framework",
@@ -8901,13 +8926,18 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
+<<<<<<< HEAD
     "platform": {
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
+=======
+    "platform": {},
+    "platform-dev": {},
+>>>>>>> 5da0d5cd2d5ec62b3fb0029541034358f17478b6
     "plugin-api-version": "2.6.0"
 }

@@ -171,6 +171,11 @@ return [
             'graph-euro-emissions' => 'Euro 6 Standard',
             'vehicles-stop-circulating' => 'The emission reduction is equivalent to the following thousands of vehicles ceasing to circulate daily:'
         ],
+        'volume-quality' => 'Volume and Quality',
+        'vehicular-emissions' => 'Vehicular Emissions',
+        'green-house-emissions' => 'Greenhouse Gas Emissions',
+        'liters' => 'Liters',
+        'gallons' => 'Gallons',
     ],
     'table-texts' => [
         'header-name' => 'Current Regulation',

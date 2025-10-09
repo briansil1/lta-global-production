@@ -41,6 +41,7 @@ function getSpanishJson() {
             }
 }
 
+
 $(function () {
 
     const inputHiddenLanguage = $('#user_locale_hidden').val();
@@ -62,9 +63,15 @@ $(function () {
     continent_id.innerHTML = continent_json.america_id;
   
     $('#switch_continent_america').on('click', evt => {
-        evt.preventDefault();
-        continent_label.innerHTML = continent_json.america;
-        continent_id.value = continent_json.america_id;
+        alert('click');
+        //evt.preventDefault();
+        //continent_label.innerHTML = continent_json.america;
+        //continent_id.value = continent_json.america_id;
+        // Show regions_container1 y hidden regions_container2,3,4
+        $('#regions_container1').removeClass('hidden');
+        $('#regions_container2').addClass('hidden');
+        $('#regions_container3').addClass('hidden');
+        $('#regions_container4').addClass('hidden');
     });
 
     $('#switch_continent_asia_africa').on('click', evt => {
