@@ -82,6 +82,8 @@ class MainController extends Controller
                 $type = $request->type;
             }
         }
+
+
         // Obtener todas las regiones sin where
         $regions = Region::all();
         // filtrar regiones por continent_id = 1 y guardar en $regions1
@@ -350,6 +352,7 @@ class MainController extends Controller
                 ->with(['region'])     // eager loading
                 // ->select(['id','region_id','campo1','campo2', ...]) // opcional: limitar columnas
                 ->get();
+            $regionsAll = $regions->where('continent_id', $continentid);
             
             // --> GRAFICA 1 - Emissions RED III (MMT/yr)
             $dataG1 = GreenHouse::query()
@@ -368,14 +371,14 @@ class MainController extends Controller
             $g1Sorted = $dataG1->map(function ($r) {
                 return [
                     'country' => $r->country,
-                    'e0'  => (float)($r->e0 ?? 0),
-                    'e10' => (float)($r->e10 ?? 0),
-                    'e15' => (float)($r->e15 ?? 0),
-                    'e20' => (float)($r->e20 ?? 0),
-                    'e25' => (float)($r->e25 ?? 0),
-                    'e30' => (float)($r->e30 ?? 0),
+                    'e0'  => (float)($r->e0_em ?? 0),
+                    'e10' => (float)($r->e10_em ?? 0),
+                    'e15' => (float)($r->e15_em ?? 0),
+                    'e20' => (float)($r->e20_em ?? 0),
+                    'e25' => (float)($r->e25_em ?? 0),
+                    'e30' => (float)($r->e30_em ?? 0),
                     'total'  => (float)(
-                        ($r->e0 ?? 0)+($r->e10 ?? 0)+($r->e15 ?? 0)+($r->e20 ?? 0)+($r->e25 ?? 0)+($r->e30 ?? 0)
+                        ($r->e0_em ?? 0)+($r->e10_em ?? 0)+($r->e15_em ?? 0)+($r->e20_em ?? 0)+($r->e25_em ?? 0)+($r->e30_em ?? 0)
                     ),
                 ];
             })->sortByDesc('total')->values();  
@@ -392,6 +395,9 @@ class MainController extends Controller
                 'region' => $region,
                 'continentid' => $continentid,
                 'regionid' => $regionid,
+                'dataGenerales' => $dataGenerales,
+                'regionsAll' => $regionsAll,
+                'type' => $type,
                 'chartLabels1' => $chartLabels1,
                 'chartValues1' => $chartValues1,
                 'dataG1' => $dataG1,

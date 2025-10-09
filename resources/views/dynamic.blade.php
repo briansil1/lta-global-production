@@ -129,43 +129,44 @@
                         <!-- Divs que parescan botones AMERICA, ASIA, EUROPE, AFRICA y GLOBAL  -->
                         <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
                             <!-- si tab != 2 --> 
-                            @if($tab != 2)
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl  " data-value="AMERICA" style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.america') }} <br>
-                                   <span style="display:block; text-align:center; font-size:large;">
-                                        {{ number_format($dataGenerales->firstWhere('region_id', 1)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
-                                    </span>
-                                </p>
-                            </a>
-                            
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " data-value="EUROPE" style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/europa2.png') }}" alt="" class="hero-sec-img">
+                            @if($tab != 2 and $tab != 3)
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl  " data-value="AMERICA" style="flex-direction: column;">
+                                    <div class="mx-auto w-100">
+                                        <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
+                                    </div>
+                                    <p class="card-p">
+                                        {{ __('main.content.america') }} <br>
+                                    <span style="display:block; text-align:center; font-size:large;">
+                                            {{ number_format($dataGenerales->firstWhere('region_id', 1)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
+                                        </span>
+                                    </p>
+                                </a>
                                 
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.europe') }}
-                                    <span style="display:block; text-align:center; font-size:large;">
-                                        {{ number_format($dataGenerales->firstWhere('region_id', 2)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
-                                    </span>
-                                </p>
-                            </a>
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " data-value="ASIA" style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
-                                    <img src="{{ asset('images/africa.png') }}" alt="" class="hero-sec-img">
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.asia-africa') }}
-                                    <span style="display:block; text-align:center; font-size:large;">
-                                        {{ number_format($dataGenerales->firstWhere('region_id', 3)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
-                                    </span>
-                                </p>
-                            </a>
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " data-value="EUROPE" style="flex-direction: column;">
+                                    <div class="mx-auto w-100">
+                                        <img src="{{ asset('images/europa2.png') }}" alt="" class="hero-sec-img">
+                                    
+                                    </div>
+                                    <p class="card-p">
+                                        {{ __('main.content.europe') }}
+                                        <span style="display:block; text-align:center; font-size:large;">
+                                            {{ number_format($dataGenerales->firstWhere('region_id', 2)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
+                                        </span>
+                                    </p>
+                                </a>
+                                
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " data-value="ASIA" style="flex-direction: column;">
+                                    <div class="mx-auto w-100">
+                                        <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
+                                        <img src="{{ asset('images/africa.png') }}" alt="" class="hero-sec-img">
+                                    </div>
+                                    <p class="card-p">
+                                        {{ __('main.content.asia-africa') }}
+                                        <span style="display:block; text-align:center; font-size:large;">
+                                            {{ number_format($dataGenerales->firstWhere('region_id', 3)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
+                                        </span>
+                                    </p>
+                                </a>
                             @endif
                         </div>
                         <!-- Regiones del continente 1 -->
@@ -206,7 +207,7 @@
                                         <p class="card-p">
                                             Benzene
                                         </p>
-                                        </a>
+                                    </a>
                                     <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             CO
@@ -237,8 +238,32 @@
                                             THC
                                         </p>
                                     </a>
-                                    </div>
-                                @endif
+                            </div>
+                        @endif
+                        @if($tab == 3)
+                        <div class="flex justify-center">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GHG" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    GHG
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/%Redvsbase" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    %Red vs base
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/%RedTarget" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    %Red Target
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CI" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    CI
+                                </p>
+                            </a>
+                        </div>
+                    @endif
                     </div>
                 </main>
             </div>
@@ -974,7 +999,10 @@
                                          <!-- Grafica 2 - CO2 emissions (g/km) por país -->
                                          <!-- Grafica 3 - CH4 emissions (g/km) por país -->
                                          <!-- Grafica 4 - N2O emissions (g/km) por país -->
-                                        <div class="container my-12"></div>
+                                        <div class="container my-12">
+
+
+                                        </div>
                                         @endif
                                     </div>
                                 </div>
