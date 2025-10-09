@@ -50,8 +50,9 @@ class MainController extends Controller
         }
 
         $tab = $request->tab ?? '1';
-        $continentid = $continent->id ?? 1;
+        
         $continent = ($continentid && (int)$continentid > 0) ? Continent::find($continentid) : null;
+        $continentid = $continent->id ?? 1;
         $region    = ($regionid && (int)$regionid > 0) ? Region::find($regionid) : null;
 
         // Variables
