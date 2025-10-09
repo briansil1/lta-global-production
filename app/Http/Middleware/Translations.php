@@ -21,6 +21,13 @@ class Translations
      */
     public function handle(Request $request, Closure $next)
     {
+        $locale = $request->route('locale');              
+        $locale = strtolower((string) $locale);
+        $locale2 = substr($locale, 0, 2);  
+
+        echo "L:".$locale."- ";
+        echo "L2:".$locale2."- ";
+
         $group_lang = $request->route()->getPrefix();
 	    //$group_locale_clean = substr($group_lang, 1,2);
         echo "X:".$group_lang;
