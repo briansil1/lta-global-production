@@ -38,6 +38,7 @@ class MainController extends Controller
     }
 
     public function tools(Request $request, $tab = '1', Continent $continentid = null,  $regionid = null, $type = null) {
+        echo $tab."-".$continentid."-".$regionid."-".$type."<br>";
         // Variables globales $type
      
         if (!Auth::check()) {
