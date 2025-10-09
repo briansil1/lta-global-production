@@ -184,6 +184,11 @@ return [
             'ipcc-graph-title-greet' => 'IPCC Escenario de Desarrollo Sustentable del Sector Transporte, 2023',
             'graph-source' => 'Fuente: IPCC, 2023'
         ],
+        'volume-quality' => 'Volumen y Calidad',
+        'vehicular-emissions' => 'Emisiones Vehiculares',
+        'green-house-emissions' => 'Emisiones de Gases de Efecto Invernadero',
+        'liters' => 'Litros',
+        'gallons' => 'Galones',
     ],
     'table-texts' => [
         'header-name' => 'Regulación vigente',

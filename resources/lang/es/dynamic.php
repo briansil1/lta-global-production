@@ -171,6 +171,11 @@ return [
             'graph-euro-emissions' => 'Estándar emisiones Euro 6',
             'vehicles-stop-circulating' => 'La reducción de emisiones es equivalente a que los siguientes miles de vehículos dejen de circular diariamente:'
         ],
+        'volume-quality' => 'Volumen y Calidad',
+        'vehicular-emissions' => 'Emisiones Vehiculares',
+        'green-house-emissions' => 'Emisiones de Gases de Efecto Invernadero',
+        'liters' => 'Litros',
+        'gallons' => 'Galones',
     ],
     'table-texts' => [
         'header-name' => 'Regulación vigente',
