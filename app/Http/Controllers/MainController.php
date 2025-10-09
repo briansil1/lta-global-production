@@ -38,7 +38,7 @@ class MainController extends Controller
     }
 
     public function tools(Request $request, $tab = '1', $continentid = null,  $regionid = null, $type = null) {
-        echo $tab."-".$continentid."-".$regionid."-".$type."<br>";
+        //echo $tab."-".$continentid."-".$regionid."-".$type."<br>";
         // Variables globales $type
      
         if (!Auth::check()) {
@@ -191,7 +191,7 @@ class MainController extends Controller
             ->values();  
             $chartLabels7 = $g7Sorted->pluck('country');
             $chartValues7 = $g7Sorted->map(fn($r) => collect($r)->except(['country','total']));
-            echo $tab."-".$continentid."-".$regionid."-".$type;
+            //echo $tab."-".$continentid."-".$regionid."-".$type;
             return view('dynamic', [
                 'tab' => $tab,
                 'continent' => $continent,
