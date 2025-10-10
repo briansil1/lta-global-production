@@ -18,7 +18,7 @@ use Inertia\Inertia;
 Route::group(['prefix' => 'en', 'middleware' => 'translate'], function() {
     Route::get('/static-home', '\App\Http\Controllers\MainController@home')->name('home');
     Route::get('/static-home/reset-pass/{token}', '\App\Http\Controllers\MainController@home')->name('reset-pass');
-    Route::get('/dynamic-tools/{tab?}/{country?}/{compareCountry?}', '\App\Http\Controllers\MainController@tools')->name('dynamic-tools');
+    Route::get('/dynamic-tools/{tab?}/{continent?}/{region?}/{type?}', '\App\Http\Controllers\MainController@tools')->name('dynamic-tools');
     Route::get('/get-components-options/{country?}', '\App\Http\Controllers\ComponentController@getComponentsList')->middleware(['auth', 'verified'])->name('get-components-list');
     Route::get('/download-profile-report', '\App\Http\Controllers\MainController@downloadProfile')->name('profile-pdf-en');
     Route::get('/download-emission-report', '\App\Http\Controllers\MainController@downloadEmission')->name('emission-file-en');
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'en', 'middleware' => 'translate'], function() {
 Route::group(['prefix' => 'es', 'middleware' => 'translate'], function() {
     Route::get('/static-hogar', '\App\Http\Controllers\MainController@home')->name('hogar');
     Route::get('/static-hogar/cambiar-contrasena/{token}', '\App\Http\Controllers\MainController@home')->name('cambiar-contra');
-    Route::get('/herramientas-dinamicas/{tab?}/{country?}/{compareCountry?}', '\App\Http\Controllers\MainController@tools')->name('herramientas-dinamicas');
+    Route::get('/herramientas-dinamicas/{tab?}/{continent?}/{region?}/{type?}', '\App\Http\Controllers\MainController@tools')->name('herramientas-dinamicas');
     Route::get('/obtener-lista-components/{country?}', '\App\Http\Controllers\ComponentController@getComponentsList')->middleware(['auth', 'verified'])->name('obtener-lista-componentes');
     Route::get('/descargar-perfil-reporte', '\App\Http\Controllers\MainController@downloadProfile')->name('profile-pdf-es');
     Route::get('/descargar-emision-reporte', '\App\Http\Controllers\MainController@downloadEmission')->name('emission-file-es');

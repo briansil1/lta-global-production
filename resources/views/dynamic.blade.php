@@ -3,9 +3,7 @@
     'tools_country' => isset($country) ? $country : null,
     'tools_compare' => isset($compareCountry) ? $compareCountry : null,
 ])
-
 @section('title', __('dynamic.title'))
-
 @section('scriptvars')
     <script type="application/javascript">
         var _url_home = "{{ route(__('routes.home')) }}";
@@ -78,16 +76,22 @@
     <script src="{{ asset('js/component-chart.js') }}"></script>
     <script src="{{ asset('js/impact-graphs.js') }}"></script>
     <script src="{{ asset('js/ghg-graphs.js') }}"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
-
 @endpush
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/dynamic.css') }}">
 @endpush
 
+@push('scripts')
+    {{-- ya tienes Chart.js cargado arriba --}}
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
+
+@endpush
+
 @section('content')
+    <!-- VARDUMP  de dataG1-->
     <div class="site-content-contain z-10">
         <div id="content" class="site-content">
             <div id="primary" class="content-area mg-banded-secondary-lightest mg-noise">
@@ -95,342 +99,918 @@
                     <div class="mg-banded-primary-darkest text-white white-links antialiased">
                     </div>
                     <div class="back-blue text-center">
-
                         <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden" aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
-                        
                         <h2 class="h1 uppercase text-2xl md:text-5xl container oswald"><a href="{{ route(__('routes.home')) }}" class="text-white">{{ __('dynamic.content.profiles') }}</a></h2>
-                        
-                        <label id="tool_continent"  class="text-white mt-0 pt-0 oswald" aria-label="tool_continent" aria-describedby="tool_continent"></label>
-                        <h3 class="text-white mt-0 pt-0 oswald">{{ __('dynamic.content.dynamic-tool') }}</h3>
-
-
-                        <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
-                            <a href="#" id="switch_continent_america" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.america') }}
-                                </p>
-                            </a>
-                            <a href="#" id="switch_continent_asia_africa" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.asia-africa') }}
-                                </p>
-                            </a>
-                            <a href="#" id="switch_continent_europe" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.europe') }}
-                                </p>
-                            </a>
-                            <!-- <a href="#" id="switch_continent_global" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
-                                <div class="mx-auto w-100">
-                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                
-                                </div>
-                                <p class="card-p">
-                                    {{ __('main.content.global') }}
-                                </p>
-                            </a> -->
+                        <label id="tool_continent"  class="text-white mt-0 pt-0 oswald" aria-label="tool_continent" aria-describedby="tool_continent">{{ $continent->name }}</label>
+                        <h3 class="text-white mt-0 pt-0 oswald">{{ __('dynamic.content.dynamic-tool') }} </h3>
+                        <!-- Agregar divs que parescan botones VOLUME & QUALITY, VEHICULAR EMISSIONS y GREEN HOUSE EMISSIONS  -->
+                         <div class="container my-4">
+                             <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
+                                <a href="{{ route(__('routes.tools')) }}/1" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                    
+                                    <p class="card-p">
+                                        {{ __('dynamic.content.volume-quality') }}
+                                    </p>
+                                </a>
+                                <a href="{{ route(__('routes.tools')) }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
+                                   
+                                    <p class="card-p">
+                                        {{ __('dynamic.content.vehicular-emissions') }}
+                                    </p>
+                                </a>
+                                <a href="{{ route(__('routes.tools')) }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " style="flex-direction: column;">
+                                    
+                                    <p class="card-p">
+                                        {{ __('dynamic.content.green-house-emissions') }}
+                                    </p>
+                                </a>
+                            </div>
                         </div>
+                        <!-- Divs que parescan botones AMERICA, ASIA, EUROPE, AFRICA y GLOBAL  -->
+                        <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
+                            <!-- si tab != 2 --> 
+                            @if($tab != 2 and $tab != 3)
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl  " data-value="AMERICA" style="flex-direction: column;">
+                                    <div class="mx-auto w-100">
+                                        <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
+                                    </div>
+                                    <p class="card-p">
+                                        {{ __('main.content.america') }} <br>
+                                    <span style="display:block; text-align:center; font-size:large;">
+                                            {{ number_format($dataGenerales->firstWhere('region_id', 1)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
+                                        </span>
+                                    </p>
+                                </a>
+                                
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " data-value="EUROPE" style="flex-direction: column;">
+                                    <div class="mx-auto w-100">
+                                        <img src="{{ asset('images/europa2.png') }}" alt="" class="hero-sec-img">
+                                    
+                                    </div>
+                                    <p class="card-p">
+                                        {{ __('main.content.europe') }}
+                                        <span style="display:block; text-align:center; font-size:large;">
+                                            {{ number_format($dataGenerales->firstWhere('region_id', 2)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
+                                        </span>
+                                    </p>
+                                </a>
+                                
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl " data-value="ASIA" style="flex-direction: column;">
+                                    <div class="mx-auto w-100">
+                                        <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
+                                        <img src="{{ asset('images/africa.png') }}" alt="" class="hero-sec-img">
+                                    </div>
+                                    <p class="card-p">
+                                        {{ __('main.content.asia-africa') }}
+                                        <span style="display:block; text-align:center; font-size:large;">
+                                            {{ number_format($dataGenerales->firstWhere('region_id', 3)->gasoline_demand_lt ?? 0, 0, '.', ',') }}
+                                        </span>
+                                    </p>
+                                </a>
+                            @endif
+                        </div>
+                        <!-- Regiones del continente 1 -->
+                        <div class="container my-4" id="regions_container" >
+                             <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
+                                <!-- dump regions -->
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        All
+                                    </p>
+                                </a>
+                                @if(isset($regionsAll))
+                                    @foreach ($regionsAll as $regionOne)
+                                        <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                            <p class="card-p">
+                                                {{ $regionOne->name }}
+                                            </p>
+                                        </a>
+                                    @endforeach
+                                @endif
+                               
+                            </div>
+                        </div>
+                        <!-- boton de Litros y galones si $tab == 1-->
+                         @if($tab == 1)
+                             <div class="flex justify-center">
+                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/litros" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl">
+                                     {{ __('dynamic.content.liters') }}
+                                 </a>
+                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/galones" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl">
+                                     {{ __('dynamic.content.gallons') }}
+                                 </a>
+                             </div>
+                         @endif
+                         @if($tab == 2)
+                            <div class="flex justify-center">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Benzene" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                        <p class="card-p">
+                                            Benzene
+                                        </p>
+                                    </a>
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                        <p class="card-p">
+                                            CO
+                                        </p>
+                                    </a>
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                        <p class="card-p">
+                                            CO2
+                                        </p>
+                                    </a>
+
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/NOx" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;"> 
+                                        <p class="card-p">
+                                            NOx
+                                        </p>
+                                    </a>
 
 
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM 2.5" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                        <p class="card-p">
+                                            PM 2.5
+                                        </p>
+                                    </a>   
+
+
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/THC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                        <p class="card-p">
+                                            THC
+                                        </p>
+                                    </a>
+                            </div>
+                        @endif
+                        @if($tab == 3)
+                        <div class="flex justify-center">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GHG" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    GHG
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/%Redvsbase" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    %Red vs base
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/%RedTarget" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    %Red Target
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CI" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    CI
+                                </p>
+                            </a>
+                        </div>
+                    @endif
                     </div>
                 </main>
             </div>
         </div>
         <div class="off-blue pb-5">
             <div class="container">
-                <p class="oswald text-center fs-4 text-white">{{ __('dynamic.content.select-country-text') }}</p>
-                <div class="col-lg-6 col-md-8 col-sm-12 country-select">
-                    <h4>{{ __('dynamic.content.select-country') }}</h4>
-                    <select id="country-select" class="form-select" aria-label="Default select example">
-                        @if (isset($country))
-                            @foreach($countryList as $countryEl)
-                                <option value="{{ $countryEl->id }}" @if($countryEl->id === $country->id) selected @endif>{{ __('countries.' . $countryEl->name) }}</option>
-                            @endforeach
-                        @else
-                            <option value="-1" selected>{{ __('dynamic.content.select-country') }}</option>
-                            @foreach($countryList as $countryEl)
-                                <option value="{{ $countryEl->id }}">{{ __('countries.' . $countryEl->name) }}</option>
-                            @endforeach
-                        @endif
-                    </select>
-                </div>
-                @if (isset($country))
-                    <div class="shadow">
-                        <!---acordions-->
-                        <div class="accordion d-sm-block d-md-block d-lg-block d-xl-none d-xxl-none" id="accordionPanelsStayOpenExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                    <a href="#" class="accordion-button @if($tab == '1') show active @else collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="@if($tab == '1') true @else false @endif" aria-controls="panelsStayOpen-collapseOne">
-                                        {{ __('dynamic.content.volume-quality') }}
-                                    </a>
-                                </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse @if($tab == '1') show @endif" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div id="continent-accordions">
+                            <div id="accordion-america" class="continent-accordion ">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        @if($tab == 1)
+                                            {{ __('dynamic.content.volume-quality') }}
+                                        @elseif($tab == 2)
+                                            {{ __('dynamic.content.vehicular-emissions') }}
+                                        @elseif($tab == 3)
+                                            {{ __('dynamic.content.green-house-emissions') }}
+                                        @endif
+                                        / {{ $continent->name }} @if($region) @if($region->name) / {{ $region->name }}  @endif  @if($type and $type == "_lt") / Litros @else / Galones @endif @endif</h2>
                                     <div class="accordion-body">
-                                        @include('component.tab-pane-volume-quality')
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                    <a href="#" class="accordion-button @if($tab == '2') show active @else collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="@if($tab == '2') true @else false @endif" aria-controls="panelsStayOpen-collapseTwo">
-                                        {{ __('dynamic.content.vehicular-emissions') }}
-                                    </a>
-                                </h2>
-                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse @if($tab == '2') show @endif" aria-labelledby="panelsStayOpen-headingTwo">
-                                    <div class="accordion-body">
-                                        @include('component.tab-pane-vehicular-emission', ['chart_id' => 'chart-accordion'])
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                    <a href="#" class="accordion-button @if($tab == '3') show active @else collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="@if($tab == '3') true @else false @endif" aria-controls="panelsStayOpen-collapseThree">
-                                        {{ __('dynamic.content.green-house-emissions') }}
-                                    </a>
-                                </h2>
-                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse @if($tab == '3') show @endif" aria-labelledby="panelsStayOpen-headingThree">
-                                    <div class="accordion-body">
-                                        @include('component.tab-pane-green-house', ['chart_id' => 'chart-accordion'])
-</div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                    <a href="#" class="accordion-button @if($tab == '4') show active @else collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="@if($tab == '4') true @else false @endif" aria-controls="panelsStayOpen-collapseFour">
-                                        {{ __('dynamic.content.ghg') }}
-                                    </a>
-                                </h2>
-                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse @if($tab == '4') show @endif" aria-labelledby="panelsStayOpen-headingFour">
-                                    <div class="accordion-body">
-                                        @include('component.tab-pane-ghg', ['chart_id' => 'chart-accordion'])                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!---tabs-->
-                        <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block d-xxl-block">
-                            <ul class="nav nav-tabs d-flex " id="myTab" role="tablist">
-                                <li class="nav-item col-4" role="presentation">
-                                    <span class="nav-link-3 @if($tab == '1') active @endif oswald" id="tab-1" data-bs-toggle="tab" data-bs-target="#tab1" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '1' ? 'true' : 'false'}}">
-                                        {{ __('dynamic.content.volume-quality') }}
-                                    </span>
-                                </li>
-                                <li class="nav-item col-4" role="presentation">
-
-                                <div id="content" class="site-content">
-                                    <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden" aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
-                                                   
-                                    <div class="modal fade" id="modalGasolineEthanolBlending" data-keyboard="false" tabindex="-1" aria-labelledby="modalGasolineEthanolBlendingLabel">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"> {{ __('dynamic.content.component-tab.modal-price-update-text') }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                        <!-- Si Tab es 1-->
+                                        @if($tab == 1)
+                                        <div class="container my-12">
+                                            
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="oswald">Gasoline demand (MML/yr)</h3>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <p> {{ __('dynamic.content.component-tab.modal-price-update') }}</p>
-                                                        
-                                                    <form id="price-update-form" method="post" action="{{ route('price-update-get-results') }}" >
-                                                                     
-
-                                                        <div class="form-group row">
-                                                            <span class="col-sm-8 col-input-group-text" id="basic-addon1">{{ __('dynamic.content.component-tab.modal-price-update-fuel-component') }}</span>
-                                                            <span class="col-sm-4 col-input-group-text" id="basic-addon1">{{ __('dynamic.content.component-tab.modal-price-update-price') }}</span>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label for="price_gasoline_regular" class="col-sm-8 col-form-label">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-regular') }}</label>                           
-                                                            <div class="col-sm-4">
-                                                                <input type="text" class="form-control-sm" id="price_gasoline_regular" aria-label="price_gasoline_regular" aria-describedby="price_gasoline_regular" required="True">
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label for="price_gasoline_premium" class="col-sm-8 col-form-label">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-premium') }}</label>
-                                                            <div class="col-sm-4">
-                                                                <input type="text" class="form-control" id="price_gasoline_premium" aria-label="price_gasoline_premium" aria-describedby="price_gasoline_premium" required="True">
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label for="price_normal_butane" class="col-sm-8 col-form-label">{{ __('dynamic.content.component-tab.modal-price-update-normal-butane') }}</label>
-                                                            <div class="col-sm-4">
-                                                                <input type="text" class="form-control" id="price_normal_butane" aria-label="price_normal_butane" aria-describedby="price_normal_butane" required="True">
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label for="price_ethanol" class="col-sm-8 col-form-label">{{ __('dynamic.content.component-tab.modal-price-update-ethanol') }}</label>
-                                                            <div class="col-sm-4">
-                                                                <input type="text" class="form-control" id="price_ethanol" aria-label="price_ethanol" aria-describedby="price_ethanol" required="True">
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label for="price_mtbe" class="col-sm-8 col-form-label">{{ __('dynamic.content.component-tab.modal-price-update-mtbe') }}</label>
-                                                            <div class="col-sm-4">
-                                                                <input type="text" class="form-control" id="price_mtbe" aria-label="price_mtbe" aria-describedby="price_mtbe" required="True">
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group row">
-                                                            <label for="price_btx_weighted" class="col-sm-8 col-form-label">{{ __('dynamic.content.component-tab.modal-price-update-btx-weighted') }}</label>
-                                                            <div class="col-sm-4">
-                                                                <input type="text" class="form-control" id="price_btx_weighted" aria-label="price_btx_weighted" aria-describedby="price_btx_weighted" required="True">
-                                                            </div>
-                                                        </div>
-
-
-                                                        
-                                                        <div class="d-flex justify-content-center pt-4">
-                                                            <button id="modal-price-update-continue" type="submit" class="btn btn-primary px-4 oswald">{{ __('dynamic.content.component-tab.modal-price-update-continue') }}</button>
-                                                        </div>
-
-
-                                                        
-                                                    </form>
-
-                                                
-
+                                                <div class="col-6">
+                                                    <h3 class="oswald">Gasoline Growth (%)</h3>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="modal fade" id="modalGasolineEthanolBlending_2" data-keyboard="false" tabindex="-1" aria-labelledby="modalGasolineEthanolBlendingLabel_2" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">{{ __('dynamic.content.component-tab.modal-price-update-report-text') }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p> {{ __('dynamic.content.component-tab.modal-price-update') }}</p>
-
-
-
-                                                    <div class="table-responsive">
-                                                        <table class="table-bordered" border="1" cellpadding="0" cellspacing="0">
-                                                            <thead >
-                                                                <tr class="table-titles ">
-                                                                    <th colspan="2" id="th_country_text" scope="col">{{ __('countries.' . $country->name) }} </th>
-                                                                    <th colspan="6" style="text-align:center" id="th_gasoline_text" scope="col">{{ __('dynamic.content.component-tab.constant-octane-number') }}</th>
-                                                                </tr>
-                                                                <tr class="table-titles ">
-                                                                    <th id="th_price_text" scope="col">{{ __('dynamic.content.component-tab.prices') }}</th>
-                                                                    <th id="th_gasoline_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline') }}</th>
-                                                                    <th id="th_gasoline_e0_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e0') }}</th>
-                                                                    <th id="th_gasoline_e10_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e10') }}</th>
-                                                                    <th id="th_gasoline_e15_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e15') }}</th>
-                                                                    <th id="th_gasoline_e20_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e20') }}</th>
-                                                                    <th id="th_gasoline_e25_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e25') }}</th>
-                                                                    <th id="th_gasoline_e30_text" scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e30') }}</th>
-                                                                </tr>
-                                                            </thead>
-                                                            
-                                                            <tbody class="table-bordered" id="table-data-constant-octane">
-
-                                                            </tbody>
-                                                        </table>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g1Chart" height="120"></canvas>
                                                     </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g2Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="oswald">Gasoline production (MML/yr)</h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h3 class="oswald">Gasoline Imports (%)</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g3Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g4Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="oswald">Ethanol demand (MML/yr)</h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h3 class="oswald">Octane demand (ROM)</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g5Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g6Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h3 class="oswald">Ethanol potential (MML/yr)</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g7Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @push('scripts')
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    // Grafica 1 - Gasoline demand (MML/yr) por país
+                                                    const labels = @json($chartLabels ?? []);  // países
+                                                    const values = @json($chartValues ?? []);  // litros
+                                                    // Grafica 2 - Gasoline growth (%) por país
+                                                    const labels2 = @json($chartLabels2 ?? []);  // países
+                                                    const values2 = @json($chartValues2 ?? []);  // litros
+                                                    // Grafica 3 - Gasoline production (MML/yr) por país
+                                                    const labels3 = @json($chartLabels3 ?? []);  // países
+                                                    const values3 = @json($chartValues3 ?? []);  // litros
+                                                    // Grafica 4 - Gasoline import dependence (MML/yr) por país
+                                                    const labels4 = @json($chartLabels4 ?? []);  // países
+                                                    const values4 = @json($chartValues4 ?? []);  // litros
+                                                    // Grafica 5 - 
+                                                    const labels5 = @json($chartLabels5 ?? []);  // países
+                                                    const values5 = @json($chartValues5 ?? []);  // litros
+                                                    // Grafica 6 - 
+                                                    const labels6 = @json($chartLabels6 ?? []);  // países
+                                                    const values6 = @json($chartValues6 ?? []);  // litros
+                                                    // Grafica 7 -
+                                                    const labels7 = @json($chartLabels7 ?? []);  // países
+                                                    const values7 = @json($chartValues7 ?? []);  // litros
 
 
+                                                    const ctx = document.getElementById('g1Chart').getContext('2d');
+                                                    const ctx2 = document.getElementById('g2Chart').getContext('2d');
+                                                    const ctx3 = document.getElementById('g3Chart').getContext('2d');
+                                                    const ctx4 = document.getElementById('g4Chart').getContext('2d');
+                                                    const ctx5 = document.getElementById('g5Chart').getContext('2d');
+                                                    const ctx6 = document.getElementById('g6Chart').getContext('2d');
+                                                    const ctx7 = document.getElementById('g7Chart').getContext('2d');
+
+                                                    new Chart(ctx, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels,
+                                                        datasets: [{
+                                                            label: 'Gasoline demand (MML/yr)',
+                                                            data: values,
+                                                            borderWidth: 1,
+                                                            backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                            borderColor: 'rgba(54, 162, 235, 1)'
+                                                        }]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        plugins: {
+                                                            legend: { display: false },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    @if($type == '_lt')
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  L`
+                                                                    @else
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  G`
+                                                                    @endif
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {                           // valores numéricos
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => Number(v).toLocaleString()
+                                                            },
+                                                            title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                            },
+                                                            y: {                           // nombres de países (no convertir a número)
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        plugins: [ChartDataLabels]
+                                                    });
+
+                                                    new Chart(ctx2, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels: labels2,
+                                                        datasets: [{
+                                                            label: 'Gasoline growth (%)',
+                                                            data: values3,
+                                                            borderWidth: 1,
+                                                            backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                            borderColor: 'rgba(54, 162, 235, 1)'
+                                                        }]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        plugins: {
+                                                            legend: { display: false },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} %`
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => `${Number(val).toLocaleString()} %`
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {                           // valores numéricos
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => `${Number(v).toFixed(1)} %`
+                                                            },
+                                                            title: { display: true, text: '(%)' }
+                                                            },
+                                                            y: {                           // nombres de países (no convertir a número)
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        plugins: [ChartDataLabels]
+                                                    });
+
+                                                    new Chart(ctx3, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels: labels3,
+                                                        datasets: [{
+                                                            label: 'Gasoline production (MML/yr)',
+                                                            data: values3,
+                                                            borderWidth: 1,
+                                                            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                                            borderColor: 'rgba(75, 192, 192, 1)'
+                                                        }]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        plugins: {
+                                                            legend: { display: false },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    @if($type == '_lt')
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                    @else
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                    @endif
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {                           // valores numéricos
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => Number(v).toLocaleString()
+                                                            },
+                                                            title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                            },
+                                                            y: {                           // nombres de países (no convertir a número)
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        plugins: [ChartDataLabels]
+                                                    });
+
+                                                    new Chart(ctx4, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels: labels4,
+                                                        datasets: [{
+                                                            label: 'Gasoline import dependence (MML/yr)',
+                                                            data: values4,
+                                                            borderWidth: 1,
+                                                            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                                            borderColor: 'rgba(75, 192, 192, 1)'
+                                                        }]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        plugins: {
+                                                            legend: { display: false },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    @if($type == '_lt')
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                    @else
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                    @endif
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {                           // valores numéricos
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => Number(v).toLocaleString()
+                                                            },
+                                                            title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                            },
+                                                            y: {                           // nombres de países (no convertir a número)
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        plugins: [ChartDataLabels]
+                                                    });
+
+                                                    new Chart(ctx5, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels: labels5,
+                                                        datasets: [{
+                                                            label: 'Ethanol Demand (MML/yr)',
+                                                            data: values5,
+                                                            borderWidth: 1,
+                                                            backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                                                            borderColor: 'rgba(153, 102, 255, 1)'
+                                                        }]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        plugins: {
+                                                            legend: { display: false },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    @if($type == '_lt')
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                    @else
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                    @endif
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {                           // valores numéricos
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => Number(v).toLocaleString()
+                                                            },
+                                                            title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                            },
+                                                            y: {                           // nombres de países (no convertir a número)
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        plugins: [ChartDataLabels]
+                                                    });
+
+                                                    new Chart(ctx6, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels: labels6,
+                                                        datasets: [{
+                                                            label: 'Octane Production (MML/yr)',
+                                                            data: values6,
+                                                            borderWidth: 1,
+                                                            backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                                                            borderColor: 'rgba(153, 102, 255, 1)'
+                                                        }]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        plugins: {
+                                                            legend: { display: false },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    @if($type == '_lt')
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                    @else
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                    @endif
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {                           // valores numéricos
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => Number(v).toLocaleString()
+                                                            },
+                                                            title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                            },
+                                                            y: {                           // nombres de países (no convertir a número)
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        plugins: [ChartDataLabels]
+                                                    });
+
+                                                    // La siguiente grafica debera de graficar varios valores por barra de pais
+                                                    new Chart(ctx7, {
+                                                        type: 'bar',
+                                                        data: {
+                                                        labels: labels7,
+                                                        datasets: [
+                                                            { label: 'E0 (MML/yr)',  data: values7.map(v => v.e0_lt),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                            { label: 'E10 (MML/yr)', data: values7.map(v => v.e10_lt), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                            { label: 'E15 (MML/yr)', data: values7.map(v => v.e15_lt), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                            { label: 'E20 (MML/yr)', data: values7.map(v => v.e20_lt), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                            { label: 'E25 (MML/yr)', data: values7.map(v => v.e25_lt), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                            { label: 'E30 (MML/yr)', data: values7.map(v => v.e30_lt), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                        ]
+                                                        },
+                                                        options: {
+                                                        indexAxis: 'y',                 // 👈 horizontal
+                                                        responsive: true,
+                                                        maintainAspectRatio: false,
+                                                        /*
+                                                        plugins: {
+                                                            legend: { display: true, position: 'top' },
+                                                            tooltip: {
+                                                                callbacks: {
+                                                                    // En horizontal, el valor está en parsed.x
+                                                                    label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                }
+                                                            },
+                                                            datalabels: {
+                                                                anchor: 'end',
+                                                                align: 'end',
+                                                                formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                            }
+                                                        },*/
+                                                        scales: {
+                                                            x: {  
+                                                            stacked : true,                        
+                                                            beginAtZero: true,
+                                                            ticks: {
+                                                                callback: (v) => Number(v).toLocaleString()
+                                                            },
+                                                            title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                            },
+                                                            y: {    
+                                                            stacked : true,                        
+                                                            ticks: {
+                                                                autoSkip: false,           // opcional: muestra todos
+                                                            },
+                                                            title: { display: true, text: 'País' }
+                                                            }
+                                                        }
+                                                        },
+                                                        //plugins: [ChartDataLabels]
+                                                    });
+                                                });
+                                            </script>
+                                            @endpush
+                                        </div>
+                                        @endif
+                                        <!-- Si Tab es 2-->
+                                        @if($tab == 2)
+                                         <!-- GRAFICAS DE VEHICULAR EMISSIONS -->
+                                         <!-- Grafica 1 - Vehicular emissions (kTons/yr) por país -->
+                                        <div class="container my-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h3 class="oswald">{{$type}} Emissions (MML/yr)</h3>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g1Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h3 class="oswald">{{$type}} Emissions (Ton/day)</h3>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g2Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h3 class="oswald">Vehicle Fleet (Units)</h3>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                        <canvas id="g3Chart" height="120"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @push('scripts')
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    // --- G1 ---
+                                                    const EURO6 = 3.5;   // <-- pon aquí el valor real en las MISMAS unidades del eje X
+                                                    const US    = 5.0;
+                                                    const labels = @json($chartLabels1 ?? []);
+                                                    const raw1 = @json($chartValues1 ?? []);
+                                                    const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
+                                                    const n = x => (x == null ? 0 : Number(x));
+                                                    const ctx1 = document.getElementById('g1Chart');
+                                                    if (ctx1) {
+                                                        Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
+                                                        new Chart(ctx1.getContext('2d'), {
+                                                            type: 'bar',
+                                                            data: {
+                                                                labels,
+                                                                datasets: [
+                                                                { label: 'E0 (MML/yr)',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                { label: 'E10 (MML/yr)', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15 (MML/yr)', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20 (MML/yr)', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                { label: 'E25 (MML/yr)', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30 (MML/yr)', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                ]
+                                                            },
+                                                            options: {
+                                                                indexAxis: 'y',
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                scales: {
+                                                                    x: {
+                                                                        stacked: true,
+                                                                        beginAtZero: true,
+                                                                        ticks: { callback: (value) => Number(value).toLocaleString() },
+                                                                        title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif }
+                                                                    },
+                                                                    y: {
+                                                                        stacked: true,
+                                                                        ticks: { autoSkip: false },
+                                                                        title: { display: true, text: 'País' }
+                                                                    }
+                                                                },
+                                                                plugins: {
+                                                                    legend: { position: 'bottom' },
+                                                                    annotation: {
+                                                                        annotations: {
+                                                                            euro6: {
+                                                                                type: 'line',
+                                                                                xMin: EURO6, xMax: EURO6,
+                                                                                borderColor: '#ff7f0e', // naranja
+                                                                                borderWidth: 2,
+                                                                                label: {
+                                                                                display: true,
+                                                                                content: 'Euro 6',
+                                                                                position: 'start',
+                                                                                rotation: -90,
+                                                                                backgroundColor: 'rgba(0,0,0,0)',
+                                                                                color: '#ff7f0e',
+                                                                                text: 'Euro 6',
+                                                                                font: {
+                                                                                    size: 12,
+                                                                                    weight: 'bold'
+                                                                                }
+                                                                                }
+                                                                            },
+                                                                            us: {
+                                                                                type: 'line',
+                                                                                xMin: US, xMax: US,
+                                                                                borderColor: '#2ca02c', // verde
+                                                                                borderWidth: 2,
+                                                                                label: {
+                                                                                display: true,
+                                                                                content: 'US',
+                                                                                position: 'start',
+                                                                                rotation: -90,
+                                                                                backgroundColor: 'rgba(0,0,0,0)',
+                                                                                color: '#2ca02c',
+                                                                                
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+
+                                                    // --- G2 ---
+                                                    const labels2 = @json($chartLabels2 ?? []);
+                                                    const raw2 = @json($chartValues2 ?? []);
+                                                    const values2 = Array.isArray(raw2) ? raw2 : Object.values(raw2);
+
+                                                    const ctx2 = document.getElementById('g2Chart');
+                                                    if (ctx2) {
+                                                        new Chart(ctx2.getContext('2d'), {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: labels2,
+                                                            datasets: [
+                                                            { label: 'E0 (Ton/day)',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                            { label: 'E10 (Ton/day)', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                            { label: 'E15 (Ton/day)', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                            { label: 'E20 (Ton/day)', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                            { label: 'E25 (Ton/day)', data: values2.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                            { label: 'E30 (Ton/day)', data: values2.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                            ]
+                                                        },
+                                                        options: {
+                                                            indexAxis: 'y',
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            scales: {
+                                                            x: {
+                                                                stacked: true,
+                                                                beginAtZero: true,
+                                                                ticks: { callback: (value) => Number(value).toLocaleString() },
+                                                                title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif }
+                                                            },
+                                                            y: {
+                                                                stacked: true,
+                                                                ticks: { autoSkip: false },
+                                                                title: { display: true, text: 'País' }
+                                                            }
+                                                            }
+                                                        }
+                                                        });
+                                                    }
                                                     
-                                                    <div class="table-responsive">
-                                                        <table class="table-bordered" border="1" cellpadding="0" cellspacing="0">
-                                                            <thead >
-                                                                <tr class="table-titles ">
-                                                                    <th colspan="2" scope="col">{{ __('countries.' . $country->name) }} </th>
-                                                                    <th colspan="6" style="text-align:center" id="th_gasoline_text" scope="col">{{ __('dynamic.content.component-tab.increased-octane-number') }}</th>
-                                                                </tr>
-                                                                <tr class="table-titles ">
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.prices') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e0') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e10') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e15') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e20') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e25') }}</th>
-                                                                    <th scope="col">{{ __('dynamic.content.component-tab.modal-price-update-gasoline-e30') }}</th>
-                                                                </tr>
-                                                            </thead>
-                                                            
-                                                            <tbody class="table-bordered" id="table-data-increased-octane">
 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-
-
-
-                                                </div>
-
-                                                <div class="d-flex justify-content-between align-items-center w-100">
-                                                    <p> </p>
-                                                    <button class="btn btn-primary px-4 oswald" data-bs-target="#modalGasolineEthanolBlending" data-bs-toggle="modal">{{ __('dynamic.content.component-tab.modal-price-update-go-back') }}</button>
-                                                    <button id="modal-price-update-download" type="submit" class="btn btn-primary px-4 oswald">{{ __('dynamic.content.profile-tab.download-button') }}</button>
-                                                    <button class="btn btn-primary px-4 oswald" data-bs-dismiss="modal">{{ __('dynamic.content.component-tab.modal-price-update-close') }}</button>
-                                                    </br>
-                                                </div>
-
-                                                {{-- <div class="modal-footer">
-                                                    <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                                    <button class="btn btn-primary" data-bs-target="#modalGasolineEthanolBlending" data-bs-toggle="modal">Regresar</button>
-                                                </div> --}}
-                                            </div>
+                                                    // --- G3 ---
+                                                    const labels3 = @json($chartLabels3 ?? []);
+                                                    const raw3 = @json($chartValues3 ?? []);
+                                                    const values3 = Array.isArray(raw3) ? raw3 : Object.values(raw3);
+                                                
+                                                    const ctx3 = document.getElementById('g3Chart');
+                                                    if (ctx3) {
+                                                        new Chart(ctx3, {
+                                                            type: 'bar',
+                                                            data: {
+                                                            labels: labels3,
+                                                            datasets: [{
+                                                                label: 'Gasoline demand (MML/yr)',
+                                                                data: values3,
+                                                                borderWidth: 1,
+                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                borderColor: 'rgba(54, 162, 235, 1)'
+                                                            }]
+                                                            },
+                                                            options: {
+                                                            indexAxis: 'y',                 // 👈 horizontal
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: {
+                                                                    callbacks: {
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                    }
+                                                                },
+                                                                datalabels: {
+                                                                    anchor: 'end',
+                                                                    align: 'end',
+                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                }
+                                                            },
+                                                            scales: {
+                                                                x: {                      
+                                                                beginAtZero: true,
+                                                                ticks: {
+                                                                    callback: (v) => Number(v).toLocaleString()
+                                                                },
+                                                                title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif}
+                                                                },
+                                                                y: {                          
+                                                                ticks: {
+                                                                    autoSkip: false,    
+                                                                },
+                                                                title: { display: true, text: 'País' }
+                                                                }
+                                                            }
+                                                            },
+                                                            plugins: [ChartDataLabels]
+                                                        });
+                                                    }
+                                                });
+                                            </script>
+                                            @endpush
                                         </div>
-                                    </div>
+                                        @endif
+                                        <!-- Si Tab es 3-->
+                                        @if($tab == 3)  
+                                         <!-- GRAFICAS DE GREEN HOUSE EMISSIONS -->
+                                         <!-- Grafica 1 - GHG emissions (kTons/yr) por país -->
+                                         <!-- Grafica 2 - CO2 emissions (g/km) por país -->
+                                         <!-- Grafica 3 - CH4 emissions (g/km) por país -->
+                                         <!-- Grafica 4 - N2O emissions (g/km) por país -->
+                                        <div class="container my-12">
 
+
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
-                                    <span class="nav-link-3 @if($tab == '2') active @endif oswald" id="tab-2" data-bs-toggle="tab" data-bs-target="#tab2" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '2' ? 'true' : 'false'}}">
-                                        {{ __('dynamic.content.vehicular-emissions') }}
-                                    </span>
-                                </li>
-                                <li class="nav-item col-4" role="presentation">
-                                    <span class="nav-link-3 @if($tab == '3') active @endif oswald" id="tab-3" data-bs-toggle="tab" data-bs-target="#tab3" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '3' ? 'true' : 'false'}}">
-                                        {{ __('dynamic.content.green-house-emissions') }}
-                                        </span>
-                                </li>
-                                {{-- <li class="nav-item col-3" role="presentation">
-                                    <span class="nav-link-3 @if($tab == '4') active @endif oswald" id="tab-4" data-bs-toggle="tab" data-bs-target="#tab4" type="span" role="tab" aria-controls="profile" aria-selected="{{ $tab == '4' ? 'true' : 'false'}}">
-                                        {{ __('dynamic.content.ghg') }}
-                                    </span>
-                                </li> --}}
-                            </ul>
-                            <!---tabs-->
-                            <!---contenedor tabs-->
-                            <div class="tab-content off-white" id="myTabContent">
-                                <div class="tab-pane fade @if($tab == '1') show active @endif" id="tab1" role="tabpanel" aria-labelledby="tab-1">
-                                    @include('component.tab-pane-volume-quality')
-                                </div>
-                                <div class="tab-pane fade @if($tab == '2') show active @endif" id="tab2" role="tabpanel" aria-labelledby="tab-2">
-                                    @include('component.tab-pane-vehicular-emission', ['chart_id' => 'chart-tab'])
-                                </div>
-                                <div class="tab-pane fade @if($tab == '3') show active @endif" id="tab3" role="tabpanel" aria-labelledby="tab-3">
-                                    @include('component.tab-pane-green-house', ['chart_id' => 'chart-tab'])
-                                </div>
-                                {{-- <div class="tab-pane fade @if($tab == '4') show active @endif" id="tab4" role="tabpanel" aria-labelledby="tab-4">
-                                    @include('component.tab-pane-ghg', ['chart_id' => 'chart-tab'])
-                                </div> --}}
                             </div>
-                            <!---contenedor tabs-->
+                            
                         </div>
                     </div>
-                @endif
+                  </div>
             </div>
         </div>
         <div id="content" class="site-content">
@@ -506,3 +1086,108 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Si regionid > 0 entonces {$('#regions_container1').removeClass('hidden'); $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');} 
+        if ({{ $regionid ?? 0 }} > 0) {
+            $('#regions_container1').removeClass('hidden');
+            $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');
+        }
+
+        // Si regionid == 2 entonces {$('#regions_container2').removeClass('hidden'); $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');}
+        if ({{ $regionid ?? 0 }} == 2) {
+            $('#regions_container2').removeClass('hidden');
+            $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');
+        }
+
+        // Si regionid == 3 entonces {$('#regions_container3').removeClass('hidden'); $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');}
+        if ({{ $regionid ?? 0 }} == 3) {
+            $('#regions_container3').removeClass('hidden');
+            $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');
+        }
+
+        // Si regionid == 4 entonces {$('#regions_container4').removeClass('hidden'); $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');}
+        if ({{ $regionid ?? 0 }} == 4) {
+            $('#regions_container4').removeClass('hidden');
+            $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');
+        }
+
+
+        $(document).on('click', '#switch_continent_america', function (e) {
+            e.preventDefault();
+            $('#regions_container1').removeClass('hidden');
+            $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');
+        });
+        $(document).on('click', '#switch_continent_asia', function (e) {
+            e.preventDefault();
+            $('#regions_container2').removeClass('hidden');
+            $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');
+        });
+        $(document).on('click', '#switch_continent_europe', function (e) {
+            e.preventDefault();
+            $('#regions_container3').removeClass('hidden');
+            $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');
+        });
+        $(document).on('click', '#switch_continent_africa', function (e) {
+            e.preventDefault();
+            $('#regions_container4').removeClass('hidden');
+            $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');
+        });
+        $(document).on('click', '#switch_continent_global', function (e) {
+            e.preventDefault();
+            $('#regions_container1, #regions_container2, #regions_container3, #regions_container4').addClass('hidden');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    let selectedContinent = null;
+
+  function showAccordion(continent) {
+    // Oculta todos
+    document.querySelectorAll('.continent-accordion').forEach(acc => acc.style.display = 'none');
+
+    // Mapea el valor a ID del acordeón
+    const map = {
+      'AMERICA': 'accordion-america',
+      'ASIA':    'accordion-asia',
+      'EUROPE':  'accordion-europe',
+      'AFRICA':  'accordion-africa',
+      'GLOBAL':  'accordion-global'
+    };
+
+    const targetId = map[continent];
+    if (targetId) {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.style.display = 'block';
+        // (Opcional) scroll suave al acordeón
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  // Listeners para los botones de continente
+  document.querySelectorAll('.continent-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      selectedContinent = btn.getAttribute('data-value');
+
+      // Marca activo visualmente
+      document.querySelectorAll('.continent-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Muestra acordeón correspondiente
+      showAccordion(selectedContinent);
+
+      // (Opcional) actualiza la etiqueta superior si quieres reflejar el continente seleccionado
+     
+    });
+  });
+
+  // Estado inicial (opcional): muestra AMERICA por defecto
+  // showAccordion('AMERICA');
+});
+</script>
+@endpush

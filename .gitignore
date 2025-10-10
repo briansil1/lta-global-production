@@ -13,3 +13,9 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+<<<<<<< HEAD
+.gitignore
+/storage
+=======
+.DS_Store
+>>>>>>> 5da0d5cd2d5ec62b3fb0029541034358f17478b6
