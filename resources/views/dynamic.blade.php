@@ -103,7 +103,7 @@
                         <h2 class="h1 uppercase text-2xl md:text-5xl container oswald"><a href="{{ route(__('routes.home')) }}" class="text-white">{{ __('dynamic.content.profiles') }}</a></h2>
                         <label id="tool_continent"  class="text-white mt-0 pt-0 oswald" aria-label="tool_continent" aria-describedby="tool_continent">{{ $continent->name }}</label>
                         <h3 class="text-white mt-0 pt-0 oswald">
-                            {{ __('dynamic.content.dynamic-tool') }}
+                            {{ __('dynamic.content.global-tool') }}
                         </h3>
                         <!-- Agregar divs que parescan botones VOLUME & QUALITY, VEHICULAR EMISSIONS y GREEN HOUSE EMISSIONS  -->
                          <div class="container my-4">
@@ -852,17 +852,18 @@
                                                                                     borderColor: '#ff7f0e', // naranja
                                                                                     borderWidth: 2,
                                                                                     label: {
-                                                                                    display: true,
-                                                                                    content: 'Euro 6',
-                                                                                    position: 'start',
-                                                                                    rotation: -90,
-                                                                                    backgroundColor: 'rgba(0,0,0,0)',
-                                                                                    color: '#ff7f0e',
-                                                                                    text: 'Euro 6',
-                                                                                    font: {
-                                                                                        size: 12,
-                                                                                        weight: 'bold'
-                                                                                    }
+                                                                                        display: true,
+                                                                                        content: 'Euro 6',
+                                                                                        position: 'start',
+                                                                                        yAdjust: -12,      // súbela un poco
+                                                                                        rotation: -90,
+                                                                                        backgroundColor: 'rgba(0,0,0,0)',
+                                                                                        color: '#ff7f0e',
+                                                                                        text: 'Euro 6',
+                                                                                        font: {
+                                                                                            size: 12,
+                                                                                            weight: 'bold'
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 us: {
@@ -870,6 +871,7 @@
                                                                                     xMin: US, xMax: US,
                                                                                     borderColor: '#2ca02c', // verde
                                                                                     borderWidth: 2,
+                                                                                    clip: false,
                                                                                     label: {
                                                                                     display: true,
                                                                                     content: 'US',
