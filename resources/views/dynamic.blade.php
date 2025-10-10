@@ -107,9 +107,8 @@
                         </h3>
                         <!-- Agregar divs que parescan botones VOLUME & QUALITY, VEHICULAR EMISSIONS y GREEN HOUSE EMISSIONS  -->
                          <div class="container my-4">
-                             <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
-                                /
-    <!-- si {{ $tab }} == 1 resaltar como seleccionado -->
+                             <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">                          
+                                <!-- si {{ $tab }} == 1 resaltar como seleccionado -->
 
                                 <a href="{{ route(__('routes.tools')) }}/1" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 1) selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                     
@@ -236,35 +235,26 @@
                                     </a>   
 
 
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/VOC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'VOC') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/THC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'THC') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
-                                            VOC
+                                            THC
                                         </p>
                                     </a>
                             </div>
                         @endif
                         @if($tab == 3)
                         <div class="flex justify-center">
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GHG" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'RED III') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                 <p class="card-p">
-                                    GHG
+                                    RED III
                                 </p>
                             </a>
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/%Redvsbase" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'GREET') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                 <p class="card-p">
-                                    %Red vs base
+                                    GREET
                                 </p>
                             </a>
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/%RedTarget" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
-                                <p class="card-p">
-                                    %Red Target
-                                </p>
-                            </a>
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CI" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl" style="flex-direction: column; padding-top: 10px;">
-                                <p class="card-p">
-                                    CI
-                                </p>
-                            </a>
+                            
                         </div>
                     @endif
                     </div>
@@ -809,8 +799,12 @@
                                                 <script>
                                                     document.addEventListener('DOMContentLoaded', function () {
                                                         // --- G1 ---
-                                                        const EURO6 = 3.5;   // <-- pon aquí el valor real en las MISMAS unidades del eje X
-                                                        const US    = 5.0;
+                                                        // Cargar EURO6 y US obtener de  $g1Limits del campo  e0
+
+                                                        const EURO6 = {{ data_get($g1Limits->firstWhere('country','UE 6'), 'e0', 0) }};
+                                                        const US    = {{ data_get($g1Limits->firstWhere('country','United States'), 'e0', 0) }};
+ 
+
                                                         const labels = @json($chartLabels1 ?? []);
                                                         const raw1 = @json($chartValues1 ?? []);
                                                         const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
@@ -997,17 +991,46 @@
                                         @endif
                                         <!-- Si Tab es 3-->
                                         @if($tab == 3)  
-                                         
                                             <div class="container my-12">
                                                 <!-- GRAFICAS DE GREEN HOUSE EMISSIONS -->
                                                 <div class="container my-12">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <h3 class="oswald">Life Cycle {{$type}} Emissions (MML/yr) - REDIII</h3>
+                                                            <h3 class="oswald">Life Cycle GHG Emissions (MML/yr) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:400px;">   <!-- 👈 altura fija -->
                                                                 <canvas id="g1Chart" height="120"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h3 class="oswald">Life Cycle GHG Reduction (%) - {{$type}}</h3>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                                <canvas id="g2Chart" height="120"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h3 class="oswald">2035 GHG Target Participation (%) - {{$type}}</h3>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                                <canvas id="g3Chart" height="120"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h3 class="oswald">Carbon Intensity (gCO2e/MJ) - {{$type}}</h3>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                                <canvas id="g4Chart" height="120"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1029,12 +1052,12 @@
                                                             data: {
                                                                 labels,
                                                                 datasets: [
-                                                                { label: 'E0 (MML/yr)',  data: values.map(v => n(v.e0_em)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                { label: 'E10 (MML/yr)', data: values.map(v => n(v.e10_em)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15 (MML/yr)', data: values.map(v => n(v.e15_em)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20 (MML/yr)', data: values.map(v => n(v.e20_em)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E25 (MML/yr)', data: values.map(v => n(v.e25_em)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30 (MML/yr)', data: values.map(v => n(v.e30_em)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                { label: 'E0 (MML/yr)',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                { label: 'E10 (MML/yr)', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15 (MML/yr)', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20 (MML/yr)', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                { label: 'E25 (MML/yr)', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30 (MML/yr)', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                 ]
                                                             },
                                                             options: {
@@ -1046,7 +1069,47 @@
                                                                         stacked: true,
                                                                         beginAtZero: true,
                                                                         ticks: { callback: (value) => Number(value).toLocaleString() },
-                                                                        title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif }
+                                                                        title: { display: true, text:  '' }
+                                                                    },
+                                                                    y: {
+                                                                        stacked: true,
+                                                                        ticks: { autoSkip: false },
+                                                                        title: { display: true, text: 'País' }
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                    // -- G2 ---
+                                                    const labels2 = @json($chartLabels2 ?? []);
+                                                    const raw2 = @json($chartValues2 ?? []);
+                                                    const values2 = Array.isArray(raw2) ? raw2 : Object.values(raw2);
+                                                    const ctx2 = document.getElementById('g2Chart');
+                                                    if (ctx2) {
+                                                        Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
+                                                        new Chart(ctx2.getContext('2d'), {
+                                                            type: 'bar',
+                                                            data: {
+                                                                labels: labels2,
+                                                                datasets: [
+                                                                { label: 'E0 (%)',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                { label: 'E10 (%)', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15 (%)', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20 (%)', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
+                                                                { label: 'E25 (%)', data: values2.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30 (%)', data: values2.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                ]
+                                                            },
+                                                            options: {
+                                                                indexAxis: 'y',
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                scales: {
+                                                                    x: {
+                                                                        stacked: true,
+                                                                        beginAtZero: true,
+                                                                        ticks: { callback: (value2) => Number(value2).toLocaleString() },
+                                                                        title: { display: true, text:'' }
                                                                     },
                                                                     y: {
                                                                         stacked: true,
@@ -1058,11 +1121,95 @@
                                                         });
                                                     }
 
-                                                    
-                                                });
-                                            </script>
-                                            @endpush
+                                                    // -- G3 ---
+                                                    const labels3 = @json($chartLabels3 ?? []);
+                                                    const raw3 = @json($chartValues3 ?? []);
+                                                    const values3 =  Array.isArray(raw3) ? raw3 : Object.values(raw3);
+                                                    const ctx3 = document.getElementById('g3Chart');
+                                                    if(ctx3) {
+                                                        Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
+                                                        new Chart(ctx3.getContext('2d'), {
+                                                            type: 'bar',
+                                                            data: {
+                                                                labels: labels3,
+                                                                datasets: [
+                                                                    { label: 'E0 (%)',  data: values3.map(v => v.e0),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                    { label: 'E10 (%)', data: values3.map(v => v.e10), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                    { label: 'E15 (%)', data: values3.map(v => v.e15), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                    { label: 'E20 (%)', data: values3.map(v => v.e20), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
+                                                                    { label: 'E25 (%)', data: values3.map(v => v.e25), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                    { label: 'E30 (%)', data: values3.map(v => v.e30), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                ]
+                                                            },
+                                                            options: {
+                                                                indexAxis: 'y',                 // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                scales: {
+                                                                    x: {    
+                                                                        stacked: true,
+                                                                        beginAtZero: true,    
+                                                                        ticks: {
+                                                                            callback: (value) => Number(value).toLocaleString()
+                                                                        },
+                                                                        title: { display: true, text: '' }
+                                                                    },
+                                                                    y: {
+                                                                        stacked: true,
+                                                                        ticks: { autoSkip: false },
+                                                                        title: { display: true, text: 'País' }
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    }
 
+                                                    // -- G4 ---
+                                                    const labels4 = @json($chartLabels4 ?? []);
+                                                    const values4 = @json($chartValues4 ?? []);
+                                                    const ctx4 = document.getElementById('g4Chart');
+                                                    if(ctx4) {
+                                                        Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
+                                                        new Chart(ctx4.getContext('2d'), {
+                                                            type: 'bar',
+                                                            data: {
+                                                                labels: labels4,
+                                                                datasets: [
+                                                                    { label: 'E0 (gCO2e/MJ)',  data: values4.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                    { label: 'E10 (gCO2e/MJ)', data: values4.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                    { label: 'E15 (gCO2e/MJ)', data: values4.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                    { label: 'E20 (gCO2e/MJ)', data: values4.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
+                                                                    { label: 'E25 (gCO2e/MJ)', data: values4.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                    { label: 'E30 (gCO2e/MJ)', data: values4.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                ]
+                                                            },
+                                                            options: {
+                                                                indexAxis: 'y',                 // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                scales: {
+                                                                    x: {    
+                                                                        stacked: true,
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (value) => Number(value).toLocaleString()
+                                                                        },
+                                                                        title: { display: true, text: '' }
+                                                                    },
+                                                                    y: {
+                                                                        stacked: true,
+                                                                        ticks: { autoSkip: false },
+                                                                        title: { display: true, text: 'País' }
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+
+
+                                                });
+                                                </script>
+                                            @endpush
                                         @endif
                                     </div>
                                 </div>

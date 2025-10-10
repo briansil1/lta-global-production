@@ -88,6 +88,14 @@ class MainController extends Controller
             }
         }
 
+        if ($tab == 3){
+            if($request->type === null ) {
+                $type = 'RED III';
+            } else {
+                $type = $request->type;
+            }
+        }
+
 
         // Obtener todas las regiones sin where
         $regions = Region::all();
@@ -258,8 +266,12 @@ class MainController extends Controller
                 ->where('emission_component', $type)
                 ->where('emission_type', 'Emissions (g/km)')
                 ->get();
-
-           
+            
+            $g1Limits = VehicularEmissions::query()
+                ->where('tipo', 'L')
+                ->where('emission_component', $type)
+                ->where('emission_type', 'Emissions (g/km)')
+                ->get();
 
             // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10, e15, e20, e25, e30, e0
             //$g1Sorted = $dataG1->values();
@@ -351,6 +363,7 @@ class MainController extends Controller
                 'type' => $type,
                 'regionsAll' => $regionsAll,
 
+                'g1Limits' => $g1Limits,
                 'chartLabels1'  => $chartLabels1,
                 'chartValues1'  => $chartValues1,
 
@@ -371,20 +384,16 @@ class MainController extends Controller
                 ->get();
             $regionsAll = $regions->where('continent_id', $continentid);
             
-            // --> GRAFICA 1 - Emissions RED III (MMT/yr)
+            // --> GRAFICA 1 - Life Cycle GHG Emissions (MMT/yr)
             $dataG1 = GreenHouse::query()
                 ->with('region') // eager loading
                 ->whereHas('region', function ($q) use ($continentid) {
                     $q->where('continent_id', $continentid);
                 })
                 ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
-                ->where('methodology', 'RED III')
+                ->where('methodology', $type)
                 ->where('data', 'GHG')
                 ->get();
-
-            // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10, e15, e20, e25, e30, e0
-            //$g1Sorted = $dataG1->values();
-            // Labels de ciudades
 
             $g1Sorted = $dataG1->map(function ($r) {
                 return [
@@ -400,13 +409,104 @@ class MainController extends Controller
                     ),
                 ];
             })->sortByDesc('total')->values();  
-
             $chartLabels1 = $g1Sorted->pluck('country');
             $chartValues1 = $g1Sorted->map(fn($r) => collect($r)->except(['country','total']));
 
-                
 
-             
+            // --> GRAFICA 2 - Life Cycle GHG Reductions (%)
+
+            $dataG2 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                ->where('methodology', $type)
+                ->where('data', '%Redvsbase')
+                ->get();
+                
+            $g2Sorted = $dataG2->map(function ($r) {
+                return [
+                    'country' => $r->country,
+                    'e0'  => (float)($r->e0_red ?? 0),
+                    'e10' => (float)($r->e10_red ?? 0),
+                    'e15' => (float)($r->e15_red ?? 0),
+                    'e20' => (float)($r->e20_red ?? 0),
+                    'e25' => (float)($r->e25_red ?? 0),
+                    'e30' => (float)($r->e30_red ?? 0),
+                    'total'  => (float)(
+                        ($r->e0_red ?? 0)+($r->e10_red ?? 0)+($r->e15_red ?? 0)+($r->e20_red ?? 0)+($r->e25_red ?? 0)+($r->e30_red ?? 0)
+                    ),
+                ];      
+            })->sortByDesc('total')->values();  
+            $chartLabels2 = $g2Sorted->pluck('country');
+            $chartValues2 = $g2Sorted->map(fn($r) => collect($r)->except(['country','total']));
+
+            
+            // --> GRAFICA 3 - 2035 GHG Participation (%)
+
+            $dataG3 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                ->where('methodology', $type)
+                ->where('data', '%RedTarget')
+                ->get();
+
+              
+
+            $g3Sorted = $dataG3->map(function ($r) {
+                return [
+                    'country' => $r->country,
+                    'e0'  => (float)($r->e0_par ?? 0),
+                    'e10' => (float)($r->e10_par ?? 0),
+                    'e15' => (float)($r->e15_par ?? 0),
+                    'e20' => (float)($r->e20_par ?? 0),
+                    'e25' => (float)($r->e25_par ?? 0),
+                    'e30' => (float)($r->e30_par ?? 0),
+                    'total'  => (float)(
+                        ($r->e0_par ?? 0)+($r->e10_par ?? 0)+($r->e15_par ?? 0)+($r->e20_par ?? 0)+($r->e25_par ?? 0)+($r->e30_par ?? 0)
+                    ),
+                ];      
+            })->sortByDesc('total')->values();  
+            $chartLabels3 = $g3Sorted->pluck('country');
+          
+            $chartValues3 = $g3Sorted->map(fn($r) => collect($r)->except(['country','total']));
+
+            //var_dump($chartValues2);
+            //echo "<hr>";
+            //var_dump($chartValues3);
+            //return false;
+            // --> GRAFICA 4 - Carbone Intensity (gCO2e/MJ) - 
+            $dataG4 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                ->where('methodology', $type)
+                ->where('data', 'CI')
+                ->get();
+
+            $g4Sorted = $dataG4->map(function ($r) {
+                return [
+                    'country' => $r->country,
+                    'e0'  => (float)($r->e0_car ?? 0),
+                    'e10' => (float)($r->e10_car ?? 0),
+                    'e15' => (float)($r->e15_car ?? 0),
+                    'e20' => (float)($r->e20_car ?? 0),
+                    'e25' => (float)($r->e25_car ?? 0),
+                    'e30' => (float)($r->e30_car ?? 0),
+                    'total'  => (float)(
+                        ($r->e0_car ?? 0)+($r->e10_car ?? 0)+($r->e15_car ?? 0)+($r->e20_car ?? 0)+($r->e25_car ?? 0)+($r->e30_car ?? 0)
+                    ),  
+                ];    
+            })->sortByDesc('total')->values();  
+            $chartLabels4 = $g4Sorted->pluck('country');
+            $chartValues4 = $g4Sorted->map(fn($r) => collect($r)->except(['country','total']));     
+
             return view('dynamic', [
                 'tab' => $tab,
                 'continent' => $continent,
@@ -418,6 +518,12 @@ class MainController extends Controller
                 'type' => $type,
                 'chartLabels1' => $chartLabels1,
                 'chartValues1' => $chartValues1,
+                'chartLabels2' => $chartLabels2,
+                'chartValues2' => $chartValues2,
+                'chartLabels3' => $chartLabels3,
+                'chartValues3' => $chartValues3,
+                'chartLabels4' => $chartLabels4,
+                'chartValues4' => $chartValues4,
                 'dataG1' => $dataG1,
             ]);
         }
