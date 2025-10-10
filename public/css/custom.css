@@ -33,7 +33,7 @@ p {
 }
 
 .card-p {
-    font-size: 12px;
+    font-size: 20px;
 }
 
 .off-white {
@@ -529,4 +529,20 @@ a#v-ghg-greet-tab.active:after {
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 10px solid #002f60;
+}
+
+.selectedBTN{
+    background-color: #002f60 !important;
+    color: white !important;
+}
+/* Over de selectBTN */
+.selectedBTN:hover{
+    background-color: #002f60 !important;
+    color: white !important;
+    cursor: not-allowed;
+}   
+
+p{
+      margin: 0 0;
+    padding: 0;
 }

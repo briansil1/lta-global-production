@@ -37,7 +37,7 @@ class MainController extends Controller
         ]); 
     }
 
-    public function tools(Request $request, $tab = '1', Continent $continent = null,  Region $region = null, $type = null) {
+    public function tools(Request $request, $tab = '1', Continent $continent = null,  $regionid = null, $type = null) {
         //echo $tab."-".$continent."-".$region."-".$type."<br>";
         // Variables globales $type
      
@@ -53,10 +53,10 @@ class MainController extends Controller
         // Si $continent->id es null o vacio entonces $continentid =  Continent::find(1);
         $continentid = $continent->id ?? 1;
         $continent = ($continentid && (int)$continentid > 0) ? Continent::find($continentid) : null;
-        $regionid = $region->id ?? 0;
+        // $region = si $region = null entonces Region::find(1) sino null
+        
         $region = ($regionid && (int)$regionid > 0) ? Region::find($regionid) : null;
-        
-        
+        $regionid = $region->id ?? 0;
 
         // Variables
         $dataG1 = null;
@@ -97,8 +97,8 @@ class MainController extends Controller
         // $tab = '2'; ==> Emisiones
         // $tab = '3'; ==> Emision de gases inveernadero
         // Datos generales de volumen y calidad (totales por continente)
-        echo $tab."-".$continentid."-".$regionid."-".$type;
         //return false; 
+        echo $tab."-".$continentid."-".$regionid."-".$type;
         if($tab == '1') {
             // Datos generales de volumen y calidad (totales por continente) para mostrar en la tabla superior
             $dataGenerales = VolumeQuality::query()
@@ -197,7 +197,7 @@ class MainController extends Controller
             ->values();  
             $chartLabels7 = $g7Sorted->pluck('country');
             $chartValues7 = $g7Sorted->map(fn($r) => collect($r)->except(['country','total']));
-            //echo $tab."-".$continentid."-".$regionid."-".$type;
+            
             return view('dynamic', [
                 'tab' => $tab,
                 'continent' => $continent,
@@ -234,7 +234,8 @@ class MainController extends Controller
             
         } elseif($tab == '2') {
             // Si $regionid es null o vacio o "" entonces =  1
-            
+            //echo $tab."-".$continentid."-".$regionid."-".$type;
+            //return false;
             $dataGenerales = VehicularEmissions::query()
                 ->with(['region'])     // eager loading
                 ->where('tipo', 'C')   // o ->tipo('C')
@@ -334,6 +335,13 @@ class MainController extends Controller
             $chartValues3 = $g3Sorted->pluck('vehicle_fleet');
             //echo $regionid;
             $regionid = ($regionid && (int)$regionid > 0) ? $regionid : 0;
+
+            // si $regionid == 10 entonces $regionid = 1
+            /*
+            if($regionid == 0) {
+                $regionid = 1;
+            }
+            */
             return view('dynamic', [
                 'tab' => $tab,
                 'continent' => $continent,
@@ -355,7 +363,7 @@ class MainController extends Controller
                 'dataGenerales' => $dataGenerales,
             ]);
         } elseif($tab == '3') {
-            
+            //echo $tab."-".$continentid."-".$regionid."-".$type;
             // Datos de emisiones de gases invernadero
             $dataGenerales = GreenHouse::query()
                 ->with(['region'])     // eager loading
@@ -377,7 +385,7 @@ class MainController extends Controller
             // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10, e15, e20, e25, e30, e0
             //$g1Sorted = $dataG1->values();
             // Labels de ciudades
-               
+
             $g1Sorted = $dataG1->map(function ($r) {
                 return [
                     'country' => $r->country,
