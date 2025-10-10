@@ -59,7 +59,7 @@
         var _getComponentsListURL = (country) => '{{ route(__('routes.components-list')) }}/' + country;
         var _getEmissionsByCountryURL = (country, emission, cComparing) => '{{ route('get-emissions-by-country') }}/' + country + (emission ? '/' + emission : '') + (cComparing ? '/c/' + cComparing : '');
         var _getGasolineComponentsByCountryURL = (country, gasoline, grade, cComparing) => '{{ route('get-components-by-country') }}/' + country + (gasoline ? '/' + gasoline : '') + (grade ? '/' + grade : '') + (cComparing ? '/c/' + cComparing : '');
-        var _getCountryUrl = (id, cComparition) => '{{ route(__('routes.tools')) }}/' + _current_tab + '/' + id + (cComparition ? '/' + cComparition : '');
+        //var _getCountryUrl = (id, cComparition) => '{{ route(__('routes.tools')) }}/' + _current_tab + '/' + id + (cComparition ? '/' + cComparition : '');
         var _getProfilePDFUrl = () => '{{ route(__('routes.profile-pdf')) }}';
         var _getComponentsFileUrl = () => '{{ route(__('routes.components-file')) }}';
         var _getImpactFileUrl = () => '{{ route(__('routes.emission-file')) }}';
