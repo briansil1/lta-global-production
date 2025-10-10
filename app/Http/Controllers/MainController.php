@@ -38,26 +38,16 @@ class MainController extends Controller
     }
 
     public function tools(Request $request, $tab = '1', Continent $continent = null,  $regionid = null, $type = null) {
-        echo $tab."-".$continent."-".$regionid."-".$type."<br>";
-        // Variables globales $type
-        
         if (!Auth::check()) {
             return redirect(route(__('routes.home')));
         }
-
         if (!session('continent_id')) {
             return redirect(route('logout-session'));
         }
-
         $tab = $request->tab ?? '1';
-        // Si $continent->id es null o vacio entonces $continentid =  Continent::find(1);
         $continentid = $continent->id ?? 1;
         $continent = ($continentid && (int)$continentid > 0) ? Continent::find($continentid) : null;
-        // $region = si $region = null entonces Region::find(1) sino null
-        
         $region = ($regionid && (int)$regionid > 0) ? Region::find($regionid) : null;
-        
-
         // Variables
         $dataG1 = null;
         $chartLabels = null;
@@ -99,12 +89,6 @@ class MainController extends Controller
         $regions = Region::all();
         // filtrar regiones por continent_id = 1 y guardar en $regions1
         $regionsAll = $regions->where('continent_id', $continentid);
-        // $tab = '1'; ==> Volumen. y calidad
-        // $tab = '2'; ==> Emisiones
-        // $tab = '3'; ==> Emision de gases inveernadero
-        // Datos generales de volumen y calidad (totales por continente)
-        //return false; 
-        echo $tab."-".$continentid."-".$regionid."-".$type;
         if($tab == '1') {
             // Datos generales de volumen y calidad (totales por continente) para mostrar en la tabla superior
             $dataGenerales = VolumeQuality::query()
