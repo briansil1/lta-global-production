@@ -38,7 +38,7 @@ class MainController extends Controller
     }
 
     public function tools(Request $request, $tab = '1', Continent $continent = null,  $regionid = null, $type = null) {
-        //echo $tab."-".$continent."-".$region."-".$type."<br>";
+        echo $tab."-".$continent."-".$regionid."-".$type."<br>";
         // Variables globales $type
 
 
@@ -58,7 +58,7 @@ class MainController extends Controller
         // $region = si $region = null entonces Region::find(1) sino null
         
         $region = ($regionid && (int)$regionid > 0) ? Region::find($regionid) : null;
-        $regionid = $region->id ?? 0;
+        
 
         // Variables
         $dataG1 = null;
