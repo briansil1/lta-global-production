@@ -1,0 +1,44 @@
+services:
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container_name: php81-fpm
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    environment:
+      # Ajusta el UID/GID para que los archivos queden con tu usuario host
+      - PUID=${UID:-1000}
+      - PGID=${GID:-1000}
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_UPLOAD_MAX_FILESIZE=64M
+      - PHP_POST_MAX_SIZE=64M
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: nginx81
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+
+  # Opcional: base de datos (quítalo si ya tienes una externa)
+  # mysql:
+  #   image: mysql:8.0
+  #   container_name: mysql80
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     - MYSQL_DATABASE=app
+  #     - MYSQL_USER=app
+  #     - MYSQL_PASSWORD=app
+  #     - MYSQL_ROOT_PASSWORD=root
+  #   volumes:
+  #     - dbdata:/var/lib/mysql
+
+# volumes:
+#   dbdata:
