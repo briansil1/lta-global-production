@@ -106,7 +106,7 @@ class MainController extends Controller
         // $tab = '3'; ==> Emision de gases inveernadero
         // Datos generales de volumen y calidad (totales por continente)
         //return false; 
-        echo $tab."-".$continentid."-".$regionid."-".$type;
+        //echo $tab."-".$continentid."-".$regionid."-".$type;
         if($tab == '1') {
             // Datos generales de volumen y calidad (totales por continente) para mostrar en la tabla superior
             $dataGenerales = VolumeQuality::query()
