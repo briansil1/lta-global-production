@@ -21,9 +21,13 @@ class Translations
      */
     public function handle(Request $request, Closure $next)
     {
+        // get element 1 
+        $locale = $request->segment(1);  
+        //echo $locale; // outputs "en"
+        // get element 2
         $group_lang = $request->route()->getPrefix();
-	    $group_locale_clean = substr($group_lang, 1,2);
-        app()->setLocale($this->languages[$group_locale_clean]);
+        $group_locale_clean = substr($group_lang, 1, 2);
+        app()->setLocale($this->languages[$locale]);
         return $next($request);
     }
 }
