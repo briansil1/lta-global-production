@@ -41,7 +41,7 @@ class MainController extends Controller
         //echo $tab."-".$continent."-".$region."-".$type."<br>";
         // Variables globales $type
 
-        
+
      
         if (!Auth::check()) {
             return redirect(route(__('routes.home')));
@@ -97,8 +97,6 @@ class MainController extends Controller
                 $type = $request->type;
             }
         }
-
-
         // Obtener todas las regiones sin where
         $regions = Region::all();
         // filtrar regiones por continent_id = 1 y guardar en $regions1
@@ -108,7 +106,7 @@ class MainController extends Controller
         // $tab = '3'; ==> Emision de gases inveernadero
         // Datos generales de volumen y calidad (totales por continente)
         //return false; 
-        //echo $tab."-".$continentid."-".$regionid."-".$type;
+        echo $tab."-".$continentid."-".$regionid."-".$type;
         if($tab == '1') {
             // Datos generales de volumen y calidad (totales por continente) para mostrar en la tabla superior
             $dataGenerales = VolumeQuality::query()
