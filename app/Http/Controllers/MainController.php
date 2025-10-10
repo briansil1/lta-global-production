@@ -40,9 +40,7 @@ class MainController extends Controller
     public function tools(Request $request, $tab = '1', Continent $continent = null,  $regionid = null, $type = null) {
         echo $tab."-".$continent."-".$regionid."-".$type."<br>";
         // Variables globales $type
-
-
-     
+        
         if (!Auth::check()) {
             return redirect(route(__('routes.home')));
         }
