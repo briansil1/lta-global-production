@@ -235,4 +235,14 @@ return [
         'emission-filename' => 'emisiones_descarga.xlsx',
         'component-pdf-filename' => 'mezcla_componentes.xlsx'
     ],
+    'graphs' => [
+        // titulos en español 
+        'g1_title' => 'Demanda de gasolina',
+        'g2_title' => 'Crecimiento de la gasolina',
+        'g3_title' => 'Producción de gasolina',
+        'g4_title' => 'Importación de gasolina',
+        'g5_title' => 'Demanda de etanol',
+        'g6_title' => 'Demanda de octano',
+        'g7_title' => 'Potencial de etanol',
+    ]
 ];

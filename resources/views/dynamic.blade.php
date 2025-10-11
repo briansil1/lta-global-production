@@ -285,10 +285,10 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <!-- sumar los totales de chartValues con formato a dos digitos y con comas en los miles -->
-                                                        <h3 class="oswald">Gasoline demand (MML/yr) <span class="unit">(Total: {{ number_format($chartValues->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Gasoline Growth (%)</h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g2_title') }} (%)</h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -305,10 +305,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Gasoline production (MML/yr) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Gasoline Imports (%)</h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues4->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -325,10 +325,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Ethanol demand (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Octane demand (ROM) <span class="unit">(Total: {{ number_format($chartValues6->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (ROM) <span class="unit">(Total: {{ number_format($chartValues6->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -346,7 +346,7 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <!-- sumar los totales de chartValues7 con formato a dos digitos y con comas en los miles considerando que chartValues7 es un Collection y tiene un campo llamado total -->
-                                                        <h3 class="oswald">Ethanol potential (MML/yr) </h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g7_title') }} (MML/yr) </h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -430,7 +430,7 @@
                                                                 ticks: {
                                                                     callback: (v) => Number(v).toLocaleString()
                                                                 },
-                                                                title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
                                                                 },
                                                                 y: {                           // nombres de países (no convertir a número)
                                                                 ticks: {
@@ -449,7 +449,7 @@
                                                             labels: labels2,
                                                             datasets: [{
                                                                 label: 'Gasoline growth (%)',
-                                                                data: values3,
+                                                                data: values2,
                                                                 borderWidth: 1,
                                                                 backgroundColor: 'rgba(54, 162, 235, 0.8)',
                                                                 borderColor: 'rgba(54, 162, 235, 1)'
@@ -532,7 +532,7 @@
                                                                 ticks: {
                                                                     callback: (v) => Number(v).toLocaleString()
                                                                 },
-                                                                title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
                                                                 },
                                                                 y: {                           // nombres de países (no convertir a número)
                                                                 ticks: {
@@ -550,7 +550,7 @@
                                                             data: {
                                                             labels: labels4,
                                                             datasets: [{
-                                                                label: 'Gasoline import dependence (MML/yr)',
+                                                                label: 'Gasoline import (MML/yr)',
                                                                 data: values4,
                                                                 borderWidth: 1,
                                                                 backgroundColor: 'rgba(75, 192, 192, 0.8)',
@@ -585,7 +585,7 @@
                                                                 ticks: {
                                                                     callback: (v) => Number(v).toLocaleString()
                                                                 },
-                                                                title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
                                                                 },
                                                                 y: {                           // nombres de países (no convertir a número)
                                                                 ticks: {
@@ -638,7 +638,7 @@
                                                                 ticks: {
                                                                     callback: (v) => Number(v).toLocaleString()
                                                                 },
-                                                                title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
                                                                 },
                                                                 y: {                           // nombres de países (no convertir a número)
                                                                 ticks: {
@@ -705,30 +705,54 @@
                                                         });
 
                                                         // La siguiente grafica debera de graficar varios valores por barra de pais
+                                                        const unidad = @if($type == '_lt') 'L' @else 'gal' @endif;
                                                         new Chart(ctx7, {
                                                             type: 'bar',
                                                             data: {
                                                             labels: labels7,
                                                             datasets: [
-                                                                { label: 'E0 (MML/yr)',  data: values7.map(v => v.e0_lt),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                { label: 'E10 (MML/yr)', data: values7.map(v => v.e10_lt), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15 (MML/yr)', data: values7.map(v => v.e15_lt), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20 (MML/yr)', data: values7.map(v => v.e20_lt), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E25 (MML/yr)', data: values7.map(v => v.e25_lt), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30 (MML/yr)', data: values7.map(v => v.e30_lt), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                { label: 'E0',  data: values7.map(v => v.e0_lt),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                { label: 'E10', data: values7.map(v => v.e10_lt), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15', data: values7.map(v => v.e15_lt), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20', data: values7.map(v => v.e20_lt), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                { label: 'E25', data: values7.map(v => v.e25_lt), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30', data: values7.map(v => v.e30_lt), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                             ]
                                                             },
                                                             options: {
                                                             indexAxis: 'y',                 // 👈 horizontal
                                                             responsive: true,
                                                             maintainAspectRatio: false,
-                                                            /*
+                                                            
                                                             plugins: {
-                                                                legend: { display: true, position: 'top' },
+                                                                legend: { 
+                                                                    display: true, 
+                                                                    position: 'top',
+                                                                    labels: {
+                                                                        // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                        generateLabels: (chart) => {
+                                                                            const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                            const ds = chart.data.datasets;
+                                                                            const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                            return base.map(l => {
+                                                                                const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                return l;
+                                                                            });
+                                                                        } 
+                                                                    }
+                                                                },
                                                                 tooltip: {
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
-                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                        label: (ctx) => {
+                                                                            const valor = ctx.parsed.x ?? 0;
+                                                                            return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
+                                                                                minimumFractionDigits: 2, 
+                                                                                maximumFractionDigits: 2 
+                                                                            })} ${unidad}`;
+                                                                        }
                                                                     }
                                                                 },
                                                                 datalabels: {
@@ -736,7 +760,7 @@
                                                                     align: 'end',
                                                                     formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
                                                                 }
-                                                            },*/
+                                                            },
                                                             scales: {
                                                                 x: {  
                                                                 stacked : true,                        
@@ -744,7 +768,7 @@
                                                                 ticks: {
                                                                     callback: (v) => Number(v).toLocaleString()
                                                                 },
-                                                                title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
                                                                 },
                                                                 y: {    
                                                                 stacked : true,                        

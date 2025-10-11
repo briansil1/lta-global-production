@@ -220,4 +220,13 @@ return [
         'emission-filename' => 'emissions_download.xlsx',
         'component-pdf-filename' => 'blending_components.xlsx'
     ],
+    'graphs' => [
+        'g1_title' => 'Gasoline demand',
+        'g2_title' => 'Gasoline Growth',
+        'g3_title' => 'Gasoline production',
+        'g4_title' => 'Gasoline import',
+        'g5_title' => 'Ethanol demand',
+        'g6_title' => 'Octane demand',
+        'g7_title' => 'Ethanol potential ',
+    ]
 ];
