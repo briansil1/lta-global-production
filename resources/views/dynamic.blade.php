@@ -859,8 +859,8 @@
                                                                                         display: true,
                                                                                         content: () => `Euro 6`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -25,
-                                                                                        rotation: -90,
+                                                                                        yAdjust: -14,
+                                                                                        rotation: 0,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#ff7f0e',
                                                                                         font: {
@@ -882,8 +882,8 @@
                                                                                         display: true,
                                                                                         content: () => `US`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -25,
-                                                                                        rotation: -90,
+                                                                                        yAdjust: -14,
+                                                                                        rotation: 0,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#2ca02c',
                                                                                         font: { size: 8, weight: 'bold' }
