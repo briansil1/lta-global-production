@@ -859,12 +859,12 @@
                                                                                         display: true,
                                                                                         content: () => `Euro 6`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -14,
+                                                                                        yAdjust: -16,
                                                                                         rotation: 0,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#ff7f0e',
                                                                                         font: {
-                                                                                            size: 8,
+                                                                                            size: 10,
                                                                                             weight: 'bold'
                                                                                         }
                                                                                     }
@@ -882,11 +882,11 @@
                                                                                         display: true,
                                                                                         content: () => `US`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -14,
+                                                                                        yAdjust: -16,
                                                                                         rotation: 0,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#2ca02c',
-                                                                                        font: { size: 8, weight: 'bold' }
+                                                                                        font: { size: 10, weight: 'bold' }
                                                                                     }
                                                                                 }
                                                                             }
