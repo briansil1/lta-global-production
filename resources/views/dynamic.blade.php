@@ -110,19 +110,19 @@
                              <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">                          
                                 <!-- si {{ $tab }} == 1 resaltar como seleccionado -->
 
-                                <a href="{{ route(__('routes.tools')) }}/1" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 1) selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                <a href="{{ route(__('routes.tools')) }}/1" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 1) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                     
                                     <p class="card-p">
                                         {{ __('dynamic.content.volume-quality') }}
                                     </p>
                                 </a>
-                                <a href="{{ route(__('routes.tools')) }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 2) selectedBTN @endif" style="flex-direction: column;">
+                                <a href="{{ route(__('routes.tools')) }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 2) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column;">
                                    
                                     <p class="card-p">
                                         {{ __('dynamic.content.vehicular-emissions') }}
                                     </p>
                                 </a>
-                                <a href="{{ route(__('routes.tools')) }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 3) selectedBTN @endif" style="flex-direction: column;">
+                                <a href="{{ route(__('routes.tools')) }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 3) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column;">
                                     
                                     <p class="card-p">
                                         {{ __('dynamic.content.green-house-emissions') }}
@@ -134,7 +134,7 @@
                         <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
                             <!-- si tab != 2 --> 
                             @if($tab != 2 and $tab != 3)
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 1) selectedBTN @endif" data-value="AMERICA" style="flex-direction: column;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 1) selectedBTN2 @else selectedBTN @endif" data-value="AMERICA" style="flex-direction: column;">
                                     <div class="mx-auto w-100">
                                         <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
                                     </div>
@@ -144,7 +144,7 @@
                                     </p>
                                 </a>
 
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 2) selectedBTN @endif" data-value="EUROPE" style="flex-direction: column;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 2) selectedBTN2 @else selectedBTN @endif" data-value="EUROPE" style="flex-direction: column;">
                                     <div class="mx-auto w-100">
                                         <img src="{{ asset('images/europa2.png') }}" alt="" class="hero-sec-img">
                                     
@@ -155,7 +155,7 @@
                                     </p>
                                 </a>
 
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 3) selectedBTN @endif" data-value="ASIA" style="flex-direction: column;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 3) selectedBTN2 @else selectedBTN @endif" data-value="ASIA" style="flex-direction: column;">
                                     <div class="mx-auto w-100">
                                         <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
                                         <img src="{{ asset('images/africa.png') }}" alt="" class="hero-sec-img">
@@ -171,14 +171,14 @@
                         <div class="container my-4" id="regions_container" >
                              <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
                                 <!-- dump regions -->
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == 0) selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == 0) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                     <p class="card-p">
                                         All
                                     </p>
                                 </a>
                                 @if(isset($regionsAll))
                                     @foreach ($regionsAll as $regionOne)
-                                        <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == $regionOne->id) selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                        <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == $regionOne->id) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                             <p class="card-p">
                                                 {{ $regionOne->name }}
                                             </p>
@@ -191,12 +191,12 @@
                         <!-- boton de Litros y galones si $tab == 1-->
                          @if($tab == 1)
                              <div class="flex justify-center">
-                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/litros" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == '_lt') selectedBTN @endif">
+                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/litros" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == '_lt') selectedBTN2 @else selectedBTN @endif">
                                     <p class="card-p">
                                      {{ __('dynamic.content.liters') }}
                                     </p>
                                  </a>
-                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/galones" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == '_gl') selectedBTN @endif">
+                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/galones" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == '_gl') selectedBTN2 @else selectedBTN @endif">
                                     <p class="card-p">
                                      {{ __('dynamic.content.gallons') }}
                                     </p>
@@ -205,37 +205,37 @@
                          @endif
                          @if($tab == 2)
                             <div class="flex justify-center">
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Benzene" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'Benzene') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Benzene" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'Benzene') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             Benzene
                                         </p>
                                     </a>
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'CO') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'CO') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             CO
                                         </p>
                                     </a>
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'CO2') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'CO2') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             CO2
                                         </p>
                                     </a>
 
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/NOx" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'NOx') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/NOx" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'NOx') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             NOx
                                         </p>
                                     </a>
 
 
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM 2.5" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'PM 2.5') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM 2.5" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'PM 2.5') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             PM 2.5
                                         </p>
                                     </a>   
 
 
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/THC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'THC') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/THC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'THC') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             THC
                                         </p>
@@ -244,12 +244,12 @@
                         @endif
                         @if($tab == 3)
                         <div class="flex justify-center">
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'RED III') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'RED III') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                 <p class="card-p">
                                     RED III
                                 </p>
                             </a>
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'GREET') selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'GREET') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                 <p class="card-p">
                                     GREET
                                 </p>
