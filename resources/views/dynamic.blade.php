@@ -434,7 +434,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -483,7 +483,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -536,7 +536,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -589,7 +589,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -642,7 +642,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -695,7 +695,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -749,7 +749,7 @@
                                                                 ticks: {
                                                                     autoSkip: false,           // opcional: muestra todos
                                                                 },
-                                                                title: { display: true, text: 'País' }
+                                                                title: { display: true, text: '' }
                                                                 }
                                                             }
                                                             },
@@ -839,7 +839,7 @@
                                                                         y: {
                                                                             stacked: true,
                                                                             ticks: { autoSkip: false },
-                                                                            title: { display: true, text: 'País' }
+                                                                            title: { display: true, text: '' }
                                                                         }
                                                                     },
                                                                     plugins: {
@@ -851,17 +851,20 @@
                                                                                     xMin: EURO6, xMax: EURO6,
                                                                                     borderColor: '#ff7f0e', // naranja
                                                                                     borderWidth: 2,
+                                                                                    clip: false,
+                                                                                    z: 10,
                                                                                     label: {
+                                                                                        enabled: true,
+                                                                                        // para v3+
                                                                                         display: true,
-                                                                                        content: 'Euro 6',
+                                                                                        content: () => `Euro 6`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -12,      // súbela un poco
+                                                                                        yAdjust: -25,
                                                                                         rotation: -90,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#ff7f0e',
-                                                                                        text: 'Euro 6',
                                                                                         font: {
-                                                                                            size: 12,
+                                                                                            size: 8,
                                                                                             weight: 'bold'
                                                                                         }
                                                                                     }
@@ -872,14 +875,18 @@
                                                                                     borderColor: '#2ca02c', // verde
                                                                                     borderWidth: 2,
                                                                                     clip: false,
+                                                                                    z: 10,
                                                                                     label: {
-                                                                                    display: true,
-                                                                                    content: 'US',
-                                                                                    position: 'start',
-                                                                                    rotation: -90,
-                                                                                    backgroundColor: 'rgba(0,0,0,0)',
-                                                                                    color: '#2ca02c',
-                                                                                    
+                                                                                        enabled: true,
+                                                                                        // para v3+
+                                                                                        display: true,
+                                                                                        content: () => `US`,
+                                                                                        position: 'start',
+                                                                                        yAdjust: -25,
+                                                                                        rotation: -90,
+                                                                                        backgroundColor: 'rgba(0,0,0,0)',
+                                                                                        color: '#2ca02c',
+                                                                                        font: { size: 8, weight: 'bold' }
                                                                                     }
                                                                                 }
                                                                             }
@@ -923,7 +930,7 @@
                                                                 y: {
                                                                     stacked: true,
                                                                     ticks: { autoSkip: false },
-                                                                    title: { display: true, text: 'País' }
+                                                                    title: { display: true, text: '' }
                                                                 }
                                                                 }
                                                             }
@@ -979,7 +986,7 @@
                                                                     ticks: {
                                                                         autoSkip: false,    
                                                                     },
-                                                                    title: { display: true, text: 'País' }
+                                                                    title: { display: true, text: '' }
                                                                     }
                                                                 }
                                                                 },
@@ -1076,7 +1083,7 @@
                                                                     y: {
                                                                         stacked: true,
                                                                         ticks: { autoSkip: false },
-                                                                        title: { display: true, text: 'País' }
+                                                                        title: { display: true, text: '' }
                                                                     }
                                                                 }
                                                             }
@@ -1116,7 +1123,7 @@
                                                                     y: {
                                                                         stacked: true,
                                                                         ticks: { autoSkip: false },
-                                                                        title: { display: true, text: 'País' }
+                                                                        title: { display: true, text: '' }
                                                                     }
                                                                 }
                                                             }
@@ -1159,7 +1166,7 @@
                                                                     y: {
                                                                         stacked: true,
                                                                         ticks: { autoSkip: false },
-                                                                        title: { display: true, text: 'País' }
+                                                                        title: { display: true, text: '' }
                                                                     }
                                                                 }
                                                             }
@@ -1201,7 +1208,7 @@
                                                                     y: {
                                                                         stacked: true,
                                                                         ticks: { autoSkip: false },
-                                                                        title: { display: true, text: 'País' }
+                                                                        title: { display: true, text: '' }
                                                                     }
                                                                 }
                                                             }
