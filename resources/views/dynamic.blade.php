@@ -1224,7 +1224,6 @@
                                                             data: {
                                                                 labels: labels2,
                                                                 datasets: [
-                                                                { label: 'E0 (%)',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
                                                                 { label: 'E10 (%)', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
                                                                 { label: 'E15 (%)', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
                                                                 { label: 'E20 (%)', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
@@ -1265,7 +1264,6 @@
                                                             data: {
                                                                 labels: labels3,
                                                                 datasets: [
-                                                                    { label: 'E0 (%)',  data: values3.map(v => v.e0),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
                                                                     { label: 'E10 (%)', data: values3.map(v => v.e10), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
                                                                     { label: 'E15 (%)', data: values3.map(v => v.e15), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
                                                                     { label: 'E20 (%)', data: values3.map(v => v.e20), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
