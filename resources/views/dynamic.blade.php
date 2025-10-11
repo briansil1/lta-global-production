@@ -857,7 +857,8 @@
                                                                                         enabled: true,
                                                                                         // para v3+
                                                                                         display: true,
-                                                                                        content: () => `Euro6 ${EURO6}`,
+                                                                                        /*  `Euro6 ${EURO6}` con formato a dos decimales  */
+                                                                                        content: () => `Euro6 ${EURO6.toFixed(2)}`,
                                                                                         position: 'start',
                                                                                         yAdjust: -16,
                                                                                         rotation: 0,
@@ -880,7 +881,7 @@
                                                                                         enabled: true,
                                                                                         // para v3+
                                                                                         display: true,
-                                                                                        content: () => `US ${US}`,
+                                                                                        content: () => `US ${US.toFixed(2)}`,
                                                                                         position: 'start',
                                                                                         yAdjust: -16,
                                                                                         rotation: 0,
