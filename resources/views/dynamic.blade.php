@@ -284,7 +284,8 @@
                                                 
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Gasoline demand (MML/yr)</h3>
+                                                        <!-- sumar los totales de chartValues con formato a dos digitos y con comas en los miles -->
+                                                        <h3 class="oswald">Gasoline demand (MML/yr) <span class="unit">(Total: {{ number_format($chartValues->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">Gasoline Growth (%)</h3>
@@ -304,7 +305,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Gasoline production (MML/yr)</h3>
+                                                        <h3 class="oswald">Gasoline production (MML/yr) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">Gasoline Imports (%)</h3>
@@ -324,10 +325,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Ethanol demand (MML/yr)</h3>
+                                                        <h3 class="oswald">Ethanol demand (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">Octane demand (ROM)</h3>
+                                                        <h3 class="oswald">Octane demand (ROM) <span class="unit">(Total: {{ number_format($chartValues6->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -344,7 +345,8 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">Ethanol potential (MML/yr)</h3>
+                                                        <!-- sumar los totales de chartValues7 con formato a dos digitos y con comas en los miles considerando que chartValues7 es un Collection y tiene un campo llamado total -->
+                                                        <h3 class="oswald">Ethanol potential (MML/yr) </h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -787,7 +789,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">Vehicle Fleet (Units)</h3>
+                                                        <h3 class="oswald">Vehicle Fleet (Units) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-12">
                                                         <div style="height:400px;">   <!-- 👈 altura fija -->

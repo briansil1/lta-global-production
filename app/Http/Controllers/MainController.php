@@ -187,7 +187,10 @@ class MainController extends Controller
             ->values();  
             $chartLabels7 = $g7Sorted->pluck('country');
             $chartValues7 = $g7Sorted->map(fn($r) => collect($r)->except(['country','total']));
-            
+    
+
+            //var_dump($chartValues7);
+            //return false;
             return view('dynamic', [
                 'tab' => $tab,
                 'continent' => $continent,
@@ -217,6 +220,7 @@ class MainController extends Controller
 
                 'chartLabels7' => $chartLabels7,
                 'chartValues7' => $chartValues7,
+        
 
                 'dataGenerales' => $dataGenerales,
                 
