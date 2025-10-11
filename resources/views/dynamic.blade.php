@@ -691,7 +691,7 @@
                                                                 ticks: {
                                                                     callback: (v) => Number(v).toLocaleString()
                                                                 },
-                                                                title: { display: true, text: @if($type == '_lt') 'Litros' @else 'Galones' @endif }
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
                                                                 },
                                                                 y: {                           // nombres de países (no convertir a número)
                                                                 ticks: {
