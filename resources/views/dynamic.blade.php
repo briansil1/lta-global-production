@@ -857,7 +857,7 @@
                                                                                         enabled: true,
                                                                                         // para v3+
                                                                                         display: true,
-                                                                                        content: () => `Euro 6`,
+                                                                                        content: () => `Euro6 ${EURO6}`,
                                                                                         position: 'start',
                                                                                         yAdjust: -16,
                                                                                         rotation: 0,
@@ -880,7 +880,7 @@
                                                                                         enabled: true,
                                                                                         // para v3+
                                                                                         display: true,
-                                                                                        content: () => `US`,
+                                                                                        content: () => `US ${US}`,
                                                                                         position: 'start',
                                                                                         yAdjust: -16,
                                                                                         rotation: 0,
