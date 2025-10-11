@@ -705,7 +705,7 @@
                                                         });
 
                                                         // La siguiente grafica debera de graficar varios valores por barra de pais
-                                                        const unidad = @if($type == '_lt') 'L' @else 'gal' @endif;
+                                                        const unidad = @if($type == '_lt') 'L' @else 'G' @endif;
                                                         new Chart(ctx7, {
                                                             type: 'bar',
                                                             data: {
@@ -793,7 +793,7 @@
                                             <div class="container my-12">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">{{$type}} Emissions (g/km)</h3>
+                                                        <h3 class="oswald"> {{ __('dynamic.graphs.g8_title') }} {{$type}} (g/km)</h3>
                                                     </div>
                                                     <div class="col-12">
                                                         <div style="height:400px;">   <!-- 👈 altura fija -->
@@ -803,7 +803,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">{{$type}} Emissions (Ton/day)</h3>
+                                                        <h3 class="oswald"> {{ __('dynamic.graphs.g9_title') }} {{$type}} (Ton/day)</h3>
                                                     </div>
                                                     <div class="col-12">
                                                         <div style="height:400px;">   <!-- 👈 altura fija -->
@@ -813,7 +813,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">Vehicle Fleet (Units) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} {{$type}} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-12">
                                                         <div style="height:400px;">   <!-- 👈 altura fija -->
@@ -836,6 +836,7 @@
                                                         const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
                                                         const n = x => (x == null ? 0 : Number(x));
                                                         const ctx1 = document.getElementById('g1Chart');
+                                                        const unidad = 'g/km';
                                                         if (ctx1) {
                                                             Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                             new Chart(ctx1.getContext('2d'), {
@@ -843,12 +844,12 @@
                                                                 data: {
                                                                     labels,
                                                                     datasets: [
-                                                                    { label: 'E0 (MML/yr)',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                    { label: 'E10 (MML/yr)', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                    { label: 'E15 (MML/yr)', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                    { label: 'E20 (MML/yr)', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                    { label: 'E25 (MML/yr)', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                    { label: 'E30 (MML/yr)', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                    { label: 'E0',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                    { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                    { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                    { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                    { label: 'E25', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                    { label: 'E30', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                     ]
                                                                 },
                                                                 options: {
@@ -860,7 +861,7 @@
                                                                             stacked: true,
                                                                             beginAtZero: true,
                                                                             ticks: { callback: (value) => Number(value).toLocaleString() },
-                                                                            title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif }
+                                                                            title: { display: true, text: '{{ __('dynamic.graphs.g8_title') }} (g/km)'}
                                                                         },
                                                                         y: {
                                                                             stacked: true,
@@ -869,7 +870,26 @@
                                                                         }
                                                                     },
                                                                     plugins: {
-                                                                        legend: { position: 'bottom' },
+                                                                        legend: { display: true, position: 'top',
+                                                                            labels: {
+                                                                                // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                                generateLabels: (chart) => {
+                                                                                    const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                    const ds = chart.data.datasets;
+                                                                                    const fmt = new Intl.NumberFormat(undefined, {
+                                                                                        minimumFractionDigits: 2,
+                                                                                        maximumFractionDigits: 2
+                                                                                    });
+                                                                                    return base.map(l => {
+                                                                                        const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                        const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                        l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                        return l;
+                                                                                    });
+                                                                                }
+                                                                            }
+
+                                                                         },
                                                                         annotation: {
                                                                             annotations: {
                                                                                 euro6: {
@@ -927,7 +947,7 @@
                                                         const labels2 = @json($chartLabels2 ?? []);
                                                         const raw2 = @json($chartValues2 ?? []);
                                                         const values2 = Array.isArray(raw2) ? raw2 : Object.values(raw2);
-
+                                                        const unidad2 = 'Ton/day';
                                                         const ctx2 = document.getElementById('g2Chart');
                                                         if (ctx2) {
                                                             new Chart(ctx2.getContext('2d'), {
@@ -935,30 +955,67 @@
                                                             data: {
                                                                 labels: labels2,
                                                                 datasets: [
-                                                                { label: 'E0 (Ton/day)',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                { label: 'E10 (Ton/day)', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15 (Ton/day)', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20 (Ton/day)', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E25 (Ton/day)', data: values2.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30 (Ton/day)', data: values2.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                { label: 'E0',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                { label: 'E10', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                { label: 'E25', data: values2.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30', data: values2.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                 ]
                                                             },
                                                             options: {
                                                                 indexAxis: 'y',
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
-                                                                scales: {
-                                                                x: {
-                                                                    stacked: true,
-                                                                    beginAtZero: true,
-                                                                    ticks: { callback: (value) => Number(value).toLocaleString() },
-                                                                    title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif }
+                                                                plugins: {
+                                                                    legend: { 
+                                                                        display: true, 
+                                                                        position: 'top',
+                                                                        labels: {
+                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                            generateLabels: (chart) => {
+                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const ds = chart.data.datasets;
+                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                return base.map(l => {
+                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad2}`;
+                                                                                    return l;
+                                                                                });
+                                                                            } 
+                                                                        }
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            label: (ctx) => {
+                                                                                const valor = ctx.parsed.x ?? 0;
+                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
+                                                                                    minimumFractionDigits: 2, 
+                                                                                    maximumFractionDigits: 2 
+                                                                                })} ${unidad2}`;
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    }
                                                                 },
-                                                                y: {
-                                                                    stacked: true,
-                                                                    ticks: { autoSkip: false },
-                                                                    title: { display: true, text: '' }
-                                                                }
+                                                                scales: {
+                                                                    x: {
+                                                                        stacked: true,
+                                                                        beginAtZero: true,
+                                                                        ticks: { callback: (value) => Number(value).toLocaleString() },
+                                                                        title: { display: true, text: '{{ __('dynamic.graphs.g9_title') }} (Ton/day)' }
+                                                                    },
+                                                                    y: {
+                                                                        stacked: true,
+                                                                        ticks: { autoSkip: false },
+                                                                        title: { display: true, text: '' }
+                                                                    }
                                                                 }
                                                             }
                                                             });
@@ -1007,7 +1064,7 @@
                                                                     ticks: {
                                                                         callback: (v) => Number(v).toLocaleString()
                                                                     },
-                                                                    title: { display: true, text: @if($type == 'g') 'Emissions (g/km)' @else 'Emissions (Ton/day)' @endif}
+                                                                    title: { display: true, text:  '' }
                                                                     },
                                                                     y: {                          
                                                                     ticks: {
@@ -1081,6 +1138,7 @@
                                                     const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
                                                     const n = x => (x == null ? 0 : Number(x));
                                                     const ctx1 = document.getElementById('g1Chart');
+                                                    const unidad = 'MML/yr';
                                                     if (ctx1) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx1.getContext('2d'), {
@@ -1088,18 +1146,55 @@
                                                             data: {
                                                                 labels,
                                                                 datasets: [
-                                                                { label: 'E0 (MML/yr)',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                { label: 'E10 (MML/yr)', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15 (MML/yr)', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20 (MML/yr)', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E25 (MML/yr)', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30 (MML/yr)', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                { label: 'E0',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                { label: 'E25', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                 ]
                                                             },
                                                             options: {
                                                                 indexAxis: 'y',
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: { 
+                                                                        display: true, 
+                                                                        position: 'top',
+                                                                        labels: {
+                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                            generateLabels: (chart) => {
+                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const ds = chart.data.datasets;
+                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                return base.map(l => {
+                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                    return l;
+                                                                                });
+                                                                            } 
+                                                                        }
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            label: (ctx) => {
+                                                                                const valor = ctx.parsed.x ?? 0;
+                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
+                                                                                    minimumFractionDigits: 2, 
+                                                                                    maximumFractionDigits: 2 
+                                                                                })} ${unidad}`;
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    }
+                                                                },
                                                                 scales: {
                                                                     x: {
                                                                         stacked: true,
@@ -1121,6 +1216,7 @@
                                                     const raw2 = @json($chartValues2 ?? []);
                                                     const values2 = Array.isArray(raw2) ? raw2 : Object.values(raw2);
                                                     const ctx2 = document.getElementById('g2Chart');
+                                                    
                                                     if (ctx2) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx2.getContext('2d'), {
@@ -1204,6 +1300,7 @@
                                                     const labels4 = @json($chartLabels4 ?? []);
                                                     const values4 = @json($chartValues4 ?? []);
                                                     const ctx4 = document.getElementById('g4Chart');
+                                                    const unidad2 = 'gCO2e/MJ';
                                                     if(ctx4) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx4.getContext('2d'), {
@@ -1211,18 +1308,55 @@
                                                             data: {
                                                                 labels: labels4,
                                                                 datasets: [
-                                                                    { label: 'E0 (gCO2e/MJ)',  data: values4.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                    { label: 'E10 (gCO2e/MJ)', data: values4.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                    { label: 'E15 (gCO2e/MJ)', data: values4.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                    { label: 'E20 (gCO2e/MJ)', data: values4.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
-                                                                    { label: 'E25 (gCO2e/MJ)', data: values4.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                    { label: 'E30 (gCO2e/MJ)', data: values4.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                    { label: 'E0',  data: values4.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
+                                                                    { label: 'E10', data: values4.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                    { label: 'E15', data: values4.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                    { label: 'E20', data: values4.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
+                                                                    { label: 'E25', data: values4.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                    { label: 'E30', data: values4.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                 ]
                                                             },
                                                             options: {
                                                                 indexAxis: 'y',                 // 👈 horizontal
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: { 
+                                                                        display: true, 
+                                                                        position: 'top',
+                                                                        labels: {
+                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                            generateLabels: (chart) => {
+                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const ds = chart.data.datasets;
+                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                return base.map(l => {
+                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad2}`;
+                                                                                    return l;
+                                                                                });
+                                                                            } 
+                                                                        }
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            label: (ctx) => {
+                                                                                const valor = ctx.parsed.x ?? 0;
+                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
+                                                                                    minimumFractionDigits: 2, 
+                                                                                    maximumFractionDigits: 2 
+                                                                                })} ${unidad2}`;
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    }
+                                                                },
                                                                 scales: {
                                                                     x: {    
                                                                         stacked: true,

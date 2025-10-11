@@ -221,12 +221,22 @@ return [
         'component-pdf-filename' => 'blending_components.xlsx'
     ],
     'graphs' => [
-        'g1_title' => 'Gasoline demand',
+        'g1_title' => 'Gasoline Demand',
         'g2_title' => 'Gasoline Growth',
-        'g3_title' => 'Gasoline production',
-        'g4_title' => 'Gasoline import',
-        'g5_title' => 'Ethanol demand',
-        'g6_title' => 'Octane demand',
-        'g7_title' => 'Ethanol potential ',
+        'g3_title' => 'Gasoline Production',
+        'g4_title' => 'Gasoline Import',
+        'g5_title' => 'Ethanol Demand',
+        'g6_title' => 'Octane Demand',
+        'g7_title' => 'Ethanol Potential',
+        
+        'g8_title' => 'Emissions',
+        'g9_title' => 'Emissions',
+        'g10_title' => 'Vehicle Fleet (Units)',
+
+        'g11_title' => 'Life Cycle GHG Emissions',
+        'g12_title' => 'Life Cycle GHG Reduction (%)',
+        'g13_title' => '2035 GHG Target Participation (%)',
+        'g14_title' => 'Carbon Intensity (gCO2e/MJ)',
+
     ]
 ];

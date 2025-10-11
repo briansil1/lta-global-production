@@ -237,12 +237,21 @@ return [
     ],
     'graphs' => [
         // titulos en español 
-        'g1_title' => 'Demanda de gasolina',
-        'g2_title' => 'Crecimiento de la gasolina',
-        'g3_title' => 'Producción de gasolina',
-        'g4_title' => 'Importación de gasolina',
-        'g5_title' => 'Demanda de etanol',
-        'g6_title' => 'Demanda de octano',
-        'g7_title' => 'Potencial de etanol',
+        'g1_title' => 'Demanda de Gasolina',
+        'g2_title' => 'Crecimiento de la Gasolina',
+        'g3_title' => 'Producción de Gasolina',
+        'g4_title' => 'Importación de Gasolina',
+        'g5_title' => 'Demanda de Etanol',
+        'g6_title' => 'Demanda de Octano',
+        'g7_title' => 'Potencial de Etanol',
+        
+        'g8_title' => 'Emisiones de',
+        'g9_title' => 'Emisiones de',
+        'g10_title' => 'Parque vehicular (unidades)',
+
+        'g11_title' => 'Emisiones de GHG durante el ciclo de vida',
+        'g12_title' => 'Reducción de GHG durante el ciclo de vida (%)',
+        'g13_title' => 'Participación en el objetivo de GHG para 2035 (%)',
+        'g14_title' => 'Intensidad de Carbono (gCO2e/MJ)',
     ]
 ];
