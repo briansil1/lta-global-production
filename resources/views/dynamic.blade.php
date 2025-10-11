@@ -1146,12 +1146,15 @@
                                                             data: {
                                                                 labels,
                                                                 datasets: [
-                                                           
-                                                                { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E25', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
                                                                 { label: 'E30', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                { label: 'E25', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
+                                                                { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                
+                                                                
+                                                                
+                                                                
                                                                 ]
                                                             },
                                                             options: {
