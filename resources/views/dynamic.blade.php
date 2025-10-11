@@ -767,7 +767,7 @@
                                             <div class="container my-12">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">{{$type}} Emissions (MML/yr)</h3>
+                                                        <h3 class="oswald">{{$type}} Emissions (g/km)</h3>
                                                     </div>
                                                     <div class="col-12">
                                                         <div style="height:400px;">   <!-- 👈 altura fija -->
