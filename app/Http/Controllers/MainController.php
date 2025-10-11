@@ -358,6 +358,11 @@ class MainController extends Controller
                 'dataGenerales' => $dataGenerales,
             ]);
         } elseif($tab == '3') {
+            // Si $regionid es null o vacio o "" entonces =  0
+            if($regionid === null || $regionid === '' || $regionid === '0') {
+                $regionid = 0;
+            }
+
             //echo $tab."-".$continentid."-".$regionid."-".$type;
             // Datos de emisiones de gases invernadero
             $dataGenerales = GreenHouse::query()
