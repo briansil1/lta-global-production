@@ -544,13 +544,14 @@ a#v-ghg-greet-tab.active:after {
 .selectedBTN:hover{
     background-color: #002f60 !important;
     color: white !important;
-    cursor: not-allowed;
+    /*cursor manita con dedo */
+    cursor: pointer;
 }   
 
 .selectedBTN2:hover{
     background-color: #003e7e !important;
     color: white !important;
-    cursor: not-allowed;
+    cursor: pointer;
 }
 
 p{
