@@ -451,14 +451,14 @@ class MainController extends Controller
             $g3Sorted = $dataG3->map(function ($r) {
                 return [
                     'country' => $r->country,
-                    'e0'  => (float)($r->e0_par ?? 0),
-                    'e10' => (float)($r->e10_par ?? 0),
-                    'e15' => (float)($r->e15_par ?? 0),
-                    'e20' => (float)($r->e20_par ?? 0),
-                    'e25' => (float)($r->e25_par ?? 0),
-                    'e30' => (float)($r->e30_par ?? 0),
+                    'e0'  => (float)($r->e0_em ?? 0),
+                    'e10' => (float)($r->e10_em ?? 0),
+                    'e15' => (float)($r->e15_em ?? 0),
+                    'e20' => (float)($r->e20_em ?? 0),
+                    'e25' => (float)($r->e25_em ?? 0),
+                    'e30' => (float)($r->e30_em ?? 0),
                     'total'  => (float)(
-                        ($r->e0_par ?? 0)+($r->e10_par ?? 0)+($r->e15_par ?? 0)+($r->e20_par ?? 0)+($r->e25_par ?? 0)+($r->e30_par ?? 0)
+                        ($r->e0_em ?? 0)+($r->e10_em ?? 0)+($r->e15_em ?? 0)+($r->e20_em ?? 0)+($r->e25_em ?? 0)+($r->e30_em ?? 0)
                     ),
                 ];      
             })->sortByDesc('total')->values();  
@@ -484,14 +484,14 @@ class MainController extends Controller
             $g4Sorted = $dataG4->map(function ($r) {
                 return [
                     'country' => $r->country,
-                    'e0'  => (float)($r->e0_car ?? 0),
-                    'e10' => (float)($r->e10_car ?? 0),
-                    'e15' => (float)($r->e15_car ?? 0),
-                    'e20' => (float)($r->e20_car ?? 0),
-                    'e25' => (float)($r->e25_car ?? 0),
-                    'e30' => (float)($r->e30_car ?? 0),
+                    'e0'  => (float)($r->e0_em ?? 0),
+                    'e10' => (float)($r->e10_em ?? 0),
+                    'e15' => (float)($r->e15_em ?? 0),
+                    'e20' => (float)($r->e20_em ?? 0),
+                    'e25' => (float)($r->e25_em ?? 0),
+                    'e30' => (float)($r->e30_em ?? 0),
                     'total'  => (float)(
-                        ($r->e0_car ?? 0)+($r->e10_car ?? 0)+($r->e15_car ?? 0)+($r->e20_car ?? 0)+($r->e25_car ?? 0)+($r->e30_car ?? 0)
+                        ($r->e0_em ?? 0)+($r->e10_em ?? 0)+($r->e15_em ?? 0)+($r->e20_em ?? 0)+($r->e25_em ?? 0)+($r->e30_em ?? 0)
                     ),  
                 ];    
             })->sortByDesc('total')->values();  
