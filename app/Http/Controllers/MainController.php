@@ -386,6 +386,7 @@ class MainController extends Controller
                 ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
                 ->where('methodology', $type)
                 ->where('data', 'GHG')
+                ->where('tipo', 'P')
                 ->get();
 
             $g1Sorted = $dataG1->map(function ($r) {
