@@ -228,16 +228,16 @@
                                     </a>
 
 
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM 2.5" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'PM 2.5') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'PM') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
                                             PM 2.5
                                         </p>
                                     </a>   
 
 
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/THC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'THC') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/VOC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'VOC') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                         <p class="card-p">
-                                            THC
+                                            VOC
                                         </p>
                                     </a>
                             </div>
