@@ -1100,7 +1100,7 @@
                                                             <h3 class="oswald">Life Cycle GHG Emissions (MML/yr) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                            <div style="height:600px;">   <!-- 👈 altura fija -->
                                                                 <canvas id="g1Chart" height="400"></canvas>
                                                             </div>
                                                         </div>
@@ -1110,7 +1110,7 @@
                                                             <h3 class="oswald">Life Cycle GHG Reduction (%) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                            <div style="height:600px;">   <!-- 👈 altura fija -->
                                                                 <canvas id="g2Chart" height="400"></canvas>
                                                             </div>
                                                         </div>
@@ -1120,7 +1120,7 @@
                                                             <h3 class="oswald">2035 GHG Target Participation (%) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                            <div style="height:600px;">   <!-- 👈 altura fija -->
                                                                 <canvas id="g3Chart" height="400"></canvas>
                                                             </div>
                                                         </div>
@@ -1130,7 +1130,7 @@
                                                             <h3 class="oswald">Carbon Intensity (gCO2e/MJ) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                            <div style="height:600px;">   <!-- 👈 altura fija -->
                                                                 <canvas id="g4Chart" height="400"></canvas>
                                                             </div>
                                                         </div>
