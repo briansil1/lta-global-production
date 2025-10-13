@@ -1101,7 +1101,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g1Chart" height="120"></canvas>
+                                                                <canvas id="g1Chart" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1111,7 +1111,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g2Chart" height="120"></canvas>
+                                                                <canvas id="g2Chart" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1121,7 +1121,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g3Chart" height="120"></canvas>
+                                                                <canvas id="g3Chart" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1131,7 +1131,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g4Chart" height="120"></canvas>
+                                                                <canvas id="g4Chart" height="200"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
