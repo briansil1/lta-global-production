@@ -122,6 +122,8 @@ class MainController extends Controller
             $chartLabels2 = $g2Sorted->pluck('country');
             // Valores numéricos
             $chartValues2 = $g2Sorted->pluck('gasoline_growth_porc');
+            // Multiplicar todos los valores por 100
+            $chartValues2 = $chartValues2->map(fn($v) => $v * 100);
             
             // --> GRAFICA 3 - Ordena desc por gasolina y arma labels/values para el gráfico de litros de producción
             $g3Sorted = $dataG1->sortByDesc('gasoline_prod'.$type)->values();

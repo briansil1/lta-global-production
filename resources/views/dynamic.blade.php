@@ -365,6 +365,8 @@
                                                         // Grafica 2 - Gasoline growth (%) por país
                                                         const labels2 = @json($chartLabels2 ?? []);  // países
                                                         const values2 = @json($chartValues2 ?? []);  // litros
+                                                        // Multiplicar todos los datos por 100
+                                                        //values2 = values2.map(v => v * 100);
                                                         // Grafica 3 - Gasoline production (MML/yr) por país
                                                         const labels3 = @json($chartLabels3 ?? []);  // países
                                                         const values3 = @json($chartValues3 ?? []);  // litros
