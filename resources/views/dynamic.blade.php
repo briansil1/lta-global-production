@@ -133,7 +133,7 @@
                         <!-- Divs que parescan botones AMERICA, ASIA, EUROPE, AFRICA y GLOBAL  -->
                         <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
                             <!-- si tab != 2 --> 
-                            @if($tab != 2 and $tab != 3)
+                         
                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 1) selectedBTN2 @else selectedBTN @endif" data-value="AMERICA" style="flex-direction: column;">
                                     <div class="mx-auto w-100">
                                         <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
@@ -165,7 +165,7 @@
                                      
                                     </p>
                                 </a>
-                            @endif
+           
                         </div>
                         <!-- Regiones del continente 1 -->
                         <div class="container my-4" id="regions_container" >
