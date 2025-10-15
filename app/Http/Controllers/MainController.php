@@ -122,8 +122,8 @@ class MainController extends Controller
             $chartLabels2 = $g2Sorted->pluck('country');
             // Valores numéricos
             $chartValues2 = $g2Sorted->pluck('gasoline_growth_porc');
-            // Multiplicar todos los valores por 100
-            $chartValues2 = $chartValues2->map(fn($v) => $v * 100);
+            // Multiplicar todos los valores por 100 y valores a 1 decimal
+            $chartValues2 =  $chartValues2->map(fn($value) => round($value * 100, 1));
             
             // --> GRAFICA 3 - Ordena desc por gasolina y arma labels/values para el gráfico de litros de producción
             $g3Sorted = $dataG1->sortByDesc('gasoline_prod'.$type)->values();
@@ -153,19 +153,20 @@ class MainController extends Controller
             $chartValues6 = $g6Sorted->pluck('ethanol_prod'.$type);
             // --> GRAFICA 7 - Ordena desc por Octane Potential y arma labels/values para el gráfico de litros de Octane Potential
             // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10_lt, e15_lt, e20_lt, e25_lt, e30_lt, e0_lt
-            $g7Sorted = $dataG1->values();
+            $g7Sorted =  $dataG1->values();
             // Labels de ciudades
             $g7Sorted = $dataG1->map(function ($r) {
        
                 if($this->type == '_lt') {
                     return [
                         'country' => $r->country,
-                        'e0_lt'  => (float)($r->e0_lt ?? 0),
-                        'e10_lt' => (float)($r->e10_lt ?? 0),
-                        'e15_lt' => (float)($r->e15_lt ?? 0),
-                        'e20_lt' => (float)($r->e20_lt ?? 0),
-                        'e25_lt' => (float)($r->e25_lt ?? 0),
-                        'e30_lt' => (float)($r->e30_lt ?? 0),
+                        // Valor $r->e0_lt solo con un decimal
+                        'e0_lt'  => (float)(round($r->e0_lt * 100, 1) ?? 0),
+                        'e10_lt' => (float)(round($r->e10_lt * 100, 1) ?? 0),
+                        'e15_lt' => (float)(round($r->e15_lt * 100, 1) ?? 0),
+                        'e20_lt' => (float)(round($r->e20_lt * 100, 1) ?? 0),
+                        'e25_lt' => (float)(round($r->e25_lt * 100, 1) ?? 0),
+                        'e30_lt' => (float)(round($r->e30_lt * 100, 1) ?? 0),
                         'total'  => (float)(
                             ($r->e0_lt ?? 0)+($r->e10_lt ?? 0)+($r->e15_lt ?? 0)+($r->e20_lt ?? 0)+($r->e25_lt ?? 0)+($r->e30_lt ?? 0)
                         ),
@@ -173,12 +174,12 @@ class MainController extends Controller
                 }else {
                     return [    
                         'country' => $r->country,
-                        'e0_lt'  => (float)($r->e0_gl ?? 0),
-                        'e10_lt' => (float)($r->e10_gl ?? 0),
-                        'e15_lt' => (float)($r->e15_gl ?? 0),
-                        'e20_lt' => (float)($r->e20_gl ?? 0),
-                        'e25_lt' => (float)($r->e25_gl ?? 0),
-                        'e30_lt' => (float)($r->e30_gl ?? 0),
+                        'e0_lt'  => (float)(round($r->e0_gl * 100, 1) ?? 0),
+                        'e10_lt' => (float)(round($r->e10_gl * 100, 1) ?? 0),
+                        'e15_lt' => (float)(round($r->e15_gl * 100, 1) ?? 0),
+                        'e20_lt' => (float)(round($r->e20_gl * 100, 1) ?? 0),
+                        'e25_lt' => (float)(round($r->e25_gl * 100, 1) ?? 0),
+                        'e30_lt' => (float)(round($r->e30_gl * 100, 1) ?? 0),
                         'total'  => (float)(
                             ($r->e0_gl ?? 0)+($r->e10_gl ?? 0)+($r->e15_gl ?? 0)+($r->e20_gl ?? 0)+($r->e25_gl ?? 0)+($r->e30_gl ?? 0)
                         ),

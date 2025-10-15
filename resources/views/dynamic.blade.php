@@ -101,7 +101,7 @@
                     <div class="back-blue text-center">
                         <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden" aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
                         <h2 class="h1 uppercase text-2xl md:text-5xl container oswald"><a href="{{ route(__('routes.home')) }}" class="text-white">{{ __('dynamic.content.profiles') }}</a></h2>
-                        <label id="tool_continent"  class="text-white mt-0 pt-0 oswald" aria-label="tool_continent" aria-describedby="tool_continent">{{ $continent->name }}</label>
+                       
                         <h3 class="text-white mt-0 pt-0 oswald">
                             {{ __('dynamic.content.global-tool') }}
                         </h3>
@@ -328,7 +328,7 @@
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (ROM) <span class="unit">(Total: {{ number_format($chartValues6->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (RON) <span class="unit">(Total: {{ number_format($chartValues6->sum(), 2, '.', ',') }})</span></h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
