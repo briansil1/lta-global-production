@@ -146,11 +146,11 @@ class MainController extends Controller
             // Valores numéricos
             $chartValues5 = $g5Sorted->pluck('ethanol_demand'.$type);
             // --> GRAFICA 6 - Ordena desc por Octane Demand y arma labels/values para el gráfico de litros de Octane Demand
-            $g6Sorted = $dataG1->sortByDesc('ethanol_prod'.$type)->values();
+            $g6Sorted = $dataG1->sortByDesc('ron'.$type)->values();
             // Labels de ciudades
             $chartLabels6 = $g6Sorted->pluck('country');
             // Valores numéricos
-            $chartValues6 = $g6Sorted->pluck('ethanol_prod'.$type);
+            $chartValues6 = $g6Sorted->pluck('ron'.$type);
             // --> GRAFICA 7 - Ordena desc por Octane Potential y arma labels/values para el gráfico de litros de Octane Potential
             // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e10_lt, e15_lt, e20_lt, e25_lt, e30_lt, e0_lt
             $g7Sorted =  $dataG1->values();
