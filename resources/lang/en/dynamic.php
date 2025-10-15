@@ -238,5 +238,8 @@ return [
         'g13_title' => '2035 GHG Target Participation (%)',
         'g14_title' => 'Carbon Intensity (gCO2e/MJ)',
 
+        'g15_title' => 'Ethanol Production',
+        'g16_title' => 'Ethanol Content',
+
     ]
 ];

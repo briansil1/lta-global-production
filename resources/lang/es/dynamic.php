@@ -238,5 +238,8 @@ return [
         'g12_title' => 'Reducción de GHG durante el ciclo de vida (%)',
         'g13_title' => 'Participación en el objetivo de GHG para 2035 (%)',
         'g14_title' => 'Intensidad de Carbono (gCO2e/MJ)',
+
+        'g15_title' => 'Producción de Etanol',
+        'g16_title' => 'Contenido de Etanol',
     ]
 ];

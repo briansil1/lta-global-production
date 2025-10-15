@@ -111,6 +111,17 @@ class MainController extends Controller
                 // Omitir el country UnitedKingdom
                 ->where('country', '!=', 'United Kingdom')
                 ->get();
+            }else if($regionid == 18){
+                $dataG1 = VolumeQuality::query()
+                ->with('region')  // eager loading
+                ->where('tipo', 'P')
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, function ($q) use ($regionid) {
+                    $q->whereIn('region_id', [14, 15]);
+                })
+                ->get();
             }else{
                 $dataG1 = VolumeQuality::query()
                 ->with('region')  // eager loading
@@ -212,6 +223,22 @@ class MainController extends Controller
             $chartLabels7 = $g7Sorted->pluck('country');
             $chartValues7 = $g7Sorted->map(fn($r) => collect($r)->except(['country','total']));
     
+            // --> GRAFICA 8 - Ordena desc por gasolina y arma labels/values para el gráfico de litros
+            $g8Sorted = $dataG1->sortByDesc('ethanol_prod'.$type)->values();
+            // Labels de ciudades 
+            $chartLabels8 = $g8Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues8 = $g8Sorted->pluck('ethanol_prod'.$type);
+
+            // --> GRAFICA 2 - Ordena desc por gasolina y arma labels/values para el gráfico de litros de crecimiento %
+            $g9Sorted = $dataG1->sortByDesc('ethanol_content')->values();
+            // Labels de ciudades 
+            $chartLabels9 = $g9Sorted->pluck('country');
+            // Valores numéricos
+            $chartValues9 = $g9Sorted->pluck('ethanol_content');
+            // Multiplicar todos los valores por 100 y valores a 1 decimal
+            $chartValues9 =  $chartValues9->map(fn($value) => round($value * 100, 1));
+
 
             //var_dump($chartValues7);
             //return false;
@@ -244,6 +271,12 @@ class MainController extends Controller
 
                 'chartLabels7' => $chartLabels7,
                 'chartValues7' => $chartValues7,
+
+                'chartLabels8' => $chartLabels8,
+                'chartValues8' => $chartValues8,
+
+                'chartLabels9' => $chartLabels9,
+                'chartValues9' => $chartValues9,
         
 
                 'dataGenerales' => $dataGenerales,
@@ -266,20 +299,7 @@ class MainController extends Controller
                 $this->type = 'Benzene';
             }
             // --> GRAFICA 1 - CO Emmisions (g/km)
-             if ($regionid == 7) {
-                $dataG1 = VehicularEmissions::query()
-                    ->with('region') // eager loading
-                    ->whereHas('region', function ($q) use ($continentid) {
-                        $q->where('continent_id', $continentid);
-                    })
-                    // Omitir el country UnitedKingdom
-                    ->where('country', '!=', 'United Kingdom')
-                    ->where('tipo', 'P')
-                    ->where('emission_component', $type)
-                    ->where('emission_type', 'Emissions (g/km)')
-                    ->get();
-             }else{
-                $dataG1 = VehicularEmissions::query()
+             $dataG1 = VehicularEmissions::query()
                 ->with('region') // eager loading
                 ->whereHas('region', function ($q) use ($continentid) {
                     $q->where('continent_id', $continentid);
@@ -290,7 +310,7 @@ class MainController extends Controller
                 ->where('emission_type', 'Emissions (g/km)')
                 ->get();
 
-             }
+             
              
             
             
@@ -356,15 +376,15 @@ class MainController extends Controller
 
             // --> GRAFICA 3 - Vehicle Fleet (millions)
             $dataG3 = VolumeQuality::query()
-            ->with('region')  // eager loading
-            ->where('tipo', 'P')
-            ->whereHas('region', function ($q) use ($continentid) {
-                $q->where('continent_id', $continentid);
-            })
-            ->when($regionid > 0, function ($q) use ($regionid) {
-                $q->where('region_id', $regionid);
-            })
-            ->get();
+                ->with('region')  // eager loading
+                ->where('tipo', 'P')
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, function ($q) use ($regionid) {
+                    $q->where('region_id', $regionid);
+                })
+                ->get();
 
             // --> GRAFICA 3 - Ordena desc por gasolina y arma labels/values para el gráfico de litros
             $g3Sorted = $dataG3->sortByDesc('vehicle_fleet')->values();

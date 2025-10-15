@@ -240,6 +240,15 @@
                                             VOC
                                         </p>
                                     </a>
+
+                               
+
+                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Vehicle Fleet" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'Vehicle Fleet') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                        <p class="card-p">
+                                            Vehicle Fleet
+                                        </p>
+                                    </a>
+                                </div>
                             </div>
                         @endif
                         @if($tab == 3)
@@ -344,6 +353,26 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
+                                                    <div class="col-6">
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues8->sum(), 2, '.', ',') }})</span></h3>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g16_title') }} (%)</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                            <canvas id="g8Chart" height="120"></canvas>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                            <canvas id="g9Chart" height="120"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-12">
                                                         <!-- sumar los totales de chartValues7 con formato a dos digitos y con comas en los miles considerando que chartValues7 es un Collection y tiene un campo llamado total -->
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g7_title') }} (MML/yr) </h3>
@@ -383,6 +412,15 @@
                                                         const labels7 = @json($chartLabels7 ?? []);  // países
                                                         const values7 = @json($chartValues7 ?? []);  // litros
 
+                                                        // Grafica 8 -
+                                                        const labels8 = @json($chartLabels8 ?? []);  // países
+                                                        const values8 = @json($chartValues8 ?? []);  // litros
+
+                                                        // Grafica 9 -
+                                                        const labels9 = @json($chartLabels9 ?? []);  // países
+                                                        const values9 = @json($chartValues9 ?? []);  // litros
+
+
 
                                                         const ctx = document.getElementById('g1Chart').getContext('2d');
                                                         const ctx2 = document.getElementById('g2Chart').getContext('2d');
@@ -391,6 +429,8 @@
                                                         const ctx5 = document.getElementById('g5Chart').getContext('2d');
                                                         const ctx6 = document.getElementById('g6Chart').getContext('2d');
                                                         const ctx7 = document.getElementById('g7Chart').getContext('2d');
+                                                        const ctx8 = document.getElementById('g8Chart').getContext('2d');
+                                                        const ctx9 = document.getElementById('g9Chart').getContext('2d');
 
                                                         new Chart(ctx, {
                                                             type: 'bar',
@@ -783,6 +823,108 @@
                                                             },
                                                             //plugins: [ChartDataLabels]
                                                         });
+
+                                                        new Chart(ctx8, {
+                                                            type: 'bar',
+                                                            data: {
+                                                            labels: labels8,
+                                                            datasets: [{
+                                                                label: 'Gasoline demand (MML/yr)',
+                                                                data: values8,
+                                                                borderWidth: 1,
+                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                borderColor: 'rgba(54, 162, 235, 1)'
+                                                            }]
+                                                            },
+                                                            options: {
+                                                            indexAxis: 'y',                 // 👈 horizontal
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: {
+                                                                    callbacks: {
+                                                                        // En horizontal, el valor está en parsed.x
+                                                                        @if($type == '_lt')
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  L`
+                                                                        @else
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  G`
+                                                                        @endif
+                                                                    }
+                                                                },
+                                                                datalabels: {
+                                                                    anchor: 'end',
+                                                                    align: 'end',
+                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                }
+                                                            },
+                                                            scales: {
+                                                                x: {                           // valores numéricos
+                                                                beginAtZero: true,
+                                                                ticks: {
+                                                                    callback: (v) => Number(v).toLocaleString()
+                                                                },
+                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
+                                                                },
+                                                                y: {                           // nombres de países (no convertir a número)
+                                                                ticks: {
+                                                                    autoSkip: false,           // opcional: muestra todos
+                                                                },
+                                                                title: { display: true, text: '' }
+                                                                }
+                                                            }
+                                                            },
+                                                            plugins: [ChartDataLabels]
+                                                        });
+
+                                                        new Chart(ctx9, {
+                                                            type: 'bar',
+                                                            data: {
+                                                            labels: labels9,
+                                                            datasets: [{
+                                                                label: 'Gasoline growth (%)',
+                                                                data: values9,
+                                                                borderWidth: 1,
+                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                borderColor: 'rgba(54, 162, 235, 1)'
+                                                            }]
+                                                            },
+                                                            options: {
+                                                            indexAxis: 'y',                 // 👈 horizontal
+                                                            responsive: true,
+                                                            maintainAspectRatio: false,
+                                                            plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: {
+                                                                    callbacks: {
+                                                                        // En horizontal, el valor está en parsed.x
+                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} %`
+                                                                    }
+                                                                },
+                                                                datalabels: {
+                                                                    anchor: 'end',
+                                                                    align: 'end',
+                                                                    formatter: (val) => `${Number(val).toLocaleString()} %`
+                                                                }
+                                                            },
+                                                            scales: {
+                                                                x: {                           // valores numéricos
+                                                                beginAtZero: true,
+                                                                ticks: {
+                                                                    callback: (v) => `${Number(v).toFixed(1)} %`
+                                                                },
+                                                                title: { display: true, text: '(%)' }
+                                                                },
+                                                                y: {                           // nombres de países (no convertir a número)
+                                                                ticks: {
+                                                                    autoSkip: false,           // opcional: muestra todos
+                                                                },
+                                                                title: { display: true, text: '' }
+                                                                }
+                                                            }
+                                                            },
+                                                            plugins: [ChartDataLabels]
+                                                        });
                                                     });
                                                 </script>
                                                 @endpush
@@ -793,6 +935,9 @@
                                             <!-- GRAFICAS DE VEHICULAR EMISSIONS -->
                                             <!-- Grafica 1 - Vehicular emissions (kTons/yr) por país -->
                                             <div class="container my-12">
+                                                @if($type != "Vehicle Fleet")
+                                                    
+                                                
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <h3 class="oswald"> {{ __('dynamic.graphs.g8_title') }} {{$type}} (g/km)</h3>
@@ -813,6 +958,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @else
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} {{$type}} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
@@ -823,6 +969,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
                                                 @push('scripts')
                                                 <script>
                                                     document.addEventListener('DOMContentLoaded', function () {
@@ -893,6 +1040,7 @@
                                                                             }
 
                                                                          },
+                                                                        @if($type != "Benzene")
                                                                         annotation: {
                                                                             annotations: {
                                                                                 euro6: {
@@ -941,6 +1089,7 @@
                                                                                 }
                                                                             }
                                                                         }
+                                                                        @endif
                                                                     }
                                                                 }
                                                             });
