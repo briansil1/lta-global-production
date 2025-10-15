@@ -373,16 +373,47 @@ class MainController extends Controller
             $chartValues1 = $g1Sorted->map(fn($r) => collect($r)->except(['country','total']));
 
             // --> GRAFICA 2 - CO2 Emmisions (Ton/kday)
-            $dataG2 = VehicularEmissions::query()
-                ->with('region') // eager loading
-                ->whereHas('region', function ($q) use ($continentid) {
-                    $q->where('continent_id', $continentid);
-                })
-                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
-                ->where('tipo', 'P')
-                ->where('emission_component', $type)
-                ->where('emission_type', 'Emissions (Ton/day)')
-                ->get();
+            if ($regionid == 7) {
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG2 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->where('country', '!=', 'United Kingdom')
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (Ton/day)')
+                    ->get();
+
+            }else if($regionid == 18){
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG2 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, function ($q) use ($regionid) {
+                        $q->whereIn('region_id', [14, 15]);
+                    })
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (Ton/day)')
+                    ->get();
+
+            }else{
+
+                $dataG2 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (Ton/day)')
+                    ->get();
+            }
 
             // El tema para esta grafica es que cada barra ejemplo mexico tiene diferentes valores campos e
             //$g2Sorted = $dataG2->values();
