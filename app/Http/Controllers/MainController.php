@@ -298,17 +298,48 @@ class MainController extends Controller
             if($this->type == '') {
                 $this->type = 'Benzene';
             }
-            // --> GRAFICA 1 - CO Emmisions (g/km)
-             $dataG1 = VehicularEmissions::query()
-                ->with('region') // eager loading
-                ->whereHas('region', function ($q) use ($continentid) {
-                    $q->where('continent_id', $continentid);
-                })
-                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
-                ->where('tipo', 'P')
-                ->where('emission_component', $type)
-                ->where('emission_type', 'Emissions (g/km)')
-                ->get();
+            if ($regionid == 7) {
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG1 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->where('country', '!=', 'United Kingdom')
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (g/km)')
+                    ->get();
+
+            }else if($regionid == 18){
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG1 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, function ($q) use ($regionid) {
+                        $q->whereIn('region_id', [14, 15]);
+                    })
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (g/km)')
+                    ->get();
+
+            }else{
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG1 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (g/km)')
+                    ->get();
+            }
+            
 
              
              
