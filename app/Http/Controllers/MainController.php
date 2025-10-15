@@ -98,16 +98,37 @@ class MainController extends Controller
                 ->get();
 
             // Datos de volumen y calidad para luego filtrar por graficas
-            $dataG1 = VolumeQuality::query()
-            ->with('region')  // eager loading
-            ->where('tipo', 'P')
-            ->whereHas('region', function ($q) use ($continentid) {
-                $q->where('continent_id', $continentid);
-            })
-            ->when($regionid > 0, function ($q) use ($regionid) {
-                $q->where('region_id', $regionid);
-            })
-            ->get();
+            // Si $regionid == 7
+            
+            if ($regionid == 7) {
+
+                $dataG1 = VolumeQuality::query()
+                ->with('region')  // eager loading
+                ->where('tipo', 'P')
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                // Omitir el country UnitedKingdom
+                ->where('country', '!=', 'United Kingdom')
+                ->get();
+            }else{
+                $dataG1 = VolumeQuality::query()
+                ->with('region')  // eager loading
+                ->where('tipo', 'P')
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, function ($q) use ($regionid) {
+                    $q->where('region_id', $regionid);
+                })
+                ->get();
+
+            }
+            
+
+
+
+
 
             // --> GRAFICA 1 - Ordena desc por gasolina y arma labels/values para el gráfico de litros
             $g1Sorted = $dataG1->sortByDesc('gasoline_demand'.$type)->values();
@@ -245,7 +266,20 @@ class MainController extends Controller
                 $this->type = 'Benzene';
             }
             // --> GRAFICA 1 - CO Emmisions (g/km)
-            $dataG1 = VehicularEmissions::query()
+             if ($regionid == 7) {
+                $dataG1 = VehicularEmissions::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    // Omitir el country UnitedKingdom
+                    ->where('country', '!=', 'United Kingdom')
+                    ->where('tipo', 'P')
+                    ->where('emission_component', $type)
+                    ->where('emission_type', 'Emissions (g/km)')
+                    ->get();
+             }else{
+                $dataG1 = VehicularEmissions::query()
                 ->with('region') // eager loading
                 ->whereHas('region', function ($q) use ($continentid) {
                     $q->where('continent_id', $continentid);
@@ -255,6 +289,10 @@ class MainController extends Controller
                 ->where('emission_component', $type)
                 ->where('emission_type', 'Emissions (g/km)')
                 ->get();
+
+             }
+             
+            
             
             $g1Limits = VehicularEmissions::query()
                 ->where('tipo', 'L')
