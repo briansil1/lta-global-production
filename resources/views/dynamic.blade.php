@@ -1040,6 +1040,31 @@
                                                                             }
 
                                                                          },
+                                                                         // tooltip En horizontal, y que el valor está en parsed.x se valla  sumando cada que cambia de dataset
+                                                                        tooltip: {
+                                                                            mode: 'index',
+                                                                            axis: 'y',
+                                                                            intersect: true,
+                                                                            callbacks: {
+                                                                                label: (ctx) => {
+                                                                                const { chart, datasetIndex, dataIndex } = ctx;
+                                                                                const ds = chart.data.datasets;
+
+                                                                                // acumulado hasta este dataset (E0..E30)
+                                                                                let sumt = 0;
+                                                                                for (let i = 0; i <= datasetIndex; i++) {
+                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                    sumt += val;
+                                                                                }
+
+                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                    minimumFractionDigits: 2,
+                                                                                    maximumFractionDigits: 2
+                                                                                })} ${unidad}`;
+                                                                                }
+                                                                            }
+                                                                        },
+
                                                                         @if($type != "Benzene")
                                                                         annotation: {
                                                                             annotations: {

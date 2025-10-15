@@ -457,12 +457,6 @@ class MainController extends Controller
             //echo $regionid;
             $regionid = ($regionid && (int)$regionid > 0) ? $regionid : 0;
 
-            // si $regionid == 10 entonces $regionid = 1
-            /*
-            if($regionid == 0) {
-                $regionid = 1;
-            }
-            */
             return view('dynamic', [
                 'tab' => $tab,
                 'continent' => $continent,
