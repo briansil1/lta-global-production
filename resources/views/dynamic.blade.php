@@ -1059,7 +1059,7 @@
 
                                                                                 return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                     minimumFractionDigits: 2,
-                                                                                    maximumFractionDigits: 2
+                                                                                    maximumFractionDigits: 3
                                                                                 })} ${unidad}`;
                                                                                 }
                                                                             }
@@ -1169,17 +1169,28 @@
                                                                         }
                                                                     },
                                                                     tooltip: {
-                                                                        callbacks: {
-                                                                            // En horizontal, el valor está en parsed.x
-                                                                            label: (ctx) => {
-                                                                                const valor = ctx.parsed.x ?? 0;
-                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
-                                                                                    minimumFractionDigits: 2, 
-                                                                                    maximumFractionDigits: 2 
-                                                                                })} ${unidad2}`;
+                                                                            mode: 'index',
+                                                                            axis: 'y',
+                                                                            intersect: true,
+                                                                            callbacks: {
+                                                                                label: (ctx) => {
+                                                                                const { chart, datasetIndex, dataIndex } = ctx;
+                                                                                const ds = chart.data.datasets;
+
+                                                                                // acumulado hasta este dataset (E0..E30)
+                                                                                let sumt = 0;
+                                                                                for (let i = 0; i <= datasetIndex; i++) {
+                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                    sumt += val;
+                                                                                }
+
+                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                    minimumFractionDigits: 2,
+                                                                                    maximumFractionDigits: 2
+                                                                                })} ${unidad}`;
+                                                                                }
                                                                             }
-                                                                        }
-                                                                    },
+                                                                        },
                                                                     datalabels: {
                                                                         anchor: 'end',
                                                                         align: 'end',
@@ -1333,10 +1344,6 @@
                                                                 { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
                                                                 { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
                                                                 { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                
-                                                                
-                                                                
-                                                                
                                                                 ]
                                                             },
                                                             options: {
@@ -1363,14 +1370,25 @@
                                                                         }
                                                                     },
                                                                     tooltip: {
+                                                                        mode: 'index',
+                                                                        axis: 'y',
+                                                                        intersect: true,
                                                                         callbacks: {
-                                                                            // En horizontal, el valor está en parsed.x
                                                                             label: (ctx) => {
-                                                                                const valor = ctx.parsed.x ?? 0;
-                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
-                                                                                    minimumFractionDigits: 2, 
-                                                                                    maximumFractionDigits: 2 
-                                                                                })} ${unidad}`;
+                                                                            const { chart, datasetIndex, dataIndex } = ctx;
+                                                                            const ds = chart.data.datasets;
+
+                                                                            // acumulado hasta este dataset (E0..E30)
+                                                                            let sumt = 0;
+                                                                            for (let i = 0; i <= datasetIndex; i++) {
+                                                                                const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                sumt += val;
+                                                                            }
+
+                                                                            return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                minimumFractionDigits: 2,
+                                                                                maximumFractionDigits: 2
+                                                                            })} ${unidad}`;
                                                                             }
                                                                         }
                                                                     },
@@ -1420,6 +1438,54 @@
                                                                 indexAxis: 'y',
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: { 
+                                                                        display: true, 
+                                                                        position: 'top',
+                                                                        labels: {
+                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                            generateLabels: (chart) => {
+                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const ds = chart.data.datasets;
+                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                return base.map(l => {
+                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} %`;
+                                                                                    return l;
+                                                                                });
+                                                                            } 
+                                                                        }
+                                                                    },
+                                                                    tooltip: {
+                                                                        mode: 'index',
+                                                                        axis: 'y',
+                                                                        intersect: true,
+                                                                        callbacks: {
+                                                                            label: (ctx) => {
+                                                                            const { chart, datasetIndex, dataIndex } = ctx;
+                                                                            const ds = chart.data.datasets;
+
+                                                                            // acumulado hasta este dataset (E0..E30)
+                                                                            let sumt = 0;
+                                                                            for (let i = 0; i <= datasetIndex; i++) {
+                                                                                const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                sumt += val;
+                                                                            }
+
+                                                                            return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                minimumFractionDigits: 2,
+                                                                                maximumFractionDigits: 2
+                                                                            })} %`;
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    }
+                                                                },  
                                                                 scales: {
                                                                     x: {
                                                                         stacked: true,
@@ -1460,6 +1526,54 @@
                                                                 indexAxis: 'y',                 // 👈 horizontal
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: { 
+                                                                        display: true, 
+                                                                        position: 'top',
+                                                                        labels: {
+                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                            generateLabels: (chart) => {
+                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const ds = chart.data.datasets;
+                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                return base.map(l => {
+                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} %`;
+                                                                                    return l;
+                                                                                });
+                                                                            } 
+                                                                        }
+                                                                    },
+                                                                    tooltip: {
+                                                                        mode: 'index',
+                                                                        axis: 'y',
+                                                                        intersect: true,
+                                                                        callbacks: {
+                                                                            label: (ctx) => {
+                                                                            const { chart, datasetIndex, dataIndex } = ctx;
+                                                                            const ds = chart.data.datasets;
+
+                                                                            // acumulado hasta este dataset (E0..E30)
+                                                                            let sumt = 0;
+                                                                            for (let i = 0; i <= datasetIndex; i++) {
+                                                                                const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                sumt += val;
+                                                                            }
+
+                                                                            return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                minimumFractionDigits: 2,
+                                                                                maximumFractionDigits: 2
+                                                                            })} %`;
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    }
+                                                                },
                                                                 scales: {
                                                                     x: {    
                                                                         stacked: true,
@@ -1528,17 +1642,28 @@
                                                                         }
                                                                     },
                                                                     tooltip: {
-                                                                        callbacks: {
-                                                                            // En horizontal, el valor está en parsed.x
-                                                                            label: (ctx) => {
-                                                                                const valor = ctx.parsed.x ?? 0;
-                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
-                                                                                    minimumFractionDigits: 2, 
-                                                                                    maximumFractionDigits: 2 
-                                                                                })} ${unidad2}`;
+                                                                            mode: 'index',
+                                                                            axis: 'y',
+                                                                            intersect: true,
+                                                                            callbacks: {
+                                                                                label: (ctx) => {
+                                                                                const { chart, datasetIndex, dataIndex } = ctx;
+                                                                                const ds = chart.data.datasets;
+
+                                                                                // acumulado hasta este dataset (E0..E30)
+                                                                                let sumt = 0;
+                                                                                for (let i = 0; i <= datasetIndex; i++) {
+                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                    sumt += val;
+                                                                                }
+
+                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                    minimumFractionDigits: 2,
+                                                                                    maximumFractionDigits: 2
+                                                                                })} ${unidad}`;
+                                                                                }
                                                                             }
-                                                                        }
-                                                                    },
+                                                                        },
                                                                     datalabels: {
                                                                         anchor: 'end',
                                                                         align: 'end',
