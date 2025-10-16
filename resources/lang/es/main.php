@@ -117,7 +117,8 @@ return [
     ],
     'content' => [
         'profiles' => 'PERFILES DE GASOLINA E IMPACTO',
-        'profiles-2' => 'DE LAS MEZCLAS CON ETANOL',
+        'profilesglobal' => 'Herramienta de Impacto del Etanol',
+        'profiles-2' => '',
         'america' => 'AMÉRICA LATINA',
         'detail' => 'Existen retos importantes en la calidad de los combustibles y las emisiones de los vehículos al medio ambiente en la región.',
         'report' => 'REPORTE',

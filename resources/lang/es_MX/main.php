@@ -117,7 +117,8 @@ return [
     ],
     'content' => [
         'profiles' => 'PERFILES DE GASOLINA E IMPACTO',
-        'profiles-2' => 'DE LAS MEZCLAS CON ETANOL',
+        'profilesglobal' => 'Herramienta de Impacto del Etanol',
+        'profiles-2' => '',
         'america' => 'AMÉRICA LATINA',
         'asia-africa' => 'ASIA-AFRICA',
         'europe' => 'EUROPA',

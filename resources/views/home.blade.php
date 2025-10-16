@@ -38,7 +38,7 @@
                         <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden" aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
                        </div>
                     <div class="back-blue text-center">
-                        <h2 class="h1 uppercase text-2xl md:text-5xl text-white container oswald">{{ __('main.content.profiles') }} <br> {{ __('main.content.profiles-2') }}</h2>
+                        <h2 class="h1 uppercase text-2xl md:text-5xl text-white container oswald"> {{ __('main.content.profilesglobal') }} <br> {{ __('main.content.profiles-2') }}</h2>
                         <h3 class="text-white mt-0 pt-0 oswald">
                             <label id="tool_continent"  class="text-white mt-0 pt-0 oswald" aria-label="tool_continent" aria-describedby="tool_continent"></label>
                             {{ __('main.content.global-version') }}
@@ -147,6 +147,9 @@
                                             <span class="fs-4">{{ __('main.content.explore-dynamic-tool-button') }}</span>
                                             <svg class="mg-icon w-6 h-6 md:w-12 md:h-12"><use href="#icon-angle-right" xlink:href="#icon-angle-right"></use></svg>
                                         </div>
+                                        <p class="card-p" style="font-size: 11px;">
+                                            {{ __('main.content.dynamic-tool-detail') }}
+                                        </p>
                                     </a>
                                 </div>
                             </div>

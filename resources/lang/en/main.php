@@ -118,6 +118,7 @@ return [
     ],
     'content' => [
         'profiles' => 'GASOLINE PROFILES AND IMPACT OF ETHANOL BLENDING',
+        'profilesglobal' => 'Ethanol Impact Tool',
         'profiles-2' => '',
         'america' => 'LATIN AMERICA',
         'detail' => 'There are significant fuel quality and vehicle emission reduction challenges in the region.',

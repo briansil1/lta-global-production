@@ -118,11 +118,13 @@ return [
     ],
     'content' => [
         'profiles' => 'GASOLINE PROFILES AND IMPACT OF ETHANOL BLENDING',
+        'profilesglobal' => 'Ethanol Impact Tool',
         'profiles-2' => '',
         'america' => 'LATIN AMERICA',
         'asia-africa' => 'ASIA-AFRICA',
         'europe' => 'EUROPE',
         'global-version' => 'GLOBAL VERSION',
+        'profilesglobal' => 'Ethanol Impact Tool',
         'detail' => 'There are significant fuel quality and vehicle emission reduction challenges in the region.',
         'report' => 'REPORT',
         'report-detail' => 'Download to learn about gasoline profiles and regulations by country, and the analysis of ethanol/gasoline blend levels: parameters, components, impact on emissions and case studies.',
