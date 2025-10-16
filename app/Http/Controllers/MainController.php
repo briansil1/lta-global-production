@@ -340,10 +340,6 @@ class MainController extends Controller
                     ->get();
             }
             
-
-             
-             
-            
             
             $g1Limits = VehicularEmissions::query()
                 ->where('tipo', 'L')
@@ -493,16 +489,53 @@ class MainController extends Controller
             $regionsAll = $regions->where('continent_id', $continentid);
             
             // --> GRAFICA 1 - Life Cycle GHG Emissions (MMT/yr)
-            $dataG1 = GreenHouse::query()
-                ->with('region') // eager loading
-                ->whereHas('region', function ($q) use ($continentid) {
-                    $q->where('continent_id', $continentid);
-                })
-                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
-                ->where('methodology', $type)
-                ->where('data', 'GHG')
-                ->where('tipo', 'P')
-                ->get();
+            if ($regionid == 7) {
+
+                    $dataG1 = GreenHouse::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                   ->where('country', '!=', 'United Kingdom')
+                    ->where('methodology', $type)
+                    ->where('data', 'GHG')
+                    ->where('tipo', 'P')
+                    ->get();
+
+            }else if($regionid == 18){
+
+                $dataG1 = GreenHouse::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, function ($q) use ($regionid) {
+                        $q->whereIn('region_id', [14, 15]);
+                    })
+                    ->where('methodology', $type)
+                    ->where('data', 'GHG')
+                    ->where('tipo', 'P')
+                    ->get();
+
+
+            }else{
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG1 = GreenHouse::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                    ->where('methodology', $type)
+                    ->where('data', 'GHG')
+                    ->where('tipo', 'P')
+                    ->get();
+            }
+
+
+
+
+            
 
             $g1Sorted = $dataG1->map(function ($r) {
                 return [
@@ -524,15 +557,51 @@ class MainController extends Controller
 
             // --> GRAFICA 2 - Life Cycle GHG Reductions (%)
 
-            $dataG2 = GreenHouse::query()
-                ->with('region') // eager loading
-                ->whereHas('region', function ($q) use ($continentid) {
-                    $q->where('continent_id', $continentid);
-                })
-                ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
-                ->where('methodology', $type)
-                ->where('data', '%Redvsbase')
-                ->get();
+            if ($regionid == 7) {
+
+                    $dataG2 = GreenHouse::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->where('country', '!=', 'United Kingdom')
+                    ->where('methodology', $type)
+                    ->where('data', '%Redvsbase')
+                    ->get();
+
+            }else if($regionid == 18){
+
+                    $dataG2 = GreenHouse::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, function ($q) use ($regionid) {
+                        $q->whereIn('region_id', [14, 15]);
+                    })
+                    ->where('methodology', $type)
+                    ->where('data', '%Redvsbase')
+                    ->get();
+
+
+
+            }else{
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG2 = GreenHouse::query()
+                    ->with('region') // eager loading
+                    ->whereHas('region', function ($q) use ($continentid) {
+                        $q->where('continent_id', $continentid);
+                    })
+                    ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
+                    ->where('methodology', $type)
+                    ->where('data', '%Redvsbase')
+                    ->get();
+            }
+
+
+
+
+            
                 
             $g2Sorted = $dataG2->map(function ($r) {
                 return [
@@ -554,7 +623,31 @@ class MainController extends Controller
             
             // --> GRAFICA 3 - 2035 GHG Participation (%)
 
-            $dataG3 = GreenHouse::query()
+            if ($regionid == 7) {
+                    $dataG3 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->where('country', '!=', 'United Kingdom')
+                ->where('methodology', $type)
+                ->where('data', '%RedTarget')
+                ->get();
+            }else if($regionid == 18){
+                    $dataG3 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, function ($q) use ($regionid) {
+                        $q->whereIn('region_id', [14, 15]);
+                    })
+                ->where('methodology', $type)
+                ->where('data', '%RedTarget')
+                ->get();
+            }else{
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG3 = GreenHouse::query()
                 ->with('region') // eager loading
                 ->whereHas('region', function ($q) use ($continentid) {
                     $q->where('continent_id', $continentid);
@@ -564,6 +657,11 @@ class MainController extends Controller
                 ->where('data', '%RedTarget')
                 ->get();
 
+            }
+
+
+            
+            
               
 
             $g3Sorted = $dataG3->map(function ($r) {
@@ -589,7 +687,35 @@ class MainController extends Controller
             //var_dump($chartValues3);
             //return false;
             // --> GRAFICA 4 - Carbone Intensity (gCO2e/MJ) - 
-            $dataG4 = GreenHouse::query()
+
+            if ($regionid == 7) {
+
+                $dataG4 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->where('country', '!=', 'United Kingdom')
+                ->where('methodology', $type)
+                ->where('data', 'CI')
+                ->get();
+            }else if($regionid == 18){
+                $dataG4 = GreenHouse::query()
+                ->with('region') // eager loading
+                ->whereHas('region', function ($q) use ($continentid) {
+                    $q->where('continent_id', $continentid);
+                })
+                ->when($regionid > 0, function ($q) use ($regionid) {
+                        $q->whereIn('region_id', [14, 15]);
+                    })
+                ->where('methodology', $type)
+                ->where('data', 'CI')
+                ->get();
+
+
+            }else{
+                // --> GRAFICA 1 - CO Emmisions (g/km)
+                $dataG4 = GreenHouse::query()
                 ->with('region') // eager loading
                 ->whereHas('region', function ($q) use ($continentid) {
                     $q->where('continent_id', $continentid);
@@ -599,6 +725,11 @@ class MainController extends Controller
                 ->where('data', 'CI')
                 ->get();
 
+
+            }
+
+
+            
             $g4Sorted = $dataG4->map(function ($r) {
                 return [
                     'country' => $r->country,

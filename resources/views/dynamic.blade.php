@@ -178,11 +178,13 @@
                                 </a>
                                 @if(isset($regionsAll))
                                     @foreach ($regionsAll as $regionOne)
+                                        @if( $regionOne->id  != 5 && $regionOne->id != 6 )
                                         <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == $regionOne->id) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                             <p class="card-p">
                                                 {{ $regionOne->name }}
                                             </p>
                                         </a>
+                                        @endif
                                     @endforeach
                                 @endif
                                
@@ -285,7 +287,7 @@
                                         @elseif($tab == 3)
                                             {{ __('dynamic.content.green-house-emissions') }}
                                         @endif
-                                        / {{ $continent->name }} @if($region) @if($region->name) / {{ $region->name }}  @endif  @if($type and $type == "_lt") / {{ __('dynamic.content.liters') }} @else / {{ __('dynamic.content.gallons') }} @endif @endif</h2>
+                                        / {{ $continent->name }} @if($region) @if($region->name) / {{ $region->name }}  @endif  @if($type and $type == "_lt") / {{ __('dynamic.content.liters') }} @elseif($type and $type == "_gl") / {{ __('dynamic.content.gallons') }} @endif @endif</h2>
                                     <div class="accordion-body">
                                         <!-- Si Tab es 1-->
                                         @if($tab == 1)
