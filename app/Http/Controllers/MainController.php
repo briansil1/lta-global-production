@@ -567,6 +567,7 @@ class MainController extends Controller
                     ->where('country', '!=', 'United Kingdom')
                     ->where('methodology', $type)
                     ->where('data', '%Redvsbase')
+                    ->where('tipo', 'P')
                     ->get();
 
             }else if($regionid == 18){
@@ -581,6 +582,7 @@ class MainController extends Controller
                     })
                     ->where('methodology', $type)
                     ->where('data', '%Redvsbase')
+                    ->where('tipo', 'P')
                     ->get();
 
 
@@ -595,6 +597,7 @@ class MainController extends Controller
                     ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
                     ->where('methodology', $type)
                     ->where('data', '%Redvsbase')
+                    ->where('tipo', 'P')
                     ->get();
             }
 
@@ -632,6 +635,7 @@ class MainController extends Controller
                 ->where('country', '!=', 'United Kingdom')
                 ->where('methodology', $type)
                 ->where('data', '%RedTarget')
+                ->where('tipo', 'P')
                 ->get();
             }else if($regionid == 18){
                     $dataG3 = GreenHouse::query()
@@ -644,6 +648,7 @@ class MainController extends Controller
                     })
                 ->where('methodology', $type)
                 ->where('data', '%RedTarget')
+                ->where('tipo', 'P')
                 ->get();
             }else{
                 // --> GRAFICA 1 - CO Emmisions (g/km)
@@ -655,6 +660,7 @@ class MainController extends Controller
                 ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
                 ->where('methodology', $type)
                 ->where('data', '%RedTarget')
+                ->where('tipo', 'P')
                 ->get();
 
             }
@@ -698,6 +704,7 @@ class MainController extends Controller
                 ->where('country', '!=', 'United Kingdom')
                 ->where('methodology', $type)
                 ->where('data', 'CI')
+                ->where('tipo', 'P')
                 ->get();
             }else if($regionid == 18){
                 $dataG4 = GreenHouse::query()
@@ -710,6 +717,7 @@ class MainController extends Controller
                     })
                 ->where('methodology', $type)
                 ->where('data', 'CI')
+                ->where('tipo', 'P')
                 ->get();
 
 
@@ -723,6 +731,7 @@ class MainController extends Controller
                 ->when($regionid > 0, fn($q) => $q->where('region_id', $regionid))
                 ->where('methodology', $type)
                 ->where('data', 'CI')
+                ->where('tipo', 'P')
                 ->get();
 
 
