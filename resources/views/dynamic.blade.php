@@ -297,7 +297,7 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <!-- sumar los totales de chartValues con formato a dos digitos y con comas en los miles -->
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues->sum(), 0, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g2_title') }} (%)</h3>
@@ -317,10 +317,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues4->sum(), 0, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues4->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -337,7 +337,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 0, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (RON) </h3>
@@ -357,7 +357,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues8->sum(), 0, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues8->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g16_title') }} (%)</h3>
@@ -378,7 +378,7 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <!-- sumar los totales de chartValues7 con formato a dos digitos y con comas en los miles considerando que chartValues7 es un Collection y tiene un campo llamado total -->
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g7_title') }} (MML/yr) </h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g7_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) </h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -457,9 +457,9 @@
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
                                                                         @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  L`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MML/yr`
                                                                         @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  G`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MMGal/yr`
                                                                         @endif
                                                                     }
                                                                 },
@@ -559,9 +559,9 @@
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
                                                                         @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
                                                                         @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
                                                                         @endif
                                                                     }
                                                                 },
@@ -612,9 +612,9 @@
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
                                                                         @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
                                                                         @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
                                                                         @endif
                                                                     }
                                                                 },
@@ -665,9 +665,9 @@
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
                                                                         @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
                                                                         @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
                                                                         @endif
                                                                     }
                                                                 },
@@ -750,7 +750,7 @@
                                                         });
 
                                                         // La siguiente grafica debera de graficar varios valores por barra de pais
-                                                        const unidad = @if($type == '_lt') 'L' @else 'G' @endif;
+                                                        const unidad = @if($type == '_lt') 'MML/yr' @else 'MMGal/yr' @endif;
                                                         new Chart(ctx7, {
                                                             type: 'bar',
                                                             data: {
@@ -850,9 +850,9 @@
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
                                                                         @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  L`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MML/yr`
                                                                         @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  G`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MMGal/yr`
                                                                         @endif
                                                                     }
                                                                 },
