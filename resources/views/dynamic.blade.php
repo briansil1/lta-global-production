@@ -181,7 +181,8 @@
                                         @if( $regionOne->id  != 5 && $regionOne->id != 6 )
                                         <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == $regionOne->id) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
                                             <p class="card-p">
-                                                {{ $regionOne->name }}
+                                                <!-- funcion para remplazar - por espacios " " que se pinte en formato de mayusculas cada priemr letra -->
+                                                {{ ucwords(str_replace('-', ' ', $regionOne->name)) }}
                                             </p>
                                         </a>
                                         @endif
@@ -254,20 +255,20 @@
                             </div>
                         @endif
                         @if($tab == 3)
-                        <div class="flex justify-center">
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'RED III') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                <p class="card-p">
-                                    RED III
-                                </p>
-                            </a>
-                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'GREET') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                <p class="card-p">
-                                    GREET
-                                </p>
-                            </a>
-                            
-                        </div>
-                    @endif
+                            <div class="flex justify-center">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'RED III') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        RED III
+                                    </p>
+                                </a>
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'GREET') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        GREET
+                                    </p>
+                                </a>
+                                
+                            </div>
+                        @endif
                     </div>
                 </main>
             </div>
@@ -287,7 +288,7 @@
                                         @elseif($tab == 3)
                                             {{ __('dynamic.content.green-house-emissions') }}
                                         @endif
-                                        / {{ $continent->name }} @if($region) @if($region->name) / {{ $region->name }}  @endif  @if($type and $type == "_lt") / {{ __('dynamic.content.liters') }} @elseif($type and $type == "_gl") / {{ __('dynamic.content.gallons') }} @endif @endif</h2>
+                                        /  {{ ucwords(str_replace('-', ' ', $continent->name)) }} @if($region) @if($region->name) / {{ ucwords(str_replace('-', ' ', $region->name)) }}  @endif  @if($type and $type == "_lt") / {{ __('dynamic.content.liters') }} @elseif($type and $type == "_gl") / {{ __('dynamic.content.gallons') }} @endif @endif</h2>
                                     <div class="accordion-body">
                                         <!-- Si Tab es 1-->
                                         @if($tab == 1)
@@ -296,7 +297,7 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <!-- sumar los totales de chartValues con formato a dos digitos y con comas en los miles -->
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g2_title') }} (%)</h3>
@@ -316,10 +317,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues4->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues4->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -336,10 +337,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (RON) <span class="unit">(Total: {{ number_format($chartValues6->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (RON) </h3>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -356,7 +357,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues8->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (MML/yr) <span class="unit">(Total: {{ number_format($chartValues8->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-6">
                                                         <h3 class="oswald">{{ __('dynamic.graphs.g16_title') }} (%)</h3>
@@ -717,16 +718,16 @@
                                                                     callbacks: {
                                                                         // En horizontal, el valor está en parsed.x
                                                                         @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} RON`
                                                                         @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} G`
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} RON`
                                                                         @endif
                                                                     }
                                                                 },
                                                                 datalabels: {
                                                                     anchor: 'end',
                                                                     align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
                                                                 }
                                                             },
                                                             scales: {
@@ -781,7 +782,8 @@
                                                                             return base.map(l => {
                                                                                 const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                 const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                //l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                l.text = `${ds[l.datasetIndex].label}`;
                                                                                 return l;
                                                                             });
                                                                         } 
@@ -963,7 +965,7 @@
                                                 @else
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} {{$type}} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 2, '.', ',') }})</span></h3>
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
                                                     </div>
                                                     <div class="col-12">
                                                         <div style="height:400px;">   <!-- 👈 altura fija -->
@@ -1035,7 +1037,8 @@
                                                                                     return base.map(l => {
                                                                                         const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                         const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                        l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                        //l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                        l.text = `${ds[l.datasetIndex].label}`;
                                                                                         return l;
                                                                                     });
                                                                                 }
@@ -1084,7 +1087,7 @@
                                                                                         /*  `Euro6 ${EURO6}` con formato a dos decimales  */
                                                                                         content: () => `Euro6 ${EURO6.toFixed(2)}`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -16,
+                                                                                        yAdjust: -22,
                                                                                         rotation: 0,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#ff7f0e',
@@ -1107,7 +1110,7 @@
                                                                                         display: true,
                                                                                         content: () => `US ${US.toFixed(2)}`,
                                                                                         position: 'start',
-                                                                                        yAdjust: -16,
+                                                                                        yAdjust: -22,
                                                                                         rotation: 0,
                                                                                         backgroundColor: 'rgba(0,0,0,0)',
                                                                                         color: '#2ca02c',
@@ -1140,11 +1143,6 @@
                                                                 { label: 'E15', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
                                                                 { label: 'E10', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
                                                                 { label: 'E0',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                
-                                                                
-                                                                
-                                                                
-                                                                
                                                                 ]
                                                             },
                                                             options: {
@@ -1164,7 +1162,7 @@
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                     const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad2}`;
+                                                                                    l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
                                                                             } 
@@ -1189,7 +1187,7 @@
                                                                                 return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                     minimumFractionDigits: 2,
                                                                                     maximumFractionDigits: 2
-                                                                                })} ${unidad}`;
+                                                                                })} ${unidad2}`;
                                                                                 }
                                                                             }
                                                                         },
@@ -1284,7 +1282,7 @@
                                                 <div class="container my-12">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <h3 class="oswald">Life Cycle GHG Emissions (MML/yr) - {{$type}}</h3>
+                                                            <h3 class="oswald">Life Cycle GHG Emissions (MMLTons/yr) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:450px;">   <!-- 👈 altura fija -->
@@ -1333,7 +1331,7 @@
                                                     const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
                                                     const n = x => (x == null ? 0 : Number(x));
                                                     const ctx1 = document.getElementById('g1Chart');
-                                                    const unidad = 'MML/yr';
+                                                    const unidad = 'MMLTons/yr';
                                                     if (ctx1) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx1.getContext('2d'), {
@@ -1365,7 +1363,7 @@
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                     const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                    l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
                                                                             } 
@@ -1420,6 +1418,8 @@
                                                     const labels2 = @json($chartLabels2 ?? []);
                                                     const raw2 = @json($chartValues2 ?? []);
                                                     const values2 = Array.isArray(raw2) ? raw2 : Object.values(raw2);
+                                          
+
                                                     const ctx2 = document.getElementById('g2Chart');
                                                     
                                                     if (ctx2) {
@@ -1429,11 +1429,11 @@
                                                             data: {
                                                                 labels: labels2,
                                                                 datasets: [
-                                                                { label: 'E10 (%)', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15 (%)', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20 (%)', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
-                                                                { label: 'E25 (%)', data: values2.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30 (%)', data: values2.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                { label: 'E10 (%)', data: values2.map(v => n(v.e10)* 100), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                { label: 'E15 (%)', data: values2.map(v => n(v.e15)* 100), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                { label: 'E20 (%)', data: values2.map(v => n(v.e20)* 100), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
+                                                                { label: 'E25 (%)', data: values2.map(v => n(v.e25)* 100), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                { label: 'E30 (%)', data: values2.map(v => n(v.e30)* 100), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                 ]
                                                             },
                                                             options: {
@@ -1453,7 +1453,7 @@
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                     const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} %`;
+                                                                                    l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
                                                                             } 
@@ -1476,8 +1476,8 @@
                                                                             }
 
                                                                             return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
-                                                                                minimumFractionDigits: 2,
-                                                                                maximumFractionDigits: 2
+                                                                                minimumFractionDigits: 1,
+                                                                                maximumFractionDigits: 1
                                                                             })} %`;
                                                                             }
                                                                         }
@@ -1517,11 +1517,11 @@
                                                             data: {
                                                                 labels: labels3,
                                                                 datasets: [
-                                                                    { label: 'E10 (%)', data: values3.map(v => v.e10), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                    { label: 'E15 (%)', data: values3.map(v => v.e15), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                    { label: 'E20 (%)', data: values3.map(v => v.e20), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
-                                                                    { label: 'E25 (%)', data: values3.map(v => v.e25), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                    { label: 'E30 (%)', data: values3.map(v => v.e30), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                    { label: 'E10 (%)', data: values3.map(v => v.e10 * 100), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                    { label: 'E15 (%)', data: values3.map(v => v.e15 * 100), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
+                                                                    { label: 'E20 (%)', data: values3.map(v => v.e20 * 100), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
+                                                                    { label: 'E25 (%)', data: values3.map(v => v.e25 * 100), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
+                                                                    { label: 'E30 (%)', data: values3.map(v => v.e30 * 100), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
                                                                 ]
                                                             },
                                                             options: {
@@ -1541,7 +1541,7 @@
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                     const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} %`;
+                                                                                    l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
                                                                             } 
@@ -1564,8 +1564,8 @@
                                                                             }
 
                                                                             return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
-                                                                                minimumFractionDigits: 2,
-                                                                                maximumFractionDigits: 2
+                                                                                minimumFractionDigits: 1,
+                                                                                maximumFractionDigits: 1
                                                                             })} %`;
                                                                             }
                                                                         }
@@ -1637,7 +1637,7 @@
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
                                                                                     const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                    l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad2}`;
+                                                                                    l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
                                                                             } 
@@ -1662,7 +1662,7 @@
                                                                                 return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                     minimumFractionDigits: 2,
                                                                                     maximumFractionDigits: 2
-                                                                                })} ${unidad}`;
+                                                                                })} ${unidad2}`;
                                                                                 }
                                                                             }
                                                                         },
