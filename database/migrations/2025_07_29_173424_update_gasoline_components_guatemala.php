@@ -13,8 +13,8 @@ class UpdateGasolineComponentsGuatemala extends Migration
      */
     public function up()
     {
-        //
-        DB::table('gasoline_components')->where(['country_id' => '8', 'quality_restriction' => 'constant-octane-number', 'blendstoks' => 'equivalent-gasoline-e0',
+        // 
+         DB::table('gasoline_components')->where(['country_id' => '8', 'quality_restriction' => 'constant-octane-number', 'blendstoks' => 'equivalent-gasoline-e0',
         'gasoline_type' => 'ordinary'])
             ->update(['bno_on' => 88.0541406650125, 'bno_rvp' => 5.02983607264443, 'Logistica' => 0.1]);
         DB::table('gasoline_components')->where(['country_id' => '8', 'quality_restriction' => 'constant-octane-number', 'blendstoks' => 'gasoline-e10',
@@ -55,9 +55,6 @@ class UpdateGasolineComponentsGuatemala extends Migration
         DB::table('gasoline_components')->where(['country_id' => '8', 'quality_restriction' => 'constant-octane-number', 'blendstoks' => 'gasoline-e30',
         'gasoline_type' => 'Superior'])
             ->update(['bno_on' => 73.5208490833153, 'bno_rvp' => 5.63736001927635, 'Logistica' => 0.1]);
-
-        
-
     }
 
     /**
