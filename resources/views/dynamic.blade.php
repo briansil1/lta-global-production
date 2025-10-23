@@ -940,50 +940,47 @@
                                             <!-- Grafica 1 - Vehicular emissions (kTons/yr) por país -->
                                             <div class="container my-12">
                                                 @if($type != "Vehicle Fleet")
-                                                    
-                                                
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <h3 class="oswald"> {{ __('dynamic.graphs.g8_title') }} {{$type}} (g/km)</h3>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g1Chart" height="120"></canvas>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h3 class="oswald"> {{ __('dynamic.graphs.g8_title') }} {{$type}} (g/km)</h3>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                                <canvas id="g1Chart" height="120"></canvas>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <h3 class="oswald"> {{ __('dynamic.graphs.g9_title') }} {{$type}} (Ton/day)</h3>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g2Chart" height="120"></canvas>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h3 class="oswald"> {{ __('dynamic.graphs.g9_title') }} {{$type}} (Ton/day)</h3>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                                <canvas id="g2Chart" height="120"></canvas>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @else
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g3Chart" height="120"></canvas>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
+                                                                <canvas id="g3Chart" height="120"></canvas>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @endif
                                                 @push('scripts')
                                                 <script>
                                                     document.addEventListener('DOMContentLoaded', function () {
                                                         // --- G1 ---
                                                         // Cargar EURO6 y US obtener de  $g1Limits del campo  e0
-
+                                                        
                                                         const EURO6 = {{ data_get($g1Limits->firstWhere('country','UE 6'), 'e0', 0) }};
                                                         const US    = {{ data_get($g1Limits->firstWhere('country','United States'), 'e0', 0) }};
- 
-
+                                    
                                                         const labels = @json($chartLabels1 ?? []);
                                                         const raw1 = @json($chartValues1 ?? []);
                                                         const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
