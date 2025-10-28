@@ -3,7 +3,7 @@
 return [
     'title' => 'Herramientas Dinámicas',
     'content' => [
-        'profiles' => 'PERFILES DE GASOLINA E IMPACTO DE LAS MEZCLAS CON ETANOL',
+        'profiles' => 'Ethanol Impact Tool',
         'america' => 'AMÉRICA LATINA',
         'dynamic-tool' => 'Herramienta dinámica',
         'global-tool' => 'Herramienta dinámica global',

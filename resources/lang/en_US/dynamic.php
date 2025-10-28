@@ -3,7 +3,7 @@
 return [
     'title' => 'Dynamic Tools',
     'content' => [
-        'profiles' => 'GASOLINE PROFILES AND IMPACT OF ETHANOL BLENDING',
+        'profiles' => 'Ethanol Impact Tool',
         'america' => 'LATIN AMERICA',
         'dynamic-tool' => 'Dynamic Tool',
         'global-tool' => 'Global Dynamic Tool',
