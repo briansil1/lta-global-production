@@ -120,7 +120,7 @@ return [
         'profilesglobal' => 'Herramienta de Impacto del Etanol',
         'profiles-2' => '',
         'america' => 'AMÉRICA LATINA',
-        'asia-africa' => 'ASIA-AFRICA',
+        'asia-africa' => 'ASIA',
         'europe' => 'EUROPA',
         'global-version' => 'GLOBAL VERSION',
         'detail' => 'Existen retos importantes en la calidad de los combustibles y las emisiones de los vehículos al medio ambiente en la región.',

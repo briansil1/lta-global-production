@@ -563,16 +563,16 @@
             <div class="wp-translate menu-item z-10">
                 <select class="lang-select" name="lang" id="lang">
                     @if(isset($country) && isset($compareCountry))
-                        <option value="{{ route(__($route_name ?: 'routes.home', [], 'es'), ['tab' => $tab, 'country' => $country ? $country->id : null, 'compareCountry' => $compareCountry ? $compareCountry->id : null]) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option>
+<!-- <option value="{{ route(__($route_name ?: 'routes.home', [], 'es'), ['tab' => $tab, 'country' => $country ? $country->id : null, 'compareCountry' => $compareCountry ? $compareCountry->id : null]) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option> -->
                         <option value="{{ route(__($route_name ?: 'routes.home', [], 'en'), ['tab' => $tab, 'country' => $country ? $country->id : null, 'compareCountry' => $compareCountry ? $compareCountry->id : null]) }}" @if(app()->getLocale() == 'en' || app()->getLocale() == 'en_US') selected @endif>{{ __('main.select.lang.english') }}</option>
                     @elseif (isset($country))
-                        <option value="{{ route(__($route_name ?: 'routes.home', [], 'es'), ['tab' => $tab, 'country' => $country ? $country->id : null]) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option>
+<!-- <option value="{{ route(__($route_name ?: 'routes.home', [], 'es'), ['tab' => $tab, 'country' => $country ? $country->id : null]) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option> -->
                         <option value="{{ route(__($route_name ?: 'routes.home', [], 'en'), ['tab' => $tab, 'country' => $country ? $country->id : null]) }}" @if(app()->getLocale() == 'en' || app()->getLocale() == 'en_US') selected @endif>{{ __('main.select.lang.english') }}</option>
                     @elseif ($route_name == 'routes.tools')
-                        <option value="{{ route(__($route_name ?: 'routes.home', [], 'es'), ['tab' => $tab]) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option>
+<!-- <option value="{{ route(__($route_name ?: 'routes.home', [], 'es'), ['tab' => $tab]) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option> -->
                         <option value="{{ route(__($route_name ?: 'routes.home', [], 'en'), ['tab' => $tab]) }}" @if(app()->getLocale() == 'en' || app()->getLocale() == 'en_US') selected @endif>{{ __('main.select.lang.english') }}</option>
                     @else
-                        <option value="{{ route(__($route_name ?: 'routes.home', [], 'es')) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option>
+<!-- <option value="{{ route(__($route_name ?: 'routes.home', [], 'es')) }}" @if(app()->getLocale() == 'es' || app()->getLocale() == 'es_MX') selected @endif>{{ __('main.select.lang.spanish') }}</option> -->
                         <option value="{{ route(__($route_name ?: 'routes.home', [], 'en')) }}" @if(app()->getLocale() == 'en' || app()->getLocale() == 'en_US') selected @endif>{{ __('main.select.lang.english') }}</option>
                     @endif
                     {{-- <option value="{{ __('main.select.lang.french-code') }}">{{ __('main.select.lang.french') }}</option> --}}

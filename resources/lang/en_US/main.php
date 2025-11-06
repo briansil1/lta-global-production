@@ -121,7 +121,7 @@ return [
         'profilesglobal' => 'Ethanol Impact Tool',
         'profiles-2' => '',
         'america' => 'LATIN AMERICA',
-        'asia-africa' => 'ASIA-AFRICA',
+        'asia-africa' => 'ASIA',
         'europe' => 'EUROPE',
         'global-version' => 'GLOBAL VERSION',
         'profilesglobal' => 'Ethanol Impact Tool',

@@ -158,7 +158,6 @@
                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 3) selectedBTN2 @else selectedBTN @endif" data-value="ASIA" style="flex-direction: column;">
                                     <div class="mx-auto w-100">
                                         <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
-                                        <img src="{{ asset('images/africa.png') }}" alt="" class="hero-sec-img">
                                     </div>
                                     <p class="card-p">
                                         {{ __('main.content.asia-africa') }}
@@ -1279,7 +1278,7 @@
                                                 <div class="container my-12">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <h3 class="oswald">Life Cycle GHG Emissions (MMLTons/yr) - {{$type}}</h3>
+                                                            <h3 class="oswald">Life Cycle GHG Emissions (MMTons/yr) - {{$type}}</h3>
                                                         </div>
                                                         <div class="col-12">
                                                             <div style="height:450px;">   <!-- 👈 altura fija -->
@@ -1328,7 +1327,7 @@
                                                     const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
                                                     const n = x => (x == null ? 0 : Number(x));
                                                     const ctx1 = document.getElementById('g1Chart');
-                                                    const unidad = 'MMLTons/yr';
+                                                    const unidad = 'MMTons/yr';
                                                     if (ctx1) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx1.getContext('2d'), {
