@@ -99,6 +99,7 @@ class AddColumnRegionIdToCountries extends Migration
             ['region_id' => '14', 'name' => 'Japan', 'code' => 'ja'],
             ['region_id' => '14', 'name' => 'South Korea', 'code' => 'ks'],
             ['region_id' => '15', 'name' => 'full-report', 'code' => 'ge'],  
+            ['region_id' => '6', 'name' => 'full-report', 'code' => 'gee'],
         ]);
 
     }
