@@ -125,7 +125,7 @@ return [
         'europe' => 'EUROPE',
         'global-version' => 'GLOBAL VERSION',
         'profilesglobal' => 'Ethanol Impact Tool',
-        'detail' => 'There are significant fuel quality and vehicle emission reduction challenges in the region.',
+        'detail' => 'There are significant fuel quality and vehicle emission reduction challenges in the world.',
         'report' => 'REPORT',
         'report-detail' => 'Download to learn about gasoline profiles and regulations by country, and the analysis of ethanol/gasoline blend levels: parameters, components, impact on emissions and case studies.',
         'dynamic-tool' => 'DYNAMIC',
