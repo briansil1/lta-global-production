@@ -71,7 +71,9 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js" integrity="sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js"
+        integrity="sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/dynamic.js') }}"></script>
     <script src="{{ asset('js/component-chart.js') }}"></script>
     <script src="{{ asset('js/impact-graphs.js') }}"></script>
@@ -87,7 +89,6 @@
     {{-- ya tienes Chart.js cargado arriba --}}
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
-
 @endpush
 
 @section('content')
@@ -97,12 +98,12 @@
             <div id="primary" class="content-area mg-banded-secondary-lightest mg-noise">
                 <main id="main" role="main" class="site-main">
                     <div class="mg-banded-primary-darkest text-white white-links antialiased">
-                        
+
                     </div>
                     <div class="back-blue text-center">
                         <!-- capa flotante de lado derecho con 3 botones  con imagenes de America, europa y asia, alinear a la derecha  -->
-                        <div class="floating-buttons-container" 
-                        style="
+                        <div class="floating-buttons-container"
+                            style="
                             position: fixed; 
                             top: 150px; 
                             right: 10px; 
@@ -111,8 +112,8 @@
                             display: flex; 
                             gap: 10px;   /* Espacio entre botones */
                         ">
-                            
-                            <a href="{{ env('URL_AMERICA') }}" 
+
+                            <a href="{{ env('URL_AMERICA') }}"
                                 style="
                                     border: 1px solid #FFF; 
                                     border-radius: 10px; 
@@ -125,7 +126,7 @@
                                 <img src="{{ asset('images/map.png') }}" alt="America" width="40">
                             </a>
 
-                            <a href="{{ env('URL_EUROPE') }}" 
+                            <a href="{{ env('URL_EUROPE') }}"
                                 style="
                                     border: 1px solid #FFF; 
                                     border-radius: 10px; 
@@ -138,7 +139,7 @@
                                 <img src="{{ asset('images/europa2.png') }}" alt="Europe" width="40">
                             </a>
 
-                            <a href="{{ env('URL_ASIA') }}" 
+                            <a href="{{ env('URL_ASIA') }}"
                                 style="
                                     border: 1px solid #FFF; 
                                     border-radius: 10px; 
@@ -154,31 +155,40 @@
                         </div>
 
 
-                        <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden" aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
-                        <h2 class="h1 uppercase text-2xl md:text-5xl container oswald"><a href="{{ route(__('routes.home')) }}" class="text-white">{{ __('dynamic.content.profiles') }}</a></h2>
-                       
+                        <input type="hidden" class="form-control" id="user_locale_hidden" aria-label="user_locale_hidden"
+                            aria-describedby="user_locale_hidden" value="{{ app()->getLocale() }}">
+                        <h2 class="h1 uppercase text-2xl md:text-5xl container oswald"><a
+                                href="{{ route(__('routes.home')) }}"
+                                class="text-white">{{ __('dynamic.content.profiles') }}</a></h2>
+
                         <h3 class="text-white mt-0 pt-0 oswald">
                             {{ __('dynamic.content.global-tool') }}
                         </h3>
                         <!-- Agregar divs que parescan botones VOLUME & QUALITY, VEHICULAR EMISSIONS y GREEN HOUSE EMISSIONS  -->
-                         <div class="container my-4">
-                             <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">                          
+                        <div class="container my-4">
+                            <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
                                 <!-- si {{ $tab }} == 1 resaltar como seleccionado -->
 
-                                <a href="{{ route(__('routes.tools')) }}/1" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 1) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                    
+                                <a href="{{ route(__('routes.tools')) }}/1"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($tab == 1) selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+
                                     <p class="card-p">
                                         {{ __('dynamic.content.volume-quality') }}
                                     </p>
                                 </a>
-                                <a href="{{ route(__('routes.tools')) }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 2) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column;">
-                                   
+                                <a href="{{ route(__('routes.tools')) }}/2"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($tab == 2) selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column;">
+
                                     <p class="card-p">
                                         {{ __('dynamic.content.vehicular-emissions') }}
                                     </p>
                                 </a>
-                                <a href="{{ route(__('routes.tools')) }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($tab == 3) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column;">
-                                    
+                                <a href="{{ route(__('routes.tools')) }}/3"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($tab == 3) selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column;">
+
                                     <p class="card-p">
                                         {{ __('dynamic.content.green-house-emissions') }}
                                     </p>
@@ -187,295 +197,368 @@
                         </div>
                         <!-- Divs que parescan botones AMERICA, ASIA, EUROPE, AFRICA y GLOBAL  -->
                         <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
-                            <!-- si tab != 2 --> 
-                         
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"  class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 1) selectedBTN2 @else selectedBTN @endif" data-value="AMERICA" style="flex-direction: column;">
-                                    <div class="mx-auto w-100">
-                                        <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
-                                    </div>
-                                    <p class="card-p">
-                                        {{ __('main.content.america') }} <br>
-                                   
-                                    </p>
-                                </a>
+                            <!-- si tab != 2 -->
 
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 2) selectedBTN2 @else selectedBTN @endif" data-value="EUROPE" style="flex-direction: column;">
-                                    <div class="mx-auto w-100">
-                                        <img src="{{ asset('images/europa2.png') }}" alt="" class="hero-sec-img">
-                                    
-                                    </div>
-                                    <p class="card-p">
-                                        {{ __('main.content.europe') }}
-                                    
-                                    </p>
-                                </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/1"
+                                class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($continentid == 1) selectedBTN2 @else selectedBTN @endif"
+                                data-value="AMERICA" style="flex-direction: column;">
+                                <div class="mx-auto w-100">
+                                    <img src="{{ asset('images/map.png') }}" alt="" class="hero-sec-img">
+                                </div>
+                                <p class="card-p">
+                                    {{ __('main.content.america') }} <br>
 
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($continentid == 3) selectedBTN2 @else selectedBTN @endif" data-value="ASIA" style="flex-direction: column;">
-                                    <div class="mx-auto w-100">
-                                        <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
-                                    </div>
-                                    <p class="card-p">
-                                        {{ __('main.content.asia-africa') }}
-                                     
-                                    </p>
-                                </a>
-           
+                                </p>
+                            </a>
+
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/2"
+                                class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($continentid == 2) selectedBTN2 @else selectedBTN @endif"
+                                data-value="EUROPE" style="flex-direction: column;">
+                                <div class="mx-auto w-100">
+                                    <img src="{{ asset('images/europa2.png') }}" alt="" class="hero-sec-img">
+
+                                </div>
+                                <p class="card-p">
+                                    {{ __('main.content.europe') }}
+
+                                </p>
+                            </a>
+
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/3"
+                                class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($continentid == 3) selectedBTN2 @else selectedBTN @endif"
+                                data-value="ASIA" style="flex-direction: column;">
+                                <div class="mx-auto w-100">
+                                    <img src="{{ asset('images/asia.png') }}" alt="" class="hero-sec-img">
+                                </div>
+                                <p class="card-p">
+                                    {{ __('main.content.asia-africa') }}
+
+                                </p>
+                            </a>
+
                         </div>
                         <!-- Regiones del continente 1 -->
-                        <div class="container my-4" id="regions_container" >
-                             <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
+                        <div class="container my-4" id="regions_container">
+                            <div class="dynamic-flex-area md:flex flex-wrap justify-center text-shadow">
                                 <!-- dump regions -->
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == 0) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($regionid == 0) selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
                                     <p class="card-p">
                                         All
                                     </p>
                                 </a>
-                                @if(isset($regionsAll))
+                                @if (isset($regionsAll))
                                     @foreach ($regionsAll as $regionOne)
-                                        @if( $regionOne->id  != 5 && $regionOne->id != 6 )
-                                        <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($regionid == $regionOne->id) selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                            <p class="card-p">
-                                                <!-- funcion para remplazar - por espacios " " que se pinte en formato de mayusculas cada priemr letra -->
-                                                {{ ucwords(str_replace('-', ' ', $regionOne->name)) }}
-                                            </p>
-                                        </a>
+                                        @if ($regionOne->id != 5 && $regionOne->id != 6)
+                                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionOne->id }}"
+                                                class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($regionid == $regionOne->id) selectedBTN2 @else selectedBTN @endif"
+                                                style="flex-direction: column; padding-top: 10px;">
+                                                <p class="card-p">
+                                                    <!-- funcion para remplazar - por espacios " " que se pinte en formato de mayusculas cada priemr letra -->
+                                                    {{ ucwords(str_replace('-', ' ', $regionOne->name)) }}
+                                                </p>
+                                            </a>
                                         @endif
                                     @endforeach
                                 @endif
-                               
+
                             </div>
                         </div>
                         <!-- boton de Litros y galones si $tab == 1-->
-                         @if($tab == 1)
-                             <div class="flex justify-center">
-                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/litros" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == '_lt') selectedBTN2 @else selectedBTN @endif">
-                                    <p class="card-p">
-                                     {{ __('dynamic.content.liters') }}
-                                    </p>
-                                 </a>
-                                 <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if($regionid)/{{ $regionid }}@else/{{0}}@endif/galones" class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == '_gl') selectedBTN2 @else selectedBTN @endif">
-                                    <p class="card-p">
-                                     {{ __('dynamic.content.gallons') }}
-                                    </p>
-                                 </a>
-                             </div>
-                         @endif
-                         @if($tab == 2)
+                        @if ($tab == 1)
                             <div class="flex justify-center">
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Benzene" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'Benzene') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            Benzene
-                                        </p>
-                                    </a>
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'CO') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            CO
-                                        </p>
-                                    </a>
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO2" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'CO2') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            CO2
-                                        </p>
-                                    </a>
-
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/NOx" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'NOx') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            NOx
-                                        </p>
-                                    </a>
-
-
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'PM') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            PM 2.5
-                                        </p>
-                                    </a>   
-
-
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/VOC" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'VOC') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            VOC
-                                        </p>
-                                    </a>
-
-                               
-
-                                    <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Vehicle Fleet" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'Vehicle Fleet') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
-                                        <p class="card-p">
-                                            Vehicle Fleet
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                        @endif
-                        @if($tab == 3)
-                            <div class="flex justify-center">
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'RED III') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if ($regionid) /{{ $regionid }}@else/{{ 0 }} @endif/litros"
+                                    class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == '_lt') selectedBTN2 @else selectedBTN @endif">
                                     <p class="card-p">
-                                        RED III
+                                        {{ __('dynamic.content.liters') }}
                                     </p>
                                 </a>
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET" class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if($type and $type == 'GREET') selectedBTN2 @else selectedBTN @endif" style="flex-direction: column; padding-top: 10px;">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if ($regionid) /{{ $regionid }}@else/{{ 0 }} @endif/galones"
+                                    class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == '_gl') selectedBTN2 @else selectedBTN @endif">
                                     <p class="card-p">
-                                        GREET
+                                        {{ __('dynamic.content.gallons') }}
                                     </p>
                                 </a>
-                                
                             </div>
                         @endif
+                        @if ($tab == 2)
+                            <div class="flex justify-center">
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Benzene"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'Benzene') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        Benzene
+                                    </p>
+                                </a>
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'CO') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        CO
+                                    </p>
+                                </a>
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/CO2"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'CO2') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        CO2
+                                    </p>
+                                </a>
+
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/NOx"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'NOx') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        NOx
+                                    </p>
+                                </a>
+
+
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/PM"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'PM') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        PM 2.5
+                                    </p>
+                                </a>
+
+
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/VOC"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'VOC') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        VOC
+                                    </p>
+                                </a>
+
+
+
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/Vehicle Fleet"
+                                    class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'Vehicle Fleet') selectedBTN2 @else selectedBTN @endif"
+                                    style="flex-direction: column; padding-top: 10px;">
+                                    <p class="card-p">
+                                        Vehicle Fleet
+                                    </p>
+                                </a>
+                            </div>
                     </div>
-                </main>
+                    @endif
+                    @if ($tab == 3)
+                        <div class="flex justify-center">
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/RED III"
+                                class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'RED III') selectedBTN2 @else selectedBTN @endif"
+                                style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    RED III
+                                </p>
+                            </a>
+                            <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid }}/GREET"
+                                class="flex-1 mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == 'GREET') selectedBTN2 @else selectedBTN @endif"
+                                style="flex-direction: column; padding-top: 10px;">
+                                <p class="card-p">
+                                    GREET
+                                </p>
+                            </a>
+
+                        </div>
+                    @endif
             </div>
+            </main>
         </div>
-        <div class="off-blue pb-5">
-            <div class="container">
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div id="continent-accordions">
-                            <div id="accordion-america" class="continent-accordion ">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        @if($tab == 1)
-                                            {{ __('dynamic.content.volume-quality') }}
-                                        @elseif($tab == 2)
-                                            {{ __('dynamic.content.vehicular-emissions') }}
-                                        @elseif($tab == 3)
-                                            {{ __('dynamic.content.green-house-emissions') }}
+    </div>
+    <div class="off-blue pb-5">
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div id="continent-accordions">
+                        <div id="accordion-america" class="continent-accordion ">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    @if ($tab == 1)
+                                        {{ __('dynamic.content.volume-quality') }}
+                                    @elseif($tab == 2)
+                                        {{ __('dynamic.content.vehicular-emissions') }}
+                                    @elseif($tab == 3)
+                                        {{ __('dynamic.content.green-house-emissions') }}
+                                    @endif
+                                    / {{ ucwords(str_replace('-', ' ', $continent->name)) }} @if ($region)
+                                        @if ($region->name)
+                                            / {{ ucwords(str_replace('-', ' ', $region->name)) }}
+                                            @endif @if ($type and $type == '_lt')
+                                                / {{ __('dynamic.content.liters') }}
+                                            @elseif($type and $type == '_gl')
+                                                / {{ __('dynamic.content.gallons') }}
+                                            @endif
                                         @endif
-                                        /  {{ ucwords(str_replace('-', ' ', $continent->name)) }} @if($region) @if($region->name) / {{ ucwords(str_replace('-', ' ', $region->name)) }}  @endif  @if($type and $type == "_lt") / {{ __('dynamic.content.liters') }} @elseif($type and $type == "_gl") / {{ __('dynamic.content.gallons') }} @endif @endif</h2>
-                                    <div class="accordion-body">
-                                        <!-- Si Tab es 1-->
-                                        @if($tab == 1)
-                                            <div class="container my-12">
-                                                
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <!-- sumar los totales de chartValues con formato a dos digitos y con comas en los miles -->
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues->sum(), 0, '.', ',') }})</span></h3>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g2_title') }} (%)</h3>
+                                </h2>
+                                <div class="accordion-body">
+                                    <!-- Si Tab es 1-->
+                                    @if ($tab == 1)
+                                        <div class="container my-12">
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <!-- sumar los totales de chartValues con formato a dos digitos y con comas en los miles -->
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g1_title') }} (@if ($type == '_lt')
+                                                            MML/yr
+                                                        @else
+                                                            MMGal/yr
+                                                        @endif) <span class="unit">(Total:
+                                                            {{ number_format($chartValues->sum(), 0, '.', ',') }})</span>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g2_title') }} (%)</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g1Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g1Chart" height="120"></canvas>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g2Chart" height="120"></canvas>
-                                                        </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g2Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues4->sum(), 0, '.', ',') }})</span></h3>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g3_title') }} (@if ($type == '_lt')
+                                                            MML/yr
+                                                        @else
+                                                            MMGal/yr
+                                                        @endif) <span class="unit">(Total:
+                                                            {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g4_title') }} (@if ($type == '_lt')
+                                                            MML/yr
+                                                        @else
+                                                            MMGal/yr
+                                                        @endif) <span class="unit">(Total:
+                                                            {{ number_format($chartValues4->sum(), 0, '.', ',') }})</span>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g3Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g3Chart" height="120"></canvas>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g4Chart" height="120"></canvas>
-                                                        </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g4Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues5->sum(), 0, '.', ',') }})</span></h3>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (RON) </h3>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g5_title') }} (@if ($type == '_lt')
+                                                            MML/yr
+                                                        @else
+                                                            MMGal/yr
+                                                        @endif) <span class="unit">(Total:
+                                                            {{ number_format($chartValues5->sum(), 0, '.', ',') }})</span>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g6_title') }} (RON) </h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g5Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g5Chart" height="120"></canvas>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g6Chart" height="120"></canvas>
-                                                        </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g6Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) <span class="unit">(Total: {{ number_format($chartValues8->sum(), 0, '.', ',') }})</span></h3>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g16_title') }} (%)</h3>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g15_title') }} (@if ($type == '_lt')
+                                                            MML/yr
+                                                        @else
+                                                            MMGal/yr
+                                                        @endif) <span class="unit">(Total:
+                                                            {{ number_format($chartValues8->sum(), 0, '.', ',') }})</span>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g16_title') }} (%)</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g8Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g8Chart" height="120"></canvas>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g9Chart" height="120"></canvas>
-                                                        </div>
+                                                <div class="col-6">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g9Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <!-- sumar los totales de chartValues7 con formato a dos digitos y con comas en los miles considerando que chartValues7 es un Collection y tiene un campo llamado total -->
-                                                        <h3 class="oswald">{{ __('dynamic.graphs.g7_title') }} (@if($type == '_lt') MML/yr @else MMGal/yr @endif) </h3>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <!-- sumar los totales de chartValues7 con formato a dos digitos y con comas en los miles considerando que chartValues7 es un Collection y tiene un campo llamado total -->
+                                                    <h3 class="oswald">{{ __('dynamic.graphs.g7_title') }} (@if ($type == '_lt')
+                                                            MML/yr
+                                                        @else
+                                                            MMGal/yr
+                                                        @endif) </h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                        <canvas id="g7Chart" height="120"></canvas>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                            <canvas id="g7Chart" height="120"></canvas>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @push('scripts')
+                                            </div>
+                                            @push('scripts')
                                                 <script>
-                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                    document.addEventListener('DOMContentLoaded', function() {
                                                         // Grafica 1 - Gasoline demand (MML/yr) por país
-                                                        const labels = @json($chartLabels ?? []);  // países
-                                                        const values = @json($chartValues ?? []);  // litros
+                                                        const labels = @json($chartLabels ?? []); // países
+                                                        const values = @json($chartValues ?? []); // litros
                                                         // Grafica 2 - Gasoline growth (%) por país
-                                                        const labels2 = @json($chartLabels2 ?? []);  // países
-                                                        const values2 = @json($chartValues2 ?? []);  // litros
+                                                        const labels2 = @json($chartLabels2 ?? []); // países
+                                                        const values2 = @json($chartValues2 ?? []); // litros
                                                         // Multiplicar todos los datos por 100
                                                         //values2 = values2.map(v => v * 100);
                                                         // Grafica 3 - Gasoline production (MML/yr) por país
-                                                        const labels3 = @json($chartLabels3 ?? []);  // países
-                                                        const values3 = @json($chartValues3 ?? []);  // litros
+                                                        const labels3 = @json($chartLabels3 ?? []); // países
+                                                        const values3 = @json($chartValues3 ?? []); // litros
                                                         // Grafica 4 - Gasoline import dependence (MML/yr) por país
-                                                        const labels4 = @json($chartLabels4 ?? []);  // países
-                                                        const values4 = @json($chartValues4 ?? []);  // litros
+                                                        const labels4 = @json($chartLabels4 ?? []); // países
+                                                        const values4 = @json($chartValues4 ?? []); // litros
                                                         // Grafica 5 - 
-                                                        const labels5 = @json($chartLabels5 ?? []);  // países
-                                                        const values5 = @json($chartValues5 ?? []);  // litros
+                                                        const labels5 = @json($chartLabels5 ?? []); // países
+                                                        const values5 = @json($chartValues5 ?? []); // litros
                                                         // Grafica 6 - 
-                                                        const labels6 = @json($chartLabels6 ?? []);  // países
-                                                        const values6 = @json($chartValues6 ?? []);  // litros
+                                                        const labels6 = @json($chartLabels6 ?? []); // países
+                                                        const values6 = @json($chartValues6 ?? []); // litros
                                                         // Grafica 7 -
-                                                        const labels7 = @json($chartLabels7 ?? []);  // países
-                                                        const values7 = @json($chartValues7 ?? []);  // litros
+                                                        const labels7 = @json($chartLabels7 ?? []); // países
+                                                        const values7 = @json($chartValues7 ?? []); // litros
 
                                                         // Grafica 8 -
-                                                        const labels8 = @json($chartLabels8 ?? []);  // países
-                                                        const values8 = @json($chartValues8 ?? []);  // litros
+                                                        const labels8 = @json($chartLabels8 ?? []); // países
+                                                        const values8 = @json($chartValues8 ?? []); // litros
 
                                                         // Grafica 9 -
-                                                        const labels9 = @json($chartLabels9 ?? []);  // países
-                                                        const values9 = @json($chartValues9 ?? []);  // litros
+                                                        const labels9 = @json($chartLabels9 ?? []); // países
+                                                        const values9 = @json($chartValues9 ?? []); // litros
 
 
 
@@ -492,52 +575,67 @@
                                                         new Chart(ctx, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels,
-                                                            datasets: [{
-                                                                label: 'Gasoline demand (MML/yr)',
-                                                                data: values,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                                                                borderColor: 'rgba(54, 162, 235, 1)'
-                                                            }]
+                                                                labels,
+                                                                datasets: [{
+                                                                    label: 'Gasoline demand (MML/yr)',
+                                                                    data: values,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                    borderColor: 'rgba(54, 162, 235, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MML/yr`
-                                                                        @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MMGal/yr`
-                                                                        @endif
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            @if ($type == '_lt')
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MML/yr`
+                                                                            @else
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MMGal/yr`
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
@@ -545,48 +643,56 @@
                                                         new Chart(ctx2, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels2,
-                                                            datasets: [{
-                                                                label: 'Gasoline growth (%)',
-                                                                data: values2,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                                                                borderColor: 'rgba(54, 162, 235, 1)'
-                                                            }]
+                                                                labels: labels2,
+                                                                datasets: [{
+                                                                    label: 'Gasoline growth (%)',
+                                                                    data: values2,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                    borderColor: 'rgba(54, 162, 235, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} %`
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} %`
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => `${Number(val).toLocaleString()} %`
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => `${Number(val).toLocaleString()} %`
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => `${Number(v).toFixed(1)} %`
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: '(%)'
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => `${Number(v).toFixed(1)} %`
-                                                                },
-                                                                title: { display: true, text: '(%)' }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
@@ -594,52 +700,67 @@
                                                         new Chart(ctx3, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels3,
-                                                            datasets: [{
-                                                                label: 'Gasoline production (MML/yr)',
-                                                                data: values3,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                                                                borderColor: 'rgba(75, 192, 192, 1)'
-                                                            }]
+                                                                labels: labels3,
+                                                                datasets: [{
+                                                                    label: 'Gasoline production (MML/yr)',
+                                                                    data: values3,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                                                    borderColor: 'rgba(75, 192, 192, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
-                                                                        @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
-                                                                        @endif
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            @if ($type == '_lt')
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
+                                                                            @else
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
@@ -647,52 +768,67 @@
                                                         new Chart(ctx4, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels4,
-                                                            datasets: [{
-                                                                label: 'Gasoline import (MML/yr)',
-                                                                data: values4,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                                                                borderColor: 'rgba(75, 192, 192, 1)'
-                                                            }]
+                                                                labels: labels4,
+                                                                datasets: [{
+                                                                    label: 'Gasoline import (MML/yr)',
+                                                                    data: values4,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                                                    borderColor: 'rgba(75, 192, 192, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
-                                                                        @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
-                                                                        @endif
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            @if ($type == '_lt')
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
+                                                                            @else
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
@@ -700,52 +836,67 @@
                                                         new Chart(ctx5, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels5,
-                                                            datasets: [{
-                                                                label: 'Ethanol Demand (MML/yr)',
-                                                                data: values5,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(153, 102, 255, 0.8)',
-                                                                borderColor: 'rgba(153, 102, 255, 1)'
-                                                            }]
+                                                                labels: labels5,
+                                                                datasets: [{
+                                                                    label: 'Ethanol Demand (MML/yr)',
+                                                                    data: values5,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                                                                    borderColor: 'rgba(153, 102, 255, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
-                                                                        @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
-                                                                        @endif
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            @if ($type == '_lt')
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MML/yr`
+                                                                            @else
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} MMGal/yr`
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
@@ -753,131 +904,198 @@
                                                         new Chart(ctx6, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels6,
-                                                            datasets: [{
-                                                                label: 'Octane Production (MML/yr)',
-                                                                data: values6,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(153, 102, 255, 0.8)',
-                                                                borderColor: 'rgba(153, 102, 255, 1)'
-                                                            }]
+                                                                labels: labels6,
+                                                                datasets: [{
+                                                                    label: 'Octane Production (MML/yr)',
+                                                                    data: values6,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                                                                    borderColor: 'rgba(153, 102, 255, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} RON`
-                                                                        @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} RON`
-                                                                        @endif
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            @if ($type == '_lt')
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} RON`
+                                                                            @else
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} RON`
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 2,
+                                                                            maximumFractionDigits: 2
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
 
                                                         // La siguiente grafica debera de graficar varios valores por barra de pais
-                                                        const unidad = @if($type == '_lt') 'MML/yr' @else 'MMGal/yr' @endif;
+                                                        const unidad =
+                                                            @if ($type == '_lt')
+                                                                'MML/yr'
+                                                            @else
+                                                                'MMGal/yr'
+                                                            @endif ;
                                                         new Chart(ctx7, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels7,
-                                                            datasets: [
-                                                             
-                                                                { label: 'E10', data: values7.map(v => v.e10_lt), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15', data: values7.map(v => v.e15_lt), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20', data: values7.map(v => v.e20_lt), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E25', data: values7.map(v => v.e25_lt), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30', data: values7.map(v => v.e30_lt), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
-                                                            ]
+                                                                labels: labels7,
+                                                                datasets: [
+
+                                                                    {
+                                                                        label: 'E10',
+                                                                        data: values7.map(v => v.e10_lt),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                        borderColor: 'rgba(255,159,64,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E15',
+                                                                        data: values7.map(v => v.e15_lt),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                        borderColor: 'rgba(255,205,86,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E20',
+                                                                        data: values7.map(v => v.e20_lt),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                        borderColor: 'rgba(75,192,192,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E25',
+                                                                        data: values7.map(v => v.e25_lt),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                        borderColor: 'rgba(54,162,235,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E30',
+                                                                        data: values7.map(v => v.e30_lt),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                        borderColor: 'rgba(153,102,255,1)'
+                                                                    },
+                                                                ]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            
-                                                            plugins: {
-                                                                legend: { 
-                                                                    display: true, 
-                                                                    position: 'top',
-                                                                    labels: {
-                                                                        // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
-                                                                        generateLabels: (chart) => {
-                                                                            const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
-                                                                            const ds = chart.data.datasets;
-                                                                            const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
-                                                                            return base.map(l => {
-                                                                                const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                //l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
-                                                                                l.text = `${ds[l.datasetIndex].label}`;
-                                                                                return l;
-                                                                            });
-                                                                        } 
-                                                                    }
-                                                                },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        label: (ctx) => {
-                                                                            const valor = ctx.parsed.x ?? 0;
-                                                                            return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: true,
+                                                                        position: 'top',
+                                                                        labels: {
+                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                            generateLabels: (chart) => {
+                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(
+                                                                                    chart);
+                                                                                const ds = chart.data.datasets;
+                                                                                const fmt = new Intl.NumberFormat(undefined, {
+                                                                                    maximumFractionDigits: 0
+                                                                                });
+                                                                                return base.map(l => {
+                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                    const total = data.reduce((acc, val) => acc + (Number(
+                                                                                        val) || 0), 0);
+                                                                                    //l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
+                                                                                    l.text = `${ds[l.datasetIndex].label}`;
+                                                                                    return l;
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            label: (ctx) => {
+                                                                                const valor = ctx.parsed.x ?? 0;
+                                                                                return ` ${ctx.dataset.label}: ${valor.toLocaleString('en-US', { 
                                                                                 minimumFractionDigits: 2, 
                                                                                 maximumFractionDigits: 2 
                                                                             })} ${unidad}`;
+                                                                            }
                                                                         }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                scales: {
+                                                                    x: {
+                                                                        stacked: true,
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: {
+                                                                        stacked: true,
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {  
-                                                                stacked : true,                        
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {    
-                                                                stacked : true,                        
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             //plugins: [ChartDataLabels]
                                                         });
@@ -885,52 +1103,67 @@
                                                         new Chart(ctx8, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels8,
-                                                            datasets: [{
-                                                                label: 'Gasoline demand (MML/yr)',
-                                                                data: values8,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                                                                borderColor: 'rgba(54, 162, 235, 1)'
-                                                            }]
+                                                                labels: labels8,
+                                                                datasets: [{
+                                                                    label: 'Gasoline demand (MML/yr)',
+                                                                    data: values8,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                    borderColor: 'rgba(54, 162, 235, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        @if($type == '_lt')
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MML/yr`
-                                                                        @else
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MMGal/yr`
-                                                                        @endif
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            @if ($type == '_lt')
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MML/yr`
+                                                                            @else
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()}  MMGal/yr`
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => Number(v).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: @if ($type == '_lt')
+                                                                                '{{ __('dynamic.content.liters') }}'
+                                                                            @else
+                                                                                '{{ __('dynamic.content.gallons') }}'
+                                                                            @endif
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => Number(v).toLocaleString()
-                                                                },
-                                                                title: { display: true, text: @if($type == '_lt') '{{ __('dynamic.content.liters') }}' @else '{{ __('dynamic.content.gallons') }}' @endif }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
@@ -938,103 +1171,116 @@
                                                         new Chart(ctx9, {
                                                             type: 'bar',
                                                             data: {
-                                                            labels: labels9,
-                                                            datasets: [{
-                                                                label: 'Gasoline growth (%)',
-                                                                data: values9,
-                                                                borderWidth: 1,
-                                                                backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                                                                borderColor: 'rgba(54, 162, 235, 1)'
-                                                            }]
+                                                                labels: labels9,
+                                                                datasets: [{
+                                                                    label: 'Gasoline growth (%)',
+                                                                    data: values9,
+                                                                    borderWidth: 1,
+                                                                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                    borderColor: 'rgba(54, 162, 235, 1)'
+                                                                }]
                                                             },
                                                             options: {
-                                                            indexAxis: 'y',                 // 👈 horizontal
-                                                            responsive: true,
-                                                            maintainAspectRatio: false,
-                                                            plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        // En horizontal, el valor está en parsed.x
-                                                                        label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} %`
+                                                                indexAxis: 'y', // 👈 horizontal
+                                                                responsive: true,
+                                                                maintainAspectRatio: false,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        callbacks: {
+                                                                            // En horizontal, el valor está en parsed.x
+                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} %`
+                                                                        }
+                                                                    },
+                                                                    datalabels: {
+                                                                        anchor: 'end',
+                                                                        align: 'end',
+                                                                        formatter: (val) => `${Number(val).toLocaleString()} %`
                                                                     }
                                                                 },
-                                                                datalabels: {
-                                                                    anchor: 'end',
-                                                                    align: 'end',
-                                                                    formatter: (val) => `${Number(val).toLocaleString()} %`
+                                                                scales: {
+                                                                    x: { // valores numéricos
+                                                                        beginAtZero: true,
+                                                                        ticks: {
+                                                                            callback: (v) => `${Number(v).toFixed(1)} %`
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: '(%)'
+                                                                        }
+                                                                    },
+                                                                    y: { // nombres de países (no convertir a número)
+                                                                        ticks: {
+                                                                            autoSkip: false, // opcional: muestra todos
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
+                                                                    }
                                                                 }
-                                                            },
-                                                            scales: {
-                                                                x: {                           // valores numéricos
-                                                                beginAtZero: true,
-                                                                ticks: {
-                                                                    callback: (v) => `${Number(v).toFixed(1)} %`
-                                                                },
-                                                                title: { display: true, text: '(%)' }
-                                                                },
-                                                                y: {                           // nombres de países (no convertir a número)
-                                                                ticks: {
-                                                                    autoSkip: false,           // opcional: muestra todos
-                                                                },
-                                                                title: { display: true, text: '' }
-                                                                }
-                                                            }
                                                             },
                                                             plugins: [ChartDataLabels]
                                                         });
                                                     });
                                                 </script>
-                                                @endpush
-                                            </div>
-                                        @endif
-                                        <!-- Si Tab es 2-->
-                                        @if($tab == 2)
-                                            <!-- GRAFICAS DE VEHICULAR EMISSIONS -->
-                                            <!-- Grafica 1 - Vehicular emissions (kTons/yr) por país -->
-                                            <div class="container my-12">
-                                                @if($type != "Vehicle Fleet")
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald"> {{ __('dynamic.graphs.g8_title') }} {{$type}} (g/km)</h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g1Chart" height="120"></canvas>
-                                                            </div>
+                                            @endpush
+                                        </div>
+                                    @endif
+                                    <!-- Si Tab es 2-->
+                                    @if ($tab == 2)
+                                        <!-- GRAFICAS DE VEHICULAR EMISSIONS -->
+                                        <!-- Grafica 1 - Vehicular emissions (kTons/yr) por país -->
+                                        <div class="container my-12">
+                                            @if ($type != 'Vehicle Fleet')
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald"> {{ __('dynamic.graphs.g8_title') }}
+                                                            {{ $type }} (g/km)</h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g1Chart" height="120"></canvas>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald"> {{ __('dynamic.graphs.g9_title') }} {{$type}} (Ton/day)</h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g2Chart" height="120"></canvas>
-                                                            </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald"> {{ __('dynamic.graphs.g9_title') }}
+                                                            {{ $type }} (Ton/day)</h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g2Chart" height="120"></canvas>
                                                         </div>
                                                     </div>
-                                                @else
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} <span class="unit">(Total: {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span></h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:400px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g3Chart" height="120"></canvas>
-                                                            </div>
+                                                </div>
+                                            @else
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald">{{ __('dynamic.graphs.g10_title') }} <span
+                                                                class="unit">(Total:
+                                                                {{ number_format($chartValues3->sum(), 0, '.', ',') }})</span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:400px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g3Chart" height="120"></canvas>
                                                         </div>
                                                     </div>
-                                                @endif
-                                                @push('scripts')
+                                                </div>
+                                            @endif
+                                            @push('scripts')
                                                 <script>
-                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                    document.addEventListener('DOMContentLoaded', function() {
                                                         // --- G1 ---
                                                         // Cargar EURO6 y US obtener de  $g1Limits del campo  e0
-                                                        
-                                                        const EURO6 = {{ data_get($g1Limits->firstWhere('country','UE 6'), 'e0', 0) }};
-                                                        const US    = {{ data_get($g1Limits->firstWhere('country','United States'), 'e0', 0) }};
-                                    
+
+                                                        const EURO6 = {{ data_get($g1Limits->firstWhere('country', 'UE 6'), 'e0', 0) }};
+                                                        const US = {{ data_get($g1Limits->firstWhere('country', 'United States'), 'e0', 0) }};
+
                                                         const labels = @json($chartLabels1 ?? []);
                                                         const raw1 = @json($chartValues1 ?? []);
                                                         const values = Array.isArray(raw1) ? raw1 : Object.values(raw1);
@@ -1047,14 +1293,49 @@
                                                                 type: 'bar',
                                                                 data: {
                                                                     labels,
-                                                                    datasets: [
-                                                                    { label: 'E30', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
-                                                                    { label: 'E25', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                    { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                    { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                    { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                    { label: 'E0',  data: values.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                    
+                                                                    datasets: [{
+                                                                            label: 'E30',
+                                                                            data: values.map(v => n(v.e30)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                            borderColor: 'rgba(153,102,255,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E25',
+                                                                            data: values.map(v => n(v.e25)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                            borderColor: 'rgba(54,162,235,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E20',
+                                                                            data: values.map(v => n(v.e20)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                            borderColor: 'rgba(75,192,192,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E15',
+                                                                            data: values.map(v => n(v.e15)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                            borderColor: 'rgba(255,205,86,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E10',
+                                                                            data: values.map(v => n(v.e10)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                            borderColor: 'rgba(255,159,64,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E0',
+                                                                            data: values.map(v => n(v.e0)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(201,203,207,0.8)',
+                                                                            borderColor: 'rgba(201,203,207,1)'
+                                                                        },
+
                                                                     ]
                                                                 },
                                                                 options: {
@@ -1065,21 +1346,34 @@
                                                                         x: {
                                                                             stacked: true,
                                                                             beginAtZero: true,
-                                                                            ticks: { callback: (value) => Number(value).toLocaleString() },
-                                                                            title: { display: true, text: '{{ __('dynamic.graphs.g8_title') }} (g/km)'}
+                                                                            ticks: {
+                                                                                callback: (value) => Number(value).toLocaleString()
+                                                                            },
+                                                                            title: {
+                                                                                display: true,
+                                                                                text: '{{ __('dynamic.graphs.g8_title') }} (g/km)'
+                                                                            }
                                                                         },
                                                                         y: {
                                                                             stacked: true,
-                                                                            ticks: { autoSkip: false },
-                                                                            title: { display: true, text: '' }
+                                                                            ticks: {
+                                                                                autoSkip: false
+                                                                            },
+                                                                            title: {
+                                                                                display: true,
+                                                                                text: ''
+                                                                            }
                                                                         }
                                                                     },
                                                                     plugins: {
-                                                                        legend: { display: true, position: 'top',
+                                                                        legend: {
+                                                                            display: true,
+                                                                            position: 'top',
                                                                             labels: {
                                                                                 // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
                                                                                 generateLabels: (chart) => {
-                                                                                    const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                    const base = Chart.defaults.plugins.legend.labels
+                                                                                        .generateLabels(chart);
                                                                                     const ds = chart.data.datasets;
                                                                                     const fmt = new Intl.NumberFormat(undefined, {
                                                                                         minimumFractionDigits: 2,
@@ -1087,7 +1381,8 @@
                                                                                     });
                                                                                     return base.map(l => {
                                                                                         const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                        const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                        const total = data.reduce((acc, val) => acc + (
+                                                                                            Number(val) || 0), 0);
                                                                                         //l.text = `${ds[l.datasetIndex].label}: ${fmt.format(total)} ${unidad}`;
                                                                                         l.text = `${ds[l.datasetIndex].label}`;
                                                                                         return l;
@@ -1095,25 +1390,29 @@
                                                                                 }
                                                                             }
 
-                                                                         },
-                                                                         // tooltip En horizontal, y que el valor está en parsed.x se valla  sumando cada que cambia de dataset
+                                                                        },
+                                                                        // tooltip En horizontal, y que el valor está en parsed.x se valla  sumando cada que cambia de dataset
                                                                         tooltip: {
                                                                             mode: 'index',
                                                                             axis: 'y',
                                                                             intersect: true,
                                                                             callbacks: {
                                                                                 label: (ctx) => {
-                                                                                const { chart, datasetIndex, dataIndex } = ctx;
-                                                                                const ds = chart.data.datasets;
+                                                                                    const {
+                                                                                        chart,
+                                                                                        datasetIndex,
+                                                                                        dataIndex
+                                                                                    } = ctx;
+                                                                                    const ds = chart.data.datasets;
 
-                                                                                // acumulado hasta este dataset (E0..E30)
-                                                                                let sumt = 0;
-                                                                                for (let i = 0; i <= datasetIndex; i++) {
-                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
-                                                                                    sumt += val;
-                                                                                }
+                                                                                    // acumulado hasta este dataset (E0..E30)
+                                                                                    let sumt = 0;
+                                                                                    for (let i = 0; i <= datasetIndex; i++) {
+                                                                                        const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                        sumt += val;
+                                                                                    }
 
-                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                    return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                     minimumFractionDigits: 2,
                                                                                     maximumFractionDigits: 3
                                                                                 })} ${unidad}`;
@@ -1121,55 +1420,60 @@
                                                                             }
                                                                         },
 
-                                                                        @if($type != "Benzene")
-                                                                        annotation: {
-                                                                            annotations: {
-                                                                                euro6: {
-                                                                                    type: 'line',
-                                                                                    xMin: EURO6, xMax: EURO6,
-                                                                                    borderColor: '#ff7f0e', // naranja
-                                                                                    borderWidth: 2,
-                                                                                    clip: false,
-                                                                                    z: 10,
-                                                                                    label: {
-                                                                                        enabled: true,
-                                                                                        // para v3+
-                                                                                        display: true,
-                                                                                        /*  `Euro6 ${EURO6}` con formato a dos decimales  */
-                                                                                        content: () => `Euro6 ${EURO6.toFixed(2)}`,
-                                                                                        position: 'start',
-                                                                                        yAdjust: -22,
-                                                                                        rotation: 0,
-                                                                                        backgroundColor: 'rgba(0,0,0,0)',
-                                                                                        color: '#ff7f0e',
-                                                                                        font: {
-                                                                                            size: 10,
-                                                                                            weight: 'bold'
+                                                                        @if ($type != 'Benzene')
+                                                                            annotation: {
+                                                                                annotations: {
+                                                                                    euro6: {
+                                                                                        type: 'line',
+                                                                                        xMin: EURO6,
+                                                                                        xMax: EURO6,
+                                                                                        borderColor: '#ff7f0e', // naranja
+                                                                                        borderWidth: 2,
+                                                                                        clip: false,
+                                                                                        z: 10,
+                                                                                        label: {
+                                                                                            enabled: true,
+                                                                                            // para v3+
+                                                                                            display: true,
+                                                                                            /*  `Euro6 ${EURO6}` con formato a dos decimales  */
+                                                                                            content: () => `Euro6 ${EURO6.toFixed(2)}`,
+                                                                                            position: 'start',
+                                                                                            yAdjust: -22,
+                                                                                            rotation: 0,
+                                                                                            backgroundColor: 'rgba(0,0,0,0)',
+                                                                                            color: '#ff7f0e',
+                                                                                            font: {
+                                                                                                size: 10,
+                                                                                                weight: 'bold'
+                                                                                            }
                                                                                         }
-                                                                                    }
-                                                                                },
-                                                                                us: {
-                                                                                    type: 'line',
-                                                                                    xMin: US, xMax: US,
-                                                                                    borderColor: '#2ca02c', // verde
-                                                                                    borderWidth: 2,
-                                                                                    clip: false,
-                                                                                    z: 10,
-                                                                                    label: {
-                                                                                        enabled: true,
-                                                                                        // para v3+
-                                                                                        display: true,
-                                                                                        content: () => `US ${US.toFixed(2)}`,
-                                                                                        position: 'start',
-                                                                                        yAdjust: -22,
-                                                                                        rotation: 0,
-                                                                                        backgroundColor: 'rgba(0,0,0,0)',
-                                                                                        color: '#2ca02c',
-                                                                                        font: { size: 10, weight: 'bold' }
+                                                                                    },
+                                                                                    us: {
+                                                                                        type: 'line',
+                                                                                        xMin: US,
+                                                                                        xMax: US,
+                                                                                        borderColor: '#2ca02c', // verde
+                                                                                        borderWidth: 2,
+                                                                                        clip: false,
+                                                                                        z: 10,
+                                                                                        label: {
+                                                                                            enabled: true,
+                                                                                            // para v3+
+                                                                                            display: true,
+                                                                                            content: () => `US ${US.toFixed(2)}`,
+                                                                                            position: 'start',
+                                                                                            yAdjust: -22,
+                                                                                            rotation: 0,
+                                                                                            backgroundColor: 'rgba(0,0,0,0)',
+                                                                                            color: '#2ca02c',
+                                                                                            font: {
+                                                                                                size: 10,
+                                                                                                weight: 'bold'
+                                                                                            }
+                                                                                        }
                                                                                     }
                                                                                 }
                                                                             }
-                                                                        }
                                                                         @endif
                                                                     }
                                                                 }
@@ -1184,198 +1488,269 @@
                                                         const ctx2 = document.getElementById('g2Chart');
                                                         if (ctx2) {
                                                             new Chart(ctx2.getContext('2d'), {
-                                                            type: 'bar',
-                                                            data: {
-                                                                labels: labels2,
-                                                                datasets: [
-                                                                { label: 'E30', data: values2.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
-                                                                { label: 'E25', data: values2.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E20', data: values2.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E15', data: values2.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E10', data: values2.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E0',  data: values2.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                ]
-                                                            },
-                                                            options: {
-                                                                indexAxis: 'y',
-                                                                responsive: true,
-                                                                maintainAspectRatio: false,
-                                                                plugins: {
-                                                                    legend: { 
-                                                                        display: true, 
-                                                                        position: 'top',
-                                                                        labels: {
-                                                                            // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
-                                                                            generateLabels: (chart) => {
-                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
-                                                                                const ds = chart.data.datasets;
-                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
-                                                                                return base.map(l => {
-                                                                                    const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
-                                                                                    l.text = `${ds[l.datasetIndex].label}`;
-                                                                                    return l;
-                                                                                });
-                                                                            } 
-                                                                        }
-                                                                    },
-                                                                    tooltip: {
+                                                                type: 'bar',
+                                                                data: {
+                                                                    labels: labels2,
+                                                                    datasets: [{
+                                                                            label: 'E30',
+                                                                            data: values2.map(v => n(v.e30)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                            borderColor: 'rgba(153,102,255,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E25',
+                                                                            data: values2.map(v => n(v.e25)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                            borderColor: 'rgba(54,162,235,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E20',
+                                                                            data: values2.map(v => n(v.e20)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                            borderColor: 'rgba(75,192,192,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E15',
+                                                                            data: values2.map(v => n(v.e15)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                            borderColor: 'rgba(255,205,86,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E10',
+                                                                            data: values2.map(v => n(v.e10)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                            borderColor: 'rgba(255,159,64,1)'
+                                                                        },
+                                                                        {
+                                                                            label: 'E0',
+                                                                            data: values2.map(v => n(v.e0)),
+                                                                            borderWidth: 1,
+                                                                            backgroundColor: 'rgba(201,203,207,0.8)',
+                                                                            borderColor: 'rgba(201,203,207,1)'
+                                                                        },
+                                                                    ]
+                                                                },
+                                                                options: {
+                                                                    indexAxis: 'y',
+                                                                    responsive: true,
+                                                                    maintainAspectRatio: false,
+                                                                    plugins: {
+                                                                        legend: {
+                                                                            display: true,
+                                                                            position: 'top',
+                                                                            labels: {
+                                                                                // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
+                                                                                generateLabels: (chart) => {
+                                                                                    const base = Chart.defaults.plugins.legend.labels
+                                                                                        .generateLabels(chart);
+                                                                                    const ds = chart.data.datasets;
+                                                                                    const fmt = new Intl.NumberFormat(undefined, {
+                                                                                        maximumFractionDigits: 0
+                                                                                    });
+                                                                                    return base.map(l => {
+                                                                                        const data = (ds[l.datasetIndex]?.data ?? []);
+                                                                                        const total = data.reduce((acc, val) => acc + (
+                                                                                            Number(val) || 0), 0);
+                                                                                        l.text = `${ds[l.datasetIndex].label}`;
+                                                                                        return l;
+                                                                                    });
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        tooltip: {
                                                                             mode: 'index',
                                                                             axis: 'y',
                                                                             intersect: true,
                                                                             callbacks: {
                                                                                 label: (ctx) => {
-                                                                                const { chart, datasetIndex, dataIndex } = ctx;
-                                                                                const ds = chart.data.datasets;
+                                                                                    const {
+                                                                                        chart,
+                                                                                        datasetIndex,
+                                                                                        dataIndex
+                                                                                    } = ctx;
+                                                                                    const ds = chart.data.datasets;
 
-                                                                                // acumulado hasta este dataset (E0..E30)
-                                                                                let sumt = 0;
-                                                                                for (let i = 0; i <= datasetIndex; i++) {
-                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
-                                                                                    sumt += val;
-                                                                                }
+                                                                                    // acumulado hasta este dataset (E0..E30)
+                                                                                    let sumt = 0;
+                                                                                    for (let i = 0; i <= datasetIndex; i++) {
+                                                                                        const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                        sumt += val;
+                                                                                    }
 
-                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                    return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                     minimumFractionDigits: 2,
                                                                                     maximumFractionDigits: 2
                                                                                 })} ${unidad2}`;
                                                                                 }
                                                                             }
                                                                         },
-                                                                    datalabels: {
-                                                                        anchor: 'end',
-                                                                        align: 'end',
-                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
-                                                                    }
-                                                                },
-                                                                scales: {
-                                                                    x: {
-                                                                        stacked: true,
-                                                                        beginAtZero: true,
-                                                                        ticks: { callback: (value) => Number(value).toLocaleString() },
-                                                                        title: { display: true, text: '{{ __('dynamic.graphs.g9_title') }} (Ton/day)' }
+                                                                        datalabels: {
+                                                                            anchor: 'end',
+                                                                            align: 'end',
+                                                                            formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                                minimumFractionDigits: 0,
+                                                                                maximumFractionDigits: 0
+                                                                            })
+                                                                        }
                                                                     },
-                                                                    y: {
-                                                                        stacked: true,
-                                                                        ticks: { autoSkip: false },
-                                                                        title: { display: true, text: '' }
+                                                                    scales: {
+                                                                        x: {
+                                                                            stacked: true,
+                                                                            beginAtZero: true,
+                                                                            ticks: {
+                                                                                callback: (value) => Number(value).toLocaleString()
+                                                                            },
+                                                                            title: {
+                                                                                display: true,
+                                                                                text: '{{ __('dynamic.graphs.g9_title') }} (Ton/day)'
+                                                                            }
+                                                                        },
+                                                                        y: {
+                                                                            stacked: true,
+                                                                            ticks: {
+                                                                                autoSkip: false
+                                                                            },
+                                                                            title: {
+                                                                                display: true,
+                                                                                text: ''
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
-                                                            }
                                                             });
                                                         }
-                                                        
+
 
                                                         // --- G3 ---
                                                         const labels3 = @json($chartLabels3 ?? []);
                                                         const raw3 = @json($chartValues3 ?? []);
                                                         const values3 = Array.isArray(raw3) ? raw3 : Object.values(raw3);
-                                                    
+
                                                         const ctx3 = document.getElementById('g3Chart');
                                                         if (ctx3) {
                                                             new Chart(ctx3, {
                                                                 type: 'bar',
                                                                 data: {
-                                                                labels: labels3,
-                                                                datasets: [{
-                                                                    label: 'Gasoline demand (MML/yr)',
-                                                                    data: values3,
-                                                                    borderWidth: 1,
-                                                                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                                                                    borderColor: 'rgba(54, 162, 235, 1)'
-                                                                }]
+                                                                    labels: labels3,
+                                                                    datasets: [{
+                                                                        label: 'Gasoline demand (MML/yr)',
+                                                                        data: values3,
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                                                                        borderColor: 'rgba(54, 162, 235, 1)'
+                                                                    }]
                                                                 },
                                                                 options: {
-                                                                indexAxis: 'y',                 // 👈 horizontal
-                                                                responsive: true,
-                                                                maintainAspectRatio: false,
-                                                                plugins: {
-                                                                    legend: { display: false },
-                                                                    tooltip: {
-                                                                        callbacks: {
-                                                                            label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                    indexAxis: 'y', // 👈 horizontal
+                                                                    responsive: true,
+                                                                    maintainAspectRatio: false,
+                                                                    plugins: {
+                                                                        legend: {
+                                                                            display: false
+                                                                        },
+                                                                        tooltip: {
+                                                                            callbacks: {
+                                                                                label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} L`
+                                                                            }
+                                                                        },
+                                                                        datalabels: {
+                                                                            anchor: 'end',
+                                                                            align: 'end',
+                                                                            formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                                minimumFractionDigits: 0,
+                                                                                maximumFractionDigits: 0
+                                                                            })
                                                                         }
                                                                     },
-                                                                    datalabels: {
-                                                                        anchor: 'end',
-                                                                        align: 'end',
-                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                    scales: {
+                                                                        x: {
+                                                                            beginAtZero: true,
+                                                                            ticks: {
+                                                                                callback: (v) => Number(v).toLocaleString()
+                                                                            },
+                                                                            title: {
+                                                                                display: true,
+                                                                                text: ''
+                                                                            }
+                                                                        },
+                                                                        y: {
+                                                                            ticks: {
+                                                                                autoSkip: false,
+                                                                            },
+                                                                            title: {
+                                                                                display: true,
+                                                                                text: ''
+                                                                            }
+                                                                        }
                                                                     }
-                                                                },
-                                                                scales: {
-                                                                    x: {                      
-                                                                    beginAtZero: true,
-                                                                    ticks: {
-                                                                        callback: (v) => Number(v).toLocaleString()
-                                                                    },
-                                                                    title: { display: true, text:  '' }
-                                                                    },
-                                                                    y: {                          
-                                                                    ticks: {
-                                                                        autoSkip: false,    
-                                                                    },
-                                                                    title: { display: true, text: '' }
-                                                                    }
-                                                                }
                                                                 },
                                                                 plugins: [ChartDataLabels]
                                                             });
                                                         }
                                                     });
                                                 </script>
-                                                @endpush
-                                            </div>
-                                        @endif
-                                        <!-- Si Tab es 3-->
-                                        @if($tab == 3)  
+                                            @endpush
+                                        </div>
+                                    @endif
+                                    <!-- Si Tab es 3-->
+                                    @if ($tab == 3)
+                                        <div class="container my-12">
+                                            <!-- GRAFICAS DE GREEN HOUSE EMISSIONS -->
                                             <div class="container my-12">
-                                                <!-- GRAFICAS DE GREEN HOUSE EMISSIONS -->
-                                                <div class="container my-12">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald">Life Cycle GHG Emissions (MMTons/yr) - {{$type}}</h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:450px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g1Chart" height="400"></canvas>
-                                                            </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald">Life Cycle GHG Emissions (MMTons/yr) -
+                                                            {{ $type }}</h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:450px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g1Chart" height="400"></canvas>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald">Life Cycle GHG Reduction (%) - {{$type}}</h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:450px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g2Chart" height="400"></canvas>
-                                                            </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald">Life Cycle GHG Reduction (%) -
+                                                            {{ $type }}</h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:450px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g2Chart" height="400"></canvas>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald">2035 GHG Target Participation (%) - {{$type}}</h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:450px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g3Chart" height="400"></canvas>
-                                                            </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald">2035 GHG Target Participation (%) -
+                                                            {{ $type }}</h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:450px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g3Chart" height="400"></canvas>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h3 class="oswald">Carbon Intensity (gCO2e/MJ) - {{$type}}</h3>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div style="height:450px;">   <!-- 👈 altura fija -->
-                                                                <canvas id="g4Chart" height="400"></canvas>
-                                                            </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3 class="oswald">Carbon Intensity (gCO2e/MJ) -
+                                                            {{ $type }}</h3>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div style="height:450px;"> <!-- 👈 altura fija -->
+                                                            <canvas id="g4Chart" height="400"></canvas>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @push('scripts')
+                                        </div>
+                                        @push('scripts')
                                             <script>
-                                                document.addEventListener('DOMContentLoaded', function () {
+                                                document.addEventListener('DOMContentLoaded', function() {
                                                     // --- G1 ---
                                                     const labels = @json($chartLabels1 ?? []);
                                                     const raw1 = @json($chartValues1 ?? []);
@@ -1389,12 +1764,41 @@
                                                             type: 'bar',
                                                             data: {
                                                                 labels,
-                                                                datasets: [
-                                                                { label: 'E30', data: values.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
-                                                                { label: 'E25', data: values.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E20', data: values.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)'   },
-                                                                { label: 'E15', data: values.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E10', data: values.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
+                                                                datasets: [{
+                                                                        label: 'E30',
+                                                                        data: values.map(v => n(v.e30)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                        borderColor: 'rgba(153,102,255,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E25',
+                                                                        data: values.map(v => n(v.e25)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                        borderColor: 'rgba(54,162,235,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E20',
+                                                                        data: values.map(v => n(v.e20)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                        borderColor: 'rgba(75,192,192,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E15',
+                                                                        data: values.map(v => n(v.e15)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                        borderColor: 'rgba(255,205,86,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E10',
+                                                                        data: values.map(v => n(v.e10)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                        borderColor: 'rgba(255,159,64,1)'
+                                                                    },
                                                                 ]
                                                             },
                                                             options: {
@@ -1402,22 +1806,26 @@
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
                                                                 plugins: {
-                                                                    legend: { 
-                                                                        display: true, 
+                                                                    legend: {
+                                                                        display: true,
                                                                         position: 'top',
                                                                         labels: {
                                                                             // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
                                                                             generateLabels: (chart) => {
-                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const base = Chart.defaults.plugins.legend.labels
+                                                                                    .generateLabels(chart);
                                                                                 const ds = chart.data.datasets;
-                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                const fmt = new Intl.NumberFormat(undefined, {
+                                                                                    maximumFractionDigits: 0
+                                                                                });
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    const total = data.reduce((acc, val) => acc + (
+                                                                                        Number(val) || 0), 0);
                                                                                     l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
-                                                                            } 
+                                                                            }
                                                                         }
                                                                     },
                                                                     tooltip: {
@@ -1426,17 +1834,21 @@
                                                                         intersect: true,
                                                                         callbacks: {
                                                                             label: (ctx) => {
-                                                                            const { chart, datasetIndex, dataIndex } = ctx;
-                                                                            const ds = chart.data.datasets;
+                                                                                const {
+                                                                                    chart,
+                                                                                    datasetIndex,
+                                                                                    dataIndex
+                                                                                } = ctx;
+                                                                                const ds = chart.data.datasets;
 
-                                                                            // acumulado hasta este dataset (E0..E30)
-                                                                            let sumt = 0;
-                                                                            for (let i = 0; i <= datasetIndex; i++) {
-                                                                                const val = Number(ds[i]?.data?.[dataIndex]) || 0;
-                                                                                sumt += val;
-                                                                            }
+                                                                                // acumulado hasta este dataset (E0..E30)
+                                                                                let sumt = 0;
+                                                                                for (let i = 0; i <= datasetIndex; i++) {
+                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                    sumt += val;
+                                                                                }
 
-                                                                            return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                 minimumFractionDigits: 2,
                                                                                 maximumFractionDigits: 2
                                                                             })} ${unidad}`;
@@ -1446,20 +1858,33 @@
                                                                     datalabels: {
                                                                         anchor: 'end',
                                                                         align: 'end',
-                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
                                                                 scales: {
                                                                     x: {
                                                                         stacked: true,
                                                                         beginAtZero: true,
-                                                                        ticks: { callback: (value) => Number(value).toLocaleString() },
-                                                                        title: { display: true, text:  '' }
+                                                                        ticks: {
+                                                                            callback: (value) => Number(value).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     },
                                                                     y: {
                                                                         stacked: true,
-                                                                        ticks: { autoSkip: false },
-                                                                        title: { display: true, text: '' }
+                                                                        ticks: {
+                                                                            autoSkip: false
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -1469,22 +1894,51 @@
                                                     const labels2 = @json($chartLabels2 ?? []);
                                                     const raw2 = @json($chartValues2 ?? []);
                                                     const values2 = Array.isArray(raw2) ? raw2 : Object.values(raw2);
-                                          
+
 
                                                     const ctx2 = document.getElementById('g2Chart');
-                                                    
+
                                                     if (ctx2) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx2.getContext('2d'), {
                                                             type: 'bar',
                                                             data: {
                                                                 labels: labels2,
-                                                                datasets: [
-                                                                { label: 'E10 (%)', data: values2.map(v => n(v.e10)* 100), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                { label: 'E15 (%)', data: values2.map(v => n(v.e15)* 100), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                { label: 'E20 (%)', data: values2.map(v => n(v.e20)* 100), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
-                                                                { label: 'E25 (%)', data: values2.map(v => n(v.e25)* 100), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                { label: 'E30 (%)', data: values2.map(v => n(v.e30)* 100), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                datasets: [{
+                                                                        label: 'E10 (%)',
+                                                                        data: values2.map(v => n(v.e10) * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                        borderColor: 'rgba(255,159,64,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E15 (%)',
+                                                                        data: values2.map(v => n(v.e15) * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                        borderColor: 'rgba(255,205,86,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E20 (%)',
+                                                                        data: values2.map(v => n(v.e20) * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                        borderColor: 'rgba(75,192,192,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E25 (%)',
+                                                                        data: values2.map(v => n(v.e25) * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                        borderColor: 'rgba(54,162,235,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E30 (%)',
+                                                                        data: values2.map(v => n(v.e30) * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                        borderColor: 'rgba(153,102,255,1)'
+                                                                    },
                                                                 ]
                                                             },
                                                             options: {
@@ -1492,22 +1946,26 @@
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
                                                                 plugins: {
-                                                                    legend: { 
-                                                                        display: true, 
+                                                                    legend: {
+                                                                        display: true,
                                                                         position: 'top',
                                                                         labels: {
                                                                             // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
                                                                             generateLabels: (chart) => {
-                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const base = Chart.defaults.plugins.legend.labels
+                                                                                    .generateLabels(chart);
                                                                                 const ds = chart.data.datasets;
-                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                const fmt = new Intl.NumberFormat(undefined, {
+                                                                                    maximumFractionDigits: 0
+                                                                                });
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    const total = data.reduce((acc, val) => acc + (
+                                                                                        Number(val) || 0), 0);
                                                                                     l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
-                                                                            } 
+                                                                            }
                                                                         }
                                                                     },
                                                                     tooltip: {
@@ -1516,17 +1974,21 @@
                                                                         intersect: true,
                                                                         callbacks: {
                                                                             label: (ctx) => {
-                                                                            const { chart, datasetIndex, dataIndex } = ctx;
-                                                                            const ds = chart.data.datasets;
+                                                                                const {
+                                                                                    chart,
+                                                                                    datasetIndex,
+                                                                                    dataIndex
+                                                                                } = ctx;
+                                                                                const ds = chart.data.datasets;
 
-                                                                            // acumulado hasta este dataset (E0..E30)
-                                                                            let sumt = 0;
-                                                                            for (let i = 0; i <= datasetIndex; i++) {
-                                                                                const val = Number(ds[i]?.data?.[dataIndex]) || 0;
-                                                                                sumt += val;
-                                                                            }
+                                                                                // acumulado hasta este dataset (E0..E30)
+                                                                                let sumt = 0;
+                                                                                for (let i = 0; i <= datasetIndex; i++) {
+                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                    sumt += val;
+                                                                                }
 
-                                                                            return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                 minimumFractionDigits: 1,
                                                                                 maximumFractionDigits: 1
                                                                             })} %`;
@@ -1536,20 +1998,33 @@
                                                                     datalabels: {
                                                                         anchor: 'end',
                                                                         align: 'end',
-                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
-                                                                },  
+                                                                },
                                                                 scales: {
                                                                     x: {
                                                                         stacked: true,
                                                                         beginAtZero: true,
-                                                                        ticks: { callback: (value2) => Number(value2).toLocaleString() },
-                                                                        title: { display: true, text:'' }
+                                                                        ticks: {
+                                                                            callback: (value2) => Number(value2).toLocaleString()
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     },
                                                                     y: {
                                                                         stacked: true,
-                                                                        ticks: { autoSkip: false },
-                                                                        title: { display: true, text: '' }
+                                                                        ticks: {
+                                                                            autoSkip: false
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -1559,43 +2034,76 @@
                                                     // -- G3 ---
                                                     const labels3 = @json($chartLabels3 ?? []);
                                                     const raw3 = @json($chartValues3 ?? []);
-                                                    const values3 =  Array.isArray(raw3) ? raw3 : Object.values(raw3);
+                                                    const values3 = Array.isArray(raw3) ? raw3 : Object.values(raw3);
                                                     const ctx3 = document.getElementById('g3Chart');
-                                                    if(ctx3) {
+                                                    if (ctx3) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx3.getContext('2d'), {
                                                             type: 'bar',
                                                             data: {
                                                                 labels: labels3,
-                                                                datasets: [
-                                                                    { label: 'E10 (%)', data: values3.map(v => v.e10 * 100), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                    { label: 'E15 (%)', data: values3.map(v => v.e15 * 100), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                    { label: 'E20 (%)', data: values3.map(v => v.e20 * 100), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
-                                                                    { label: 'E25 (%)', data: values3.map(v => v.e25 * 100), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                    { label: 'E30 (%)', data: values3.map(v => v.e30 * 100), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
+                                                                datasets: [{
+                                                                        label: 'E10 (%)',
+                                                                        data: values3.map(v => v.e10 * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                        borderColor: 'rgba(255,159,64,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E15 (%)',
+                                                                        data: values3.map(v => v.e15 * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                        borderColor: 'rgba(255,205,86,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E20 (%)',
+                                                                        data: values3.map(v => v.e20 * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                        borderColor: 'rgba(75,192,192,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E25 (%)',
+                                                                        data: values3.map(v => v.e25 * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                        borderColor: 'rgba(54,162,235,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E30 (%)',
+                                                                        data: values3.map(v => v.e30 * 100),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                        borderColor: 'rgba(153,102,255,1)'
+                                                                    },
                                                                 ]
                                                             },
                                                             options: {
-                                                                indexAxis: 'y',                 // 👈 horizontal
+                                                                indexAxis: 'y', // 👈 horizontal
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
                                                                 plugins: {
-                                                                    legend: { 
-                                                                        display: true, 
+                                                                    legend: {
+                                                                        display: true,
                                                                         position: 'top',
                                                                         labels: {
                                                                             // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
                                                                             generateLabels: (chart) => {
-                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const base = Chart.defaults.plugins.legend.labels
+                                                                                    .generateLabels(chart);
                                                                                 const ds = chart.data.datasets;
-                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                const fmt = new Intl.NumberFormat(undefined, {
+                                                                                    maximumFractionDigits: 0
+                                                                                });
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    const total = data.reduce((acc, val) => acc + (
+                                                                                        Number(val) || 0), 0);
                                                                                     l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
-                                                                            } 
+                                                                            }
                                                                         }
                                                                     },
                                                                     tooltip: {
@@ -1604,17 +2112,21 @@
                                                                         intersect: true,
                                                                         callbacks: {
                                                                             label: (ctx) => {
-                                                                            const { chart, datasetIndex, dataIndex } = ctx;
-                                                                            const ds = chart.data.datasets;
+                                                                                const {
+                                                                                    chart,
+                                                                                    datasetIndex,
+                                                                                    dataIndex
+                                                                                } = ctx;
+                                                                                const ds = chart.data.datasets;
 
-                                                                            // acumulado hasta este dataset (E0..E30)
-                                                                            let sumt = 0;
-                                                                            for (let i = 0; i <= datasetIndex; i++) {
-                                                                                const val = Number(ds[i]?.data?.[dataIndex]) || 0;
-                                                                                sumt += val;
-                                                                            }
+                                                                                // acumulado hasta este dataset (E0..E30)
+                                                                                let sumt = 0;
+                                                                                for (let i = 0; i <= datasetIndex; i++) {
+                                                                                    const val = Number(ds[i]?.data?.[dataIndex]) || 0;
+                                                                                    sumt += val;
+                                                                                }
 
-                                                                            return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
+                                                                                return ` ${ds[datasetIndex].label}: ${sumt.toLocaleString('en-US', {
                                                                                 minimumFractionDigits: 1,
                                                                                 maximumFractionDigits: 1
                                                                             })} %`;
@@ -1624,22 +2136,33 @@
                                                                     datalabels: {
                                                                         anchor: 'end',
                                                                         align: 'end',
-                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
                                                                 scales: {
-                                                                    x: {    
+                                                                    x: {
                                                                         stacked: true,
-                                                                        beginAtZero: true,    
+                                                                        beginAtZero: true,
                                                                         ticks: {
                                                                             callback: (value) => Number(value).toLocaleString()
                                                                         },
-                                                                        title: { display: true, text: '' }
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     },
                                                                     y: {
                                                                         stacked: true,
-                                                                        ticks: { autoSkip: false },
-                                                                        title: { display: true, text: '' }
+                                                                        ticks: {
+                                                                            autoSkip: false
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -1651,56 +2174,99 @@
                                                     const values4 = @json($chartValues4 ?? []);
                                                     const ctx4 = document.getElementById('g4Chart');
                                                     const unidad2 = 'gCO2e/MJ';
-                                                    if(ctx4) {
+                                                    if (ctx4) {
                                                         Chart.register(window['chartjs-plugin-annotation']); // si lo cargaste por <script>
                                                         new Chart(ctx4.getContext('2d'), {
                                                             type: 'bar',
                                                             data: {
                                                                 labels: labels4,
-                                                                datasets: [
-                                                                    { label: 'E30', data: values4.map(v => n(v.e30)), borderWidth: 1, backgroundColor: 'rgba(153,102,255,0.8)', borderColor: 'rgba(153,102,255,1)' },
-                                                                    { label: 'E25', data: values4.map(v => n(v.e25)), borderWidth: 1, backgroundColor: 'rgba(54,162,235,0.8)',  borderColor: 'rgba(54,162,235,1)'  },
-                                                                    { label: 'E20', data: values4.map(v => n(v.e20)), borderWidth: 1, backgroundColor: 'rgba(75,192,192,0.8)',   borderColor: 'rgba(75,192,192,1)' },
-                                                                    { label: 'E15', data: values4.map(v => n(v.e15)), borderWidth: 1, backgroundColor: 'rgba(255,205,86,0.8)',  borderColor: 'rgba(255,205,86,1)'  },
-                                                                    { label: 'E10', data: values4.map(v => n(v.e10)), borderWidth: 1, backgroundColor: 'rgba(255,159,64,0.8)',  borderColor: 'rgba(255,159,64,1)'  },
-                                                                    { label: 'E0',  data: values4.map(v => n(v.e0)),  borderWidth: 1, backgroundColor: 'rgba(201,203,207,0.8)', borderColor: 'rgba(201,203,207,1)' },
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
+                                                                datasets: [{
+                                                                        label: 'E30',
+                                                                        data: values4.map(v => n(v.e30)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(153,102,255,0.8)',
+                                                                        borderColor: 'rgba(153,102,255,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E25',
+                                                                        data: values4.map(v => n(v.e25)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(54,162,235,0.8)',
+                                                                        borderColor: 'rgba(54,162,235,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E20',
+                                                                        data: values4.map(v => n(v.e20)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(75,192,192,0.8)',
+                                                                        borderColor: 'rgba(75,192,192,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E15',
+                                                                        data: values4.map(v => n(v.e15)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,205,86,0.8)',
+                                                                        borderColor: 'rgba(255,205,86,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E10',
+                                                                        data: values4.map(v => n(v.e10)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(255,159,64,0.8)',
+                                                                        borderColor: 'rgba(255,159,64,1)'
+                                                                    },
+                                                                    {
+                                                                        label: 'E0',
+                                                                        data: values4.map(v => n(v.e0)),
+                                                                        borderWidth: 1,
+                                                                        backgroundColor: 'rgba(201,203,207,0.8)',
+                                                                        borderColor: 'rgba(201,203,207,1)'
+                                                                    },
+
+
+
+
+
                                                                 ]
                                                             },
                                                             options: {
-                                                                indexAxis: 'y',                 // 👈 horizontal
+                                                                indexAxis: 'y', // 👈 horizontal
                                                                 responsive: true,
                                                                 maintainAspectRatio: false,
                                                                 plugins: {
-                                                                    legend: { 
-                                                                        display: true, 
+                                                                    legend: {
+                                                                        display: true,
                                                                         position: 'top',
                                                                         labels: {
                                                                             // 🔹 Reescribimos las etiquetas para incluir el total de cada dataset
                                                                             generateLabels: (chart) => {
-                                                                                const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                                                                const base = Chart.defaults.plugins.legend.labels
+                                                                                    .generateLabels(chart);
                                                                                 const ds = chart.data.datasets;
-                                                                                const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+                                                                                const fmt = new Intl.NumberFormat(undefined, {
+                                                                                    maximumFractionDigits: 0
+                                                                                });
                                                                                 return base.map(l => {
                                                                                     const data = (ds[l.datasetIndex]?.data ?? []);
-                                                                                    const total = data.reduce((acc, val) => acc + (Number(val) || 0), 0);
+                                                                                    const total = data.reduce((acc, val) => acc + (
+                                                                                        Number(val) || 0), 0);
                                                                                     l.text = `${ds[l.datasetIndex].label}`;
                                                                                     return l;
                                                                                 });
-                                                                            } 
+                                                                            }
                                                                         }
                                                                     },
                                                                     tooltip: {
-                                                                            mode: 'index',
-                                                                            axis: 'y',
-                                                                            intersect: true,
-                                                                            callbacks: {
-                                                                                label: (ctx) => {
-                                                                                const { chart, datasetIndex, dataIndex } = ctx;
+                                                                        mode: 'index',
+                                                                        axis: 'y',
+                                                                        intersect: true,
+                                                                        callbacks: {
+                                                                            label: (ctx) => {
+                                                                                const {
+                                                                                    chart,
+                                                                                    datasetIndex,
+                                                                                    dataIndex
+                                                                                } = ctx;
                                                                                 const ds = chart.data.datasets;
 
                                                                                 // acumulado hasta este dataset (E0..E30)
@@ -1714,28 +2280,39 @@
                                                                                     minimumFractionDigits: 2,
                                                                                     maximumFractionDigits: 2
                                                                                 })} ${unidad2}`;
-                                                                                }
                                                                             }
-                                                                        },
+                                                                        }
+                                                                    },
                                                                     datalabels: {
                                                                         anchor: 'end',
                                                                         align: 'end',
-                                                                        formatter: (val) => Number(val).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                                                                        formatter: (val) => Number(val).toLocaleString(undefined, {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })
                                                                     }
                                                                 },
                                                                 scales: {
-                                                                    x: {    
+                                                                    x: {
                                                                         stacked: true,
                                                                         beginAtZero: true,
                                                                         ticks: {
                                                                             callback: (value) => Number(value).toLocaleString()
                                                                         },
-                                                                        title: { display: true, text: '' }
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     },
                                                                     y: {
                                                                         stacked: true,
-                                                                        ticks: { autoSkip: false },
-                                                                        title: { display: true, text: '' }
+                                                                        ticks: {
+                                                                            autoSkip: false
+                                                                        },
+                                                                        title: {
+                                                                            display: true,
+                                                                            text: ''
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -1744,193 +2321,227 @@
 
 
                                                 });
-                                                </script>
-                                            @endpush
-                                        @endif
-                                    </div>
+                                            </script>
+                                        @endpush
+                                    @endif
                                 </div>
                             </div>
-                            
                         </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
-        <div id="content" class="site-content">
-            <footer id="colophon" role="contentinfo" class="relative text-white site-footer mg-banded-primary antialiased uppercase text-base border-0 z-10 sm:text-left print-break-avoid">
-                <div class="wrap xl:flex items-center">
-                    <div class="flex-1 text-sm leading-normal lg:leading-loose">
-                        <aside role="complementary" aria-label="Footer" class="widget-area">
-                            <picture>
-                                <source data-lazy-srcset="{{ asset('images/grains-symbol.svg') }}" srcset="{{ asset('images/grains-symbol.svg') }}" />
-                                <img src="{{ asset('images/grains-symbol.png') }}" alt="flat graphic symbolizing a grain plant" data-lazy-src="{{ asset('images/grains-symbol.png') }}" data-ll-status="loading" class="mg-icon--larger md:float-left mt-1 md:mr-4 no-print lazyloading" />
-                                <noscript>
-                                    <img src="{{ asset('images/grains-symbol.png') }}" alt="flat graphic symbolizing a grain plant" class="mg-icon--larger md:float-left mt-1 md:mr-4 no-print" />
-                                </noscript>
-                            </picture>
-                            <div class="site-copyright">{{ __('main.footer.site-name') }}</div>
-                            <section id="custom_html-2" class="widget_text widget widget_custom_html">
-                                <h2 class="widget-title">USGC Info</h2>
-                                <div class="textwidget custom-html-widget">
-                                    20 F Street NW, Suite 900, Washington, DC 20001 | TEL: <a href="tel:202.789.0789">202.789.0789</a> | FAX: <a href="tel:202.898.0522">202.898.0522</a>
-                                    <p>
-                                        <a href="https://grains.org/privacy/">{{ __('main.footer.privacy-policy') }}</a> | <a href="https://grains.org/cookies/">{{ __('main.footer.cookies-policy') }}</a> | <a href="https://grains.org/employment/">{{ __('main.footer.eeo-policy') }}</a> | <a href="https://www.usda.gov/non-discrimination-statement">{{ __('main.footer.non-discrimination-policy') }}</a>
-                                    </p>
-                                </div>
-                            </section>
-                        </aside>
-                    </div>
-                    <div class="xl:w-1/3 xl:flex xl:justify-end text-sm">
-                        <nav role="navigation" aria-label="Social Links Menu" class="social-navigation mt-4 xl:mt-0">
-                            <ul id="menu-social" class="social-links-menu mg-hover-menu social-icons">
-                                <div class="menu-social-container">
-                                    <li id="menu-item-88" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-88">
-                                        <a href="https://www.facebook.com/usgrainscouncil">
-                                            <svg class="icon-social icon"><use xlink:href="#icon-facebook"></use></svg>
-                                            <span class="screen-reader-text">Facebook</span>
-                                        </a>
-                                    </li>
-                                    <li id="menu-item-89" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89">
-                                        <a href="http://twitter.com/usgc">
-                                            <svg class="icon-social icon"><use xlink:href="#icon-twitter"></use></svg>
-                                            <span class="screen-reader-text">Twitter</span>
-                                        </a>
-                                    </li>
-                                    <li id="menu-item-91" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91">
-                                        <a href="https://www.instagram.com/usgrains/">
-                                            <svg class="icon-social icon"><use xlink:href="#icon-instagram"></use></svg>
-                                            <span class="screen-reader-text">Instagram</span>
-                                        </a>
-                                    </li>
-                                    <li id="menu-item-90" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90">
-                                        <a href="http://www.youtube.com/user/USGrainsCouncil">
-                                            <svg class="icon-social icon"><use xlink:href="#icon-youtube"></use></svg>
-                                            <span class="screen-reader-text">Youtube</span>
-                                        </a>
-                                    </li>
-                                    <li id="menu-item-92" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92">
-                                        <a href="https://usgrains.photoshelter.com/galleries">
-                                            <svg class="icon-social icon"><use xlink:href="#icon-photoshelter"></use></svg>
-                                            <span class="screen-reader-text">Photoshelter</span>
-                                        </a>
-                                    </li>
-                                    <li id="menu-item-5106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5106">
-                                        <a href="https://soundcloud.com/usgc">
-                                            <svg class="icon-social icon"><use xlink:href="#icon-soundcloud"></use></svg>
-                                            <span class="screen-reader-text">Soundcloud</span>
-                                        </a>
-                                    </li>
-                                </div>
-                            </ul>
-                        </nav>
+
                     </div>
                 </div>
-            </footer>
+            </div>
         </div>
+    </div>
+    <div id="content" class="site-content">
+        <footer id="colophon" role="contentinfo"
+            class="relative text-white site-footer mg-banded-primary antialiased uppercase text-base border-0 z-10 sm:text-left print-break-avoid">
+            <div class="wrap xl:flex items-center">
+                <div class="flex-1 text-sm leading-normal lg:leading-loose">
+                    <aside role="complementary" aria-label="Footer" class="widget-area">
+                        <picture>
+                            <source data-lazy-srcset="{{ asset('images/grains-symbol.svg') }}"
+                                srcset="{{ asset('images/grains-symbol.svg') }}" />
+                            <img src="{{ asset('images/grains-symbol.png') }}"
+                                alt="flat graphic symbolizing a grain plant"
+                                data-lazy-src="{{ asset('images/grains-symbol.png') }}" data-ll-status="loading"
+                                class="mg-icon--larger md:float-left mt-1 md:mr-4 no-print lazyloading" />
+                            <noscript>
+                                <img src="{{ asset('images/grains-symbol.png') }}"
+                                    alt="flat graphic symbolizing a grain plant"
+                                    class="mg-icon--larger md:float-left mt-1 md:mr-4 no-print" />
+                            </noscript>
+                        </picture>
+                        <div class="site-copyright">{{ __('main.footer.site-name') }}</div>
+                        <section id="custom_html-2" class="widget_text widget widget_custom_html">
+                            <h2 class="widget-title">USGC Info</h2>
+                            <div class="textwidget custom-html-widget">
+                                20 F Street NW, Suite 900, Washington, DC 20001 | TEL: <a
+                                    href="tel:202.789.0789">202.789.0789</a> | FAX: <a
+                                    href="tel:202.898.0522">202.898.0522</a>
+                                <p>
+                                    <a href="https://grains.org/privacy/">{{ __('main.footer.privacy-policy') }}</a> | <a
+                                        href="https://grains.org/cookies/">{{ __('main.footer.cookies-policy') }}</a> |
+                                    <a href="https://grains.org/employment/">{{ __('main.footer.eeo-policy') }}</a> | <a
+                                        href="https://www.usda.gov/non-discrimination-statement">{{ __('main.footer.non-discrimination-policy') }}</a>
+                                </p>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="xl:w-1/3 xl:flex xl:justify-end text-sm">
+                    <nav role="navigation" aria-label="Social Links Menu" class="social-navigation mt-4 xl:mt-0">
+                        <ul id="menu-social" class="social-links-menu mg-hover-menu social-icons">
+                            <div class="menu-social-container">
+                                <li id="menu-item-88"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-88">
+                                    <a href="https://www.facebook.com/usgrainscouncil">
+                                        <svg class="icon-social icon">
+                                            <use xlink:href="#icon-facebook"></use>
+                                        </svg>
+                                        <span class="screen-reader-text">Facebook</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-89"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89">
+                                    <a href="http://twitter.com/usgc">
+                                        <svg class="icon-social icon">
+                                            <use xlink:href="#icon-twitter"></use>
+                                        </svg>
+                                        <span class="screen-reader-text">Twitter</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-91"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91">
+                                    <a href="https://www.instagram.com/usgrains/">
+                                        <svg class="icon-social icon">
+                                            <use xlink:href="#icon-instagram"></use>
+                                        </svg>
+                                        <span class="screen-reader-text">Instagram</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-90"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90">
+                                    <a href="http://www.youtube.com/user/USGrainsCouncil">
+                                        <svg class="icon-social icon">
+                                            <use xlink:href="#icon-youtube"></use>
+                                        </svg>
+                                        <span class="screen-reader-text">Youtube</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-92"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92">
+                                    <a href="https://usgrains.photoshelter.com/galleries">
+                                        <svg class="icon-social icon">
+                                            <use xlink:href="#icon-photoshelter"></use>
+                                        </svg>
+                                        <span class="screen-reader-text">Photoshelter</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-5106"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5106">
+                                    <a href="https://soundcloud.com/usgc">
+                                        <svg class="icon-social icon">
+                                            <use xlink:href="#icon-soundcloud"></use>
+                                        </svg>
+                                        <span class="screen-reader-text">Soundcloud</span>
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+    </div>
     </div>
 @endsection
 @push('scripts')
-<script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Si regionid > 0 entonces {$('#regions_container1').removeClass('hidden'); $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');} 
+            if ({{ $regionid ?? 0 }} > 0) {
+                $('#regions_container1').removeClass('hidden');
+                $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');
+            }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        // Si regionid > 0 entonces {$('#regions_container1').removeClass('hidden'); $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');} 
-        if ({{ $regionid ?? 0 }} > 0) {
-            $('#regions_container1').removeClass('hidden');
-            $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');
-        }
+            // Si regionid == 2 entonces {$('#regions_container2').removeClass('hidden'); $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');}
+            if ({{ $regionid ?? 0 }} == 2) {
+                $('#regions_container2').removeClass('hidden');
+                $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');
+            }
 
-        // Si regionid == 2 entonces {$('#regions_container2').removeClass('hidden'); $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');}
-        if ({{ $regionid ?? 0 }} == 2) {
-            $('#regions_container2').removeClass('hidden');
-            $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');
-        }
+            // Si regionid == 3 entonces {$('#regions_container3').removeClass('hidden'); $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');}
+            if ({{ $regionid ?? 0 }} == 3) {
+                $('#regions_container3').removeClass('hidden');
+                $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');
+            }
 
-        // Si regionid == 3 entonces {$('#regions_container3').removeClass('hidden'); $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');}
-        if ({{ $regionid ?? 0 }} == 3) {
-            $('#regions_container3').removeClass('hidden');
-            $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');
-        }
-
-        // Si regionid == 4 entonces {$('#regions_container4').removeClass('hidden'); $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');}
-        if ({{ $regionid ?? 0 }} == 4) {
-            $('#regions_container4').removeClass('hidden');
-            $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');
-        }
+            // Si regionid == 4 entonces {$('#regions_container4').removeClass('hidden'); $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');}
+            if ({{ $regionid ?? 0 }} == 4) {
+                $('#regions_container4').removeClass('hidden');
+                $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');
+            }
 
 
-        $(document).on('click', '#switch_continent_america', function (e) {
-            e.preventDefault();
-            $('#regions_container1').removeClass('hidden');
-            $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');
+            $(document).on('click', '#switch_continent_america', function(e) {
+                e.preventDefault();
+                $('#regions_container1').removeClass('hidden');
+                $('#regions_container2, #regions_container3, #regions_container4').addClass('hidden');
+            });
+            $(document).on('click', '#switch_continent_asia', function(e) {
+                e.preventDefault();
+                $('#regions_container2').removeClass('hidden');
+                $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');
+            });
+            $(document).on('click', '#switch_continent_europe', function(e) {
+                e.preventDefault();
+                $('#regions_container3').removeClass('hidden');
+                $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');
+            });
+            $(document).on('click', '#switch_continent_africa', function(e) {
+                e.preventDefault();
+                $('#regions_container4').removeClass('hidden');
+                $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');
+            });
+            $(document).on('click', '#switch_continent_global', function(e) {
+                e.preventDefault();
+                $('#regions_container1, #regions_container2, #regions_container3, #regions_container4')
+                    .addClass('hidden');
+            });
         });
-        $(document).on('click', '#switch_continent_asia', function (e) {
-            e.preventDefault();
-            $('#regions_container2').removeClass('hidden');
-            $('#regions_container1, #regions_container3, #regions_container4').addClass('hidden');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedContinent = null;
+
+            function showAccordion(continent) {
+                // Oculta todos
+                document.querySelectorAll('.continent-accordion').forEach(acc => acc.style.display = 'none');
+
+                // Mapea el valor a ID del acordeón
+                const map = {
+                    'AMERICA': 'accordion-america',
+                    'ASIA': 'accordion-asia',
+                    'EUROPE': 'accordion-europe',
+                    'AFRICA': 'accordion-africa',
+                    'GLOBAL': 'accordion-global'
+                };
+
+                const targetId = map[continent];
+                if (targetId) {
+                    const el = document.getElementById(targetId);
+                    if (el) {
+                        el.style.display = 'block';
+                        // (Opcional) scroll suave al acordeón
+                        el.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            }
+
+            // Listeners para los botones de continente
+            document.querySelectorAll('.continent-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    selectedContinent = btn.getAttribute('data-value');
+
+                    // Marca activo visualmente
+                    document.querySelectorAll('.continent-btn').forEach(b => b.classList.remove(
+                        'active'));
+                    btn.classList.add('active');
+
+                    // Muestra acordeón correspondiente
+                    showAccordion(selectedContinent);
+
+                    // (Opcional) actualiza la etiqueta superior si quieres reflejar el continente seleccionado
+
+                });
+            });
+
+            // Estado inicial (opcional): muestra AMERICA por defecto
+            // showAccordion('AMERICA');
         });
-        $(document).on('click', '#switch_continent_europe', function (e) {
-            e.preventDefault();
-            $('#regions_container3').removeClass('hidden');
-            $('#regions_container1, #regions_container2, #regions_container4').addClass('hidden');
-        });
-        $(document).on('click', '#switch_continent_africa', function (e) {
-            e.preventDefault();
-            $('#regions_container4').removeClass('hidden');
-            $('#regions_container1, #regions_container2, #regions_container3').addClass('hidden');
-        });
-        $(document).on('click', '#switch_continent_global', function (e) {
-            e.preventDefault();
-            $('#regions_container1, #regions_container2, #regions_container3, #regions_container4').addClass('hidden');
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-    let selectedContinent = null;
-
-  function showAccordion(continent) {
-    // Oculta todos
-    document.querySelectorAll('.continent-accordion').forEach(acc => acc.style.display = 'none');
-
-    // Mapea el valor a ID del acordeón
-    const map = {
-      'AMERICA': 'accordion-america',
-      'ASIA':    'accordion-asia',
-      'EUROPE':  'accordion-europe',
-      'AFRICA':  'accordion-africa',
-      'GLOBAL':  'accordion-global'
-    };
-
-    const targetId = map[continent];
-    if (targetId) {
-      const el = document.getElementById(targetId);
-      if (el) {
-        el.style.display = 'block';
-        // (Opcional) scroll suave al acordeón
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-  }
-
-  // Listeners para los botones de continente
-  document.querySelectorAll('.continent-btn').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      selectedContinent = btn.getAttribute('data-value');
-
-      // Marca activo visualmente
-      document.querySelectorAll('.continent-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // Muestra acordeón correspondiente
-      showAccordion(selectedContinent);
-
-      // (Opcional) actualiza la etiqueta superior si quieres reflejar el continente seleccionado
-     
-    });
-  });
-
-  // Estado inicial (opcional): muestra AMERICA por defecto
-  // showAccordion('AMERICA');
-});
-</script>
+    </script>
 @endpush
