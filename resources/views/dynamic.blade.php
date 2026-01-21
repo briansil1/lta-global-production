@@ -101,57 +101,58 @@
 
                     </div>
                     <div class="back-blue text-center">
-                        <!-- capa flotante de lado derecho con 3 botones  con imagenes de America, europa y asia, alinear a la derecha  -->
-                        <div class="floating-buttons-container"
-                            style="
-                            position: fixed; 
-                            top: 150px; 
-                            right: 10px; 
-                            transform: translateY(-50%); 
-                            z-index: 1000;
-                            display: flex; 
-                            gap: 10px;   /* Espacio entre botones */
-                        ">
-
-                            <a href="{{ env('URL_AMERICA') }}"
+                        <!-- capa que se ajuste a la derecha y que no se mueva -->
+                        <div class="container relative py-6">
+                            <div class="floating-buttons-container"
                                 style="
-                                    border: 1px solid #FFF; 
-                                    border-radius: 10px; 
-                                    width: 60px;
-                                    height: 60px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                ">
-                                <img src="{{ asset('images/map.png') }}" alt="America" width="40">
-                            </a>
+                                top: 150px; 
+                                right: 10px; 
+                                transform: translateY(-50%); 
+                                z-index: 1000;
+                                display: flex; 
+                                gap: 10px;   /* Espacio entre botones */
+                            ">
 
-                            <a href="{{ env('URL_EUROPE') }}"
-                                style="
-                                    border: 1px solid #FFF; 
-                                    border-radius: 10px; 
-                                    width: 60px;
-                                    height: 60px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                ">
-                                <img src="{{ asset('images/europa2.png') }}" alt="Europe" width="40">
-                            </a>
+                                <a href="{{ env('URL_AMERICA') }}"
+                                    style="
+                                        border: 1px solid #FFF; 
+                                        border-radius: 10px; 
+                                        width: 60px;
+                                        height: 60px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                    ">
+                                    <img src="{{ asset('images/map.png') }}" alt="America" width="40">
+                                </a>
 
-                            <a href="{{ env('URL_ASIA') }}"
-                                style="
-                                    border: 1px solid #FFF; 
-                                    border-radius: 10px; 
-                                    width: 60px;
-                                    height: 60px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                ">
-                                <img src="{{ asset('images/asia.png') }}" alt="Asia" width="40">
-                            </a>
+                                <a href="{{ env('URL_EUROPE') }}"
+                                    style="
+                                        border: 1px solid #FFF; 
+                                        border-radius: 10px; 
+                                        width: 60px;
+                                        height: 60px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                    ">
+                                    <img src="{{ asset('images/europa2.png') }}" alt="Europe" width="40">
+                                </a>
 
+                                <a href="{{ env('URL_ASIA') }}"
+                                    style="
+                                        border: 1px solid #FFF; 
+                                        border-radius: 10px; 
+                                        width: 60px;
+                                        height: 60px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                    ">
+                                    <img src="{{ asset('images/asia.png') }}" alt="Asia" width="40">
+                                </a>
+
+                            </div>
                         </div>
 
 
