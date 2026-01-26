@@ -196,7 +196,7 @@ class MainController extends Controller
                         'country' => $r->country,
                         // Valor $r->e0_lt solo con un decimal
 
-                        'e10_lt' => (float)(round($r->e10_lt * 100, 1) ?? 0),
+                        'e10_lt' => (float)(round($r->e10_lt, 1) ?? 0),
                         'e15_lt' => (float)(round($r->e15_lt - $r->e10_lt, 1) ?? 0),
                         'e20_lt' => (float)(round($r->e20_lt - $r->e15_lt, 1) ?? 0),
                         'e25_lt' => (float)(round($r->e25_lt - $r->e20_lt, 1) ?? 0),
