@@ -208,7 +208,6 @@ class MainController extends Controller
                 } else {
                     return [
                         'country' => $r->country,
-
                         'e10_lt' => (float)(round($r->e10_gl, 1) ?? 0),
                         'e15_lt' => (float)(round($r->e15_gl - $r->e10_gl, 1) ?? 0),
                         'e20_lt' => (float)(round($r->e20_gl - $r->e15_gl, 1) ?? 0),
@@ -222,8 +221,44 @@ class MainController extends Controller
             })
                 ->sortByDesc('total')
                 ->values();
+            // Labels de ciudades para tooltip
+            $g77Sorted = $dataG1->map(function ($r) {
+
+                if ($this->type == '_lt') {
+                    return [
+                        'country' => $r->country,
+                        // Valor $r->e0_lt solo con un decimal
+
+                        'e10_lt' => (float)(round($r->e10_lt, 1) ?? 0),
+                        'e15_lt' => (float)(round($r->e15_lt, 1) ?? 0),
+                        'e20_lt' => (float)(round($r->e20_lt, 1) ?? 0),
+                        'e25_lt' => (float)(round($r->e25_lt, 1) ?? 0),
+                        'e30_lt' => (float)(round($r->e30_lt, 1) ?? 0),
+                        'total'  => (float)(
+                            ($r->e0_lt ?? 0) + ($r->e10_lt ?? 0) + ($r->e15_lt ?? 0) + ($r->e20_lt ?? 0) + ($r->e25_lt ?? 0) + ($r->e30_lt ?? 0)
+                        ),
+                    ];
+                } else {
+                    return [
+                        'country' => $r->country,
+                        'e10_lt' => (float)(round($r->e10_gl, 1) ?? 0),
+                        'e15_lt' => (float)(round($r->e15_gl, 1) ?? 0),
+                        'e20_lt' => (float)(round($r->e20_gl, 1) ?? 0),
+                        'e25_lt' => (float)(round($r->e25_gl, 1) ?? 0),
+                        'e30_lt' => (float)(round($r->e30_gl, 1) ?? 0),
+                        'total'  => (float)(
+                            ($r->e0_gl ?? 0) + ($r->e10_gl ?? 0) + ($r->e15_gl ?? 0) + ($r->e20_gl ?? 0) + ($r->e25_gl ?? 0) + ($r->e30_gl ?? 0)
+                        ),
+                    ];
+                }
+            })
+                ->sortByDesc('total')
+                ->values();
+
             $chartLabels7 = $g7Sorted->pluck('country');
+            $chartLabels77 = $g77Sorted->pluck('country');
             $chartValues7 = $g7Sorted->map(fn($r) => collect($r)->except(['country', 'total']));
+            $chartValues77 = $g77Sorted->map(fn($r) => collect($r)->except(['country', 'total']));
 
             // --> GRAFICA 8 - Ordena desc por gasolina y arma labels/values para el gráfico de litros
             $g8Sorted = $dataG1->sortByDesc('ethanol_prod' . $type)->values();
@@ -273,6 +308,9 @@ class MainController extends Controller
 
                 'chartLabels7' => $chartLabels7,
                 'chartValues7' => $chartValues7,
+
+                'chartLabels77' => $chartLabels77,
+                'chartValues77' => $chartValues77,
 
                 'chartLabels8' => $chartLabels8,
                 'chartValues8' => $chartValues8,
