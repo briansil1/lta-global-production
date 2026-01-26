@@ -195,12 +195,11 @@ class MainController extends Controller
                     return [
                         'country' => $r->country,
                         // Valor $r->e0_lt solo con un decimal
-
-                        'e10_lt' => (float)(round($r->e10_lt, 1) ?? 0),
-                        'e15_lt' => (float)(round($r->e15_lt - $r->e10_lt, 1) ?? 0),
-                        'e20_lt' => (float)(round($r->e20_lt - $r->e15_lt, 1) ?? 0),
-                        'e25_lt' => (float)(round($r->e25_lt - $r->e20_lt, 1) ?? 0),
-                        'e30_lt' => (float)(round($r->e30_lt - $r->e25_lt, 1) ?? 0),
+                        'e10_lt' => (float)(round($r->e10_lt < 0 ? 0 : $r->e10_lt, 1) ?? 0),
+                        'e15_lt' => (float)(round($r->e15_lt < 0 ? 0 : $r->e15_lt - $r->e10_lt, 1) ?? 0),
+                        'e20_lt' => (float)(round($r->e20_lt < 0 ? 0 : $r->e20_lt - $r->e15_lt, 1) ?? 0),
+                        'e25_lt' => (float)(round($r->e25_lt < 0 ? 0 : $r->e25_lt - $r->e20_lt, 1) ?? 0),
+                        'e30_lt' => (float)(round($r->e30_lt < 0 ? 0 : $r->e30_lt - $r->e25_lt, 1) ?? 0),
                         'total'  => (float)(
                             ($r->e0_lt ?? 0) + ($r->e10_lt ?? 0) + ($r->e15_lt ?? 0) + ($r->e20_lt ?? 0) + ($r->e25_lt ?? 0) + ($r->e30_lt ?? 0)
                         ),
@@ -208,11 +207,11 @@ class MainController extends Controller
                 } else {
                     return [
                         'country' => $r->country,
-                        'e10_lt' => (float)(round($r->e10_gl, 1) ?? 0),
-                        'e15_lt' => (float)(round($r->e15_gl - $r->e10_gl, 1) ?? 0),
-                        'e20_lt' => (float)(round($r->e20_gl - $r->e15_gl, 1) ?? 0),
-                        'e25_lt' => (float)(round($r->e25_gl - $r->e20_gl, 1) ?? 0),
-                        'e30_lt' => (float)(round($r->e30_gl - $r->e25_gl, 1) ?? 0),
+                        'e10_lt' => (float)(round($r->e10_gl < 0 ? 0 : $r->e10_gl, 1) ?? 0),
+                        'e15_lt' => (float)(round($r->e15_gl < 0 ? 0 : $r->e15_gl - $r->e10_gl, 1) ?? 0),
+                        'e20_lt' => (float)(round($r->e20_gl < 0 ? 0 : $r->e20_gl - $r->e15_gl, 1) ?? 0),
+                        'e25_lt' => (float)(round($r->e25_gl < 0 ? 0 : $r->e25_gl - $r->e20_gl, 1) ?? 0),
+                        'e30_lt' => (float)(round($r->e30_gl < 0 ? 0 : $r->e30_gl - $r->e25_gl, 1) ?? 0),
                         'total'  => (float)(
                             ($r->e0_gl ?? 0) + ($r->e10_gl ?? 0) + ($r->e15_gl ?? 0) + ($r->e20_gl ?? 0) + ($r->e25_gl ?? 0) + ($r->e30_gl ?? 0)
                         ),
