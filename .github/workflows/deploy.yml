@@ -12,7 +12,7 @@ concurrency:
 env:
   APP_NAME: lta-global
   SSH_USER: deploy
-  PHP_VERSION: '8.1'
+  PHP_VERSION: '8.2'
   NODE_VERSION: '18'
 
 jobs:
@@ -101,7 +101,7 @@ jobs:
           php artisan view:cache
 
           ln -sfn "\$NEW_RELEASE" "\$APP_DIR/current"
-          sudo systemctl reload php8.1-fpm
+          sudo systemctl reload php8.2-fpm
 
           # Mantener solo los últimos 3 releases
           cd "\$APP_DIR/releases"
