@@ -7,19 +7,24 @@ return [
     | Enlaces externos de los botones de continente
     |--------------------------------------------------------------------------
     |
-    | URLs destino de los botones flotantes (America / Europe / Asia) que se
-    | muestran en la vista de dynamic-tools. Se leen desde variables de entorno
-    | (definidas en .env). Se usan vía config('links.xxx') en las vistas para
-    | que sigan funcionando cuando el pipeline ejecuta `php artisan config:cache`
-    | (env() directo en Blade devuelve null con la config cacheada).
+    | Los botones flotantes (America / Europe / Asia) de la vista dynamic-tools
+    | enlazan a las rutas dynamic-tools-continent de este mismo sitio, usando
+    | URL absoluta. Solo el DOMINIO cambia entre entornos, por eso se define en
+    | una unica variable de entorno TOOL_BASE_URL; las rutas viven aqui.
     |
-    | Los valores por defecto apuntan a la herramienta LTA y garantizan que los
-    | botones funcionen aunque el .env del entorno no defina las variables.
+    | Se consumen via config('links.xxx') en las vistas para que sigan
+    | funcionando con `php artisan config:cache` (env() directo en Blade
+    | devuelve null con la config cacheada).
+    |
+    | El valor por defecto es el dominio de staging. Al desplegar en otro
+    | entorno, el proveedor solo ajusta TOOL_BASE_URL en su .env.
     |
     */
 
-    'america' => env('URL_AMERICA', 'https://ethanolblendslta.grains.org/en/dynamic-tools-continent/1'),
-    'europe'  => env('URL_EUROPE',  'https://ethanolblendslta.grains.org/en/dynamic-tools-continent/2'),
-    'asia'    => env('URL_ASIA',    'https://ethanolblendslta.grains.org/en/dynamic-tools-continent/3'),
+    'base' => $base = rtrim(env('TOOL_BASE_URL', 'https://global.vision-it.com.mx'), '/'),
+
+    'america' => $base.'/en/dynamic-tools-continent/1',
+    'europe'  => $base.'/en/dynamic-tools-continent/2',
+    'asia'    => $base.'/en/dynamic-tools-continent/3',
 
 ];

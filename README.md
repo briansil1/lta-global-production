@@ -40,17 +40,22 @@ The id is 24
 
 - **ADMIN_PASS**
 
-### Enlaces de botones de continente (dynamic-tools)
+### Dominio base y botones de continente (dynamic-tools)
 
-URLs destino de los botones flotantes America / Europe / Asia en la vista
-`dynamic-tools`. Se consumen vía `config('links.*')` (ver `config/links.php`),
-por lo que **funcionan con `php artisan config:cache`**. Si no se definen en el
-`.env`, se usan los valores por defecto de `config/links.php`.
+Los botones flotantes (America / Europe / Asia) de la vista `dynamic-tools`
+enlazan a las rutas `dynamic-tools-continent` de este mismo sitio con URL
+absoluta. Solo el **dominio** cambia entre entornos, por eso se define en una
+sola variable:
 
-- **URL_AMERICA** — botón America / LATAM. Ej: `https://ethanolblendslta.grains.org/en/dynamic-tools-continent/1`
-- **URL_EUROPE** — botón Europe. Ej: `https://ethanolblendslta.grains.org/en/dynamic-tools-continent/2`
-- **URL_ASIA** — botón Asia. Ej: `https://ethanolblendslta.grains.org/en/dynamic-tools-continent/3`
+- **TOOL_BASE_URL** — dominio base del sitio. Migrar de dominio = cambiar solo
+  esta variable. Por defecto usa el dominio de staging
+  (`https://global.vision-it.com.mx`). Al desplegar en cliente/producción,
+  ajustar a su dominio (ej: `https://ethanolblendslta.grains.org`).
 
-> Nota: usar siempre `config('links.xxx')` en las vistas, **no** `env('URL_XXX')`
-> directamente, porque con la config cacheada `env()` devuelve `null` en runtime.
+Las rutas completas se construyen en `config/links.php` y se consumen en las
+vistas vía `config('links.america|europe|asia')`.
+
+> Nota: usar siempre `config('links.xxx')` en las vistas, **no** `env('...')`
+> directamente, porque con `php artisan config:cache` (que corre el pipeline)
+> `env()` devuelve `null` en runtime.
 This password is set by US Grains
