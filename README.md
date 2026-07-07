@@ -39,4 +39,18 @@ The id is 4
 The id is 24
 
 - **ADMIN_PASS**
+
+### Enlaces de botones de continente (dynamic-tools)
+
+URLs destino de los botones flotantes America / Europe / Asia en la vista
+`dynamic-tools`. Se consumen vía `config('links.*')` (ver `config/links.php`),
+por lo que **funcionan con `php artisan config:cache`**. Si no se definen en el
+`.env`, se usan los valores por defecto de `config/links.php`.
+
+- **URL_AMERICA** — botón America / LATAM. Ej: `https://ethanolblendslta.grains.org/en/dynamic-tools-continent/1`
+- **URL_EUROPE** — botón Europe. Ej: `https://ethanolblendslta.grains.org/en/dynamic-tools-continent/2`
+- **URL_ASIA** — botón Asia. Ej: `https://ethanolblendslta.grains.org/en/dynamic-tools-continent/3`
+
+> Nota: usar siempre `config('links.xxx')` en las vistas, **no** `env('URL_XXX')`
+> directamente, porque con la config cacheada `env()` devuelve `null` en runtime.
 This password is set by US Grains
