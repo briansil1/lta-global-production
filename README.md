@@ -1,5 +1,7 @@
 # LTA Global
 
+**English** | [Español](README.es.md)
+
 ## Requirements
 
 - **PHP extension php_zip enabled**
