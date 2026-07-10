@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
 use App\Models\Region;
 use App\Models\Emission;
 use App\Models\Locale;
-use App\Models\Profile;
 use App\Models\Report;
 use App\Models\Continent;
 use App\Models\VolumeQuality;
@@ -884,41 +882,16 @@ class MainController extends Controller
             return redirect(route(__('routes.home')));
         }
 
-        // if (!session('continent_iddsd')) {
-        //     return redirect(route(__('routes.home')));
-        // }
-
-        // if (!session('continent_iddsd')) {
-        //     return redirect(route(__('routes.home')));
-        // }
-
-        Session::put('continent_id', $continent_id);
-
-        $locale = app()->getLocale();
-        $base_l = explode('_', $locale)[0];
-        $locale = Locale::where('code', $locale)->first();
-        if (empty($locale)) {
-            $locale = Locale::where('code', $base_l)->first();
+        $continent = Continent::find($continent_id);
+        if (!$continent) {
+            return redirect(route(__('routes.home')));
         }
 
-        // $country_profiles = Profile::select('country_id')->where('country_id', '<>', env('APP_EUROPE_ID'))->groupBy('country_id')->get();
-        $country_profiles = Profile::join('countries', 'countries.id', '=', 'profiles.country_id')
-            ->join('regions', 'regions.id', '=', 'countries.region_id')
-            ->join('continents', 'continents.id', '=', 'regions.continent_id')
-            ->where('continents.id', $continent_id)
-            ->select('country_id')->where('country_id', '<>', env('APP_EUROPE_ID'))->groupBy('country_id')->get();
-        $c_ids = [];
+        Session::put('continent_id', $continent->id);
 
-        foreach ($country_profiles as $profile) {
-            $c_ids[] = $profile->country_id;
-        }
-        $countries = Country::whereIn('id', $c_ids)->get();
-
-        if (empty($country)) {
-            return view('dynamic', [
-                'tab' => 1,
-                'countryList' => $countries
-            ]);
-        }
+        return redirect(route(__('routes.tools'), [
+            'tab' => 1,
+            'continent' => $continent->id,
+        ]));
     }
 }
