@@ -267,13 +267,13 @@
                         <!-- boton de Litros y galones si $tab == 1-->
                         @if ($tab == 1)
                             <div class="flex justify-center">
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if ($regionid) /{{ str_replace(' ', '', $regionid) }}@else/{{ 0 }} @endif/litros"
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid ? str_replace(' ', '', $regionid) : 0 }}/litros"
                                     class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == '_lt') selectedBTN2 @else selectedBTN @endif">
                                     <p class="card-p">
                                         {{ __('dynamic.content.liters') }}
                                     </p>
                                 </a>
-                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}@if ($regionid) /{{ str_replace(' ', '', $regionid) }}@else/{{ 0 }} @endif/galones"
+                                <a href="{{ route(__('routes.tools')) }}/{{ $tab }}/{{ $continentid }}/{{ $regionid ? str_replace(' ', '', $regionid) : 0 }}/galones"
                                     class="mg-button mg-button--larger mg-button--tertiary mx-4 p-3 flex  items-center text-base md:text-lg lg:text-3xl @if ($type and $type == '_gl') selectedBTN2 @else selectedBTN @endif">
                                     <p class="card-p">
                                         {{ __('dynamic.content.gallons') }}
